@@ -87,8 +87,9 @@ def populate_users(n=10):
         new_number = get_next_available_user_number()
         name = f"User{new_number}"
         password = create_random_password()
+        has_premium = random.choice([True, False])
         
-        user = User.objects.create(name=name, password=password)
+        user = User.objects.create(name=name, password=password, has_premium=has_premium)
         users_created += 1
         print(f"Created User {user.id}: {name}")
 

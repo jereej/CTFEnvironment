@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = User
-        fields = ['id', 'name', 'password']
+        fields = ['id', 'name', 'password', 'has_premium']
 
 class MenuItemSerializer(serializers.ModelSerializer):
     """

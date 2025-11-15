@@ -5,6 +5,7 @@ class User(models.Model):
     """Represents a user/client that can make orders."""
     name = models.CharField(max_length=64, unique=True)
     password = models.CharField(max_length=128)
+    has_premium = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["name"]
