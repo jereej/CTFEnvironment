@@ -1,0 +1,20 @@
+name: Build and Publish images to Docker Hub
+
+on:
+  [workflow_dispatch]
+
+jobs:
+  publish_images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: build image
+        run: |
+          docker build ./client -t jereej/ctfenvironment-client:latest
+          docker build ./server -t jereej/ctfenvironment-server:latest
+      - name: push image
+        run: |
+          docker login -u jereej -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push jereej/ctfenvironment-client:latest
+          docker push jereej/ctfenvironment-server:latest
