@@ -41,36 +41,30 @@ const Home: React.FC = () => {
 
       {/* Welcome user */}
       {user && (
-        <p className="text-gray-700 mb-6 text-lg font-semibold">
+        <p className="text-black-700 mb-6 text-lg font-semibold">
           Welcome, {user.name}!
         </p>
       )}
 
       {/* Buttons */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-row gap-4">
         {user ? (
           <>
             <Link to="/menu">
-              <button className="px-6 py-3 bg-yellow-500 text-white rounded-2xl hover:bg-yellow-600 transition">
+              <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
                 View Menu
               </button>
             </Link>
 
             <Link to="/orders">
-              <button className="px-6 py-3 bg-blue-500 text-white rounded-2xl hover:bg-blue-600 transition">
+              <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
                 Orders
-              </button>
-            </Link>
-
-            <Link to="/reservations">
-              <button className="px-6 py-3 bg-purple-500 text-white rounded-2xl hover:bg-purple-600 transition">
-                Reservations
               </button>
             </Link>
 
             <button
               onClick={handleLogout}
-              className="px-6 py-3 bg-red-500 text-white rounded-2xl hover:bg-red-600 transition">
+              className="px-6 py-3 bg-red-500 text-black rounded-2xl hover:bg-[#b099bf] transition">
               Log Out
             </button>
 
@@ -80,20 +74,20 @@ const Home: React.FC = () => {
           <>
 
             <Link to="/menu">
-              <button className="px-6 py-3 bg-yellow-500 text-white rounded-2xl hover:bg-yellow-600 transition">
+              <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
                 View Menu
               </button>
             </Link>
 
             <Link to="/login">
-              <button className="px-6 py-3 bg-green-600 text-white rounded-2xl hover:bg-green-700 transition">
+              <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
                 Log In
               </button>
             </Link>
           </>
         )}
         <Link to="/admin">
-              <button className="px-6 py-3 bg-gray-250 text-black rounded-2xl hover:bg-gray-400 transition">
+              <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
                 Admin
               </button>
             </Link>

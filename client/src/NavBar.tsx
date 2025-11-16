@@ -29,9 +29,16 @@ const NavBar: React.FC = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow-md flex justify-between items-center px-8 py-4">
-      <div className="text-xl font-bold text-gray-700">
-        <Link to="/">Les Baguettes</Link>
+    <nav className="sticky top-0 z-50 bg-[#dabed6] shadow-md flex justify-between items-center px-8 py-4">
+      <div className="flex items-center">
+        <Link to="/">
+          <img
+            src="/common_logo.png"  // Adjust path if necessary
+            alt="Les Baguettes Logo"
+            className="h-12 w-auto"   // Tailwind styles to control size
+            style={{borderRadius: '5%'}}
+          />
+        </Link>
       </div>
 
       <div className="flex gap-4 items-center">
