@@ -97,10 +97,20 @@ const Orders: React.FC = () => {
   const addToCart = async (item: MenuItem) => {
     // Add item to cart, send POST request to API
     const amount = quantities[item.id];
+    const storedUser = localStorage.getItem('user');
+    
     if (!amount || amount <= 0) return;
 
+    if (!storedUser) {
+      setError('You must be logged in to add items to the cart.');
+      return;
+    }
+
+    const user = JSON.parse(storedUser);
+
     try {
-      const response = await axios.post(`${API_BASE}/api/order-items/`, {
+      const response = await axios.post(`${API_BASE}/api/cart-items/`, {
+        user_id: user.id,
         item_id: item.id,
         amount,
       });
@@ -113,16 +123,16 @@ const Orders: React.FC = () => {
     }
   };
 
-  const removeFromCart = async (orderItemId: number) => {
-    // Remove item from cart
+  const removeFromCart = async (cartItemId: number) => {
     try {
-      await axios.delete(`${API_BASE}/api/order-items/${orderItemId}/`);
+      await axios.delete(`${API_BASE}/api/cart-items/${cartItemId}/`);
+      setCart(prev => prev.filter(item => item.id !== cartItemId));
     } catch (err) {
       console.error('Failed to remove item from cart:', err);
       alert('Failed to remove item from cart.');
     }
-    setCart(prev => prev.filter(item => item.id !== orderItemId));
   };
+
 
   const placeOrder = async () => {
     // Place order, send POST request to API
@@ -200,9 +210,14 @@ const Orders: React.FC = () => {
   if (error == 'You must be logged in to place an order.') return <div className="min-h-screen flex justify-center items-center text-red-500">{error}</div>;
   if (loading) return <div className="min-h-screen flex justify-center items-center">Loading menu...</div>;
 
-  return (
-    // Main component rendering
-    <div className="p-8 flex flex-col items-center bg-[#f2cbea]">
+return (
+  // Main component rendering
+  <div className="relative p-8 flex flex-col items-center min-h-screen bg-[url('/bakery_overlay.png')] bg-cover bg-center">
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-[#f2cbea]/70"></div>
+
+    {/* Content */}
+    <div className="relative z-10 w-full flex flex-col items-center">
       <div className="mb-6">
         <button
           onClick={fetchUserOrders}
@@ -377,7 +392,9 @@ const Orders: React.FC = () => {
         </>
       )}
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Orders;

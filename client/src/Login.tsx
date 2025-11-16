@@ -75,43 +75,58 @@ const Login: React.FC = () => {
     }
   };
 
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">
-          {isSignUp ? 'Create Account' : 'Login'}
-        </h1>
+return (
+  <div className="relative flex flex-col items-center justify-center min-h-screen bg-[url('/bakery_overlay.png')] bg-cover bg-center p-4">
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-[#f2cbea]/70"></div>
 
-        <input
-          type="text"
-          placeholder="Enter your username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="w-full mb-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
+    {/* Content */}
+    <div className="relative z-10 bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
+      <h1 className="text-2xl font-bold mb-6 text-center">
+        {isSignUp ? 'Create Account' : 'Login'}
+      </h1>
 
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+      <input
+        type="text"
+        placeholder="Enter your username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        className="w-full mb-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
 
+      <input
+        type="text"
+        placeholder="Enter your password"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        className="w-full mb-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+
+      <button
+        onClick={handleLoginOrSignUp}
+        className="w-full bg-[#b36be3] text-white py-2 rounded-lg hover:bg-[#794899] transition disabled:opacity-50"
+        disabled={loading}
+      >
+        {loading
+          ? (isSignUp ? 'Creating account...' : 'Logging in...')
+          : (isSignUp ? 'Create Account' : 'Log In')}
+      </button>
+
+      <p className="text-center text-gray-600 mt-4">
+        {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
         <button
-          onClick={handleLoginOrSignUp}
-          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition disabled:opacity-50"
-          disabled={loading}
+          onClick={() => setIsSignUp(prev => !prev)}
+          className="text-blue-500 hover:underline"
         >
-          {loading ? (isSignUp ? 'Creating account...' : 'Logging in...') : (isSignUp ? 'Create Account' : 'Log In')}
+          {isSignUp ? 'Log in' : 'Create one'}
         </button>
-
-        <p className="text-center text-gray-600 mt-4">
-          {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
-          <button
-            onClick={() => setIsSignUp(prev => !prev)}
-            className="text-blue-500 hover:underline"
-          >
-            {isSignUp ? 'Log in' : 'Create one'}
-          </button>
-        </p>
-      </div>
+      </p>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Login;

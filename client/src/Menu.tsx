@@ -64,46 +64,51 @@ const Menu: React.FC = () => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
   
-  return (
-    <div className="flex justify-center bg-[#f2cbea] p-4">
-      <div className="max-w-6xl w-full">
-        {Object.keys(groupedItems)
-          .sort((a, b) => {
-            const indexA = categoryOrder.indexOf(a.toLowerCase());
-            const indexB = categoryOrder.indexOf(b.toLowerCase());
-            if (indexA === -1) return 1;
-            if (indexB === -1) return -1;
-            return indexA - indexB;
-          })
-          .map((type) => (
-            <motion.div
-              key={type}
-              className="mb-12"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl font-bold mb-6 text-center flex items-center justify-center gap-2">
-                <span>{formatCategoryName(type)}</span>
-              </h2>
-              <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {groupedItems[type].map((item) => (
-                  <div 
-                    key={item.id} 
-                    className="p-6 border rounded-2xl shadow-md hover:shadow-xl hover:scale-105 transition-transform duration-300 bg-white"
-                  >
-                    <h3 className="text-xl font-semibold mb-2">{capitalizeFirstLetter(item.name)}</h3>
-                    <p className="text-gray-600 mb-2">{item.description}</p>
-                    <p className="text-lg font-bold">{item.price} €</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-      </div>
+return (
+  <div className="relative flex justify-center min-h-screen bg-[url('/bakery_overlay.png')] bg-cover bg-center p-4">
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-[#f2cbea]/70"></div>
+    {/* You can adjust the color and opacity, e.g. bg-black/30 */}
+
+    {/* Content */}
+    <div className="relative z-10 max-w-6xl w-full">
+      {Object.keys(groupedItems)
+        .sort((a, b) => {
+          const indexA = categoryOrder.indexOf(a.toLowerCase());
+          const indexB = categoryOrder.indexOf(b.toLowerCase());
+          if (indexA === -1) return 1;
+          if (indexB === -1) return -1;
+          return indexA - indexB;
+        })
+        .map((type) => (
+          <motion.div
+            key={type}
+            className="mb-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold mb-6 text-center flex items-center justify-center gap-2">
+              <span>{formatCategoryName(type)}</span>
+            </h2>
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {groupedItems[type].map((item) => (
+                <div 
+                  key={item.id} 
+                  className="p-6 border rounded-2xl shadow-md hover:shadow-xl hover:scale-105 transition-transform duration-300 bg-white"
+                >
+                  <h3 className="text-xl font-semibold mb-2">{capitalizeFirstLetter(item.name)}</h3>
+                  <p className="text-gray-600 mb-2">{item.description}</p>
+                  <p className="text-lg font-bold">{item.price} €</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        ))}
     </div>
-  );
+  </div>
+);
 };
 
 export default Menu;

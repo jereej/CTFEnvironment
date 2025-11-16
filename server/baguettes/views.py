@@ -6,8 +6,8 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from baguettes.models import User, MenuItem, OrderItem, Order
-from baguettes.serializers import UserSerializer, MenuItemSerializer, OrderItemSerializer, OrderSerializer
+from baguettes.models import User, MenuItem, OrderItem, Order, CartItem
+from baguettes.serializers import UserSerializer, MenuItemSerializer, OrderItemSerializer, OrderSerializer, CartItemSerializer
 
 
 @extend_schema_view(
@@ -118,3 +118,24 @@ class OrderItemViewSet(viewsets.ModelViewSet):
     """
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
+
+@extend_schema_view(
+    list=extend_schema(summary="List cart items", description="Retrieve a list of all order items.",
+                       responses={200: OrderItemSerializer}),
+    create=extend_schema(summary="Create cart item", description="Create a new cart item with the provided details.",
+                         request=OrderItemSerializer, responses={201: OrderItemSerializer, 400: None}),
+    retrieve=extend_schema(summary="Retrieve cart item", description="Get details of a specific cart item by ID.",
+                           responses={200: OrderItemSerializer, 404: None}),
+    update=extend_schema(summary="Update cart item", description="Update all fields of an cart item.",
+                         request=CartItemSerializer, responses={200: CartItemSerializer, 400: None, 404: None}),
+    partial_update=extend_schema(summary="Partially update cart item",
+                                 description="Update one or more fields of an cart item.", request=CartItemSerializer,
+                                 responses={200: CartItemSerializer, 400: None, 404: None}),
+    destroy=extend_schema(summary="Delete cart item", description="Delete a cart item by ID.",
+                          responses={204: None, 404: None}))
+class CartItemViewSet(viewsets.ModelViewSet):
+    """
+    A ViewSet for managing order items.
+    """
+    queryset = CartItem.objects.all()
+    serializer_class = CartItemSerializer

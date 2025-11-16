@@ -3,7 +3,7 @@ Serializers for the application.
 """
 from rest_framework import serializers
 
-from baguettes.models import User, MenuItem, OrderItem, Order
+from baguettes.models import User, MenuItem, OrderItem, Order, CartItem
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -52,3 +52,19 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ['id', 'user_id', 'order_items']
+
+
+class CartItemSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the CartItem model.
+    """
+    user_id = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(), source='user'
+    )
+    item_id = serializers.PrimaryKeyRelatedField(
+        queryset=MenuItem.objects.all(), source='item'
+    )
+
+    class Meta:
+        model = CartItem
+        fields = ['id', 'user_id', 'item_id', 'amount']

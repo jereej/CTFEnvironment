@@ -27,16 +27,21 @@ const Home: React.FC = () => {
     setUser(null);
     navigate('/');
   };
+return (
+  <div className="relative min-h-screen flex flex-col items-center justify-center bg-[url('/bakery_overlay.png')] bg-cover bg-center p-4">
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-[#f2cbea]/70"></div>
+    {/* You can change bg-black/30 to any color, e.g. bg-[#f2cbea]/40 */}
 
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#f2cbea] p-4">
+    {/* Content */}
+    <div className="relative z-10 flex flex-col items-center">
       {/* Logo */}
       <div className="mb-8">
-      <img 
-        src="/baguette_logo.png" 
-        alt="Restaurant Logo"
-        style={{ width: '600px', height: '400px', objectFit: 'contain', borderRadius: '33%'}}
-      />
+        <img 
+          src="/baguette_logo.png" 
+          alt="Restaurant Logo"
+          style={{ width: '600px', height: '400px', objectFit: 'contain', borderRadius: '33%' }}
+        />
       </div>
 
       {/* Welcome user */}
@@ -67,12 +72,9 @@ const Home: React.FC = () => {
               className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
               Log Out
             </button>
-
-
           </>
         ) : (
           <>
-
             <Link to="/menu">
               <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
                 View Menu
@@ -87,13 +89,15 @@ const Home: React.FC = () => {
           </>
         )}
         <Link to="/admin">
-              <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
-                Admin
-              </button>
-            </Link>
+          <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
+            Admin
+          </button>
+        </Link>
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Home;

@@ -51,3 +51,15 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.amount}x {self.item.name}"
+    
+
+class CartItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+    amount = models.IntegerField()
+
+    class Meta:
+        ordering = ["id"]
+
+    def __str__(self):
+        return f"{self.amount}x {self.item.name} in cart"
