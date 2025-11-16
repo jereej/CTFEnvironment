@@ -1,5 +1,5 @@
 {
-  "name": "burgir-client",
+  "name": "baguettes-client",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "axios": "^1.13.2",
-    "burgir-client": "file:",
+    "baguettes-client": "file:",
     "framer-motion": "^12.23.24",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

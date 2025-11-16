@@ -1,5 +1,5 @@
-# Burgir-Client
-Repository for the Burgir API client, built with React in TypeScript.
+# Les Baguettes Client
+Repository for the Les Baguettes API client, built with React in TypeScript.
 
 Setting up:
 
