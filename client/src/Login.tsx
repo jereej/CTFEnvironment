@@ -22,13 +22,8 @@ const Login: React.FC = () => {
     // Fetch all users from the API
     let allUsers: User[] = [];
     let url = '/api/users/';
-
-    while (url) {
-      const response = await axios.get(`${API_BASE}${url}`);
-      allUsers = [...allUsers, ...response.data.results];
-      url = response.data.next ? response.data.next.replace('https://burgirs.2.rahtiapp.fi', '') : '';
-    }
-
+    const response = await axios.get(`${API_BASE}${url}`);
+    allUsers = [...allUsers, ...response.data];
     return allUsers;
   };
 

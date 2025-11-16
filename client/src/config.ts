@@ -1,1 +1,1 @@
-export const API_BASE = import.meta.env.DEV ? '' : 'https://burgirs.2.rahtiapp.fi';
+export const API_BASE = 'http://127.0.0.1:8000';

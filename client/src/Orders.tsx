@@ -5,7 +5,6 @@ import axios from 'axios';
 interface Order {
   id: number;
   user_id: number;
-  status: string;
   order_items: number[];
 }
 
@@ -56,11 +55,8 @@ const Orders: React.FC = () => {
         let allItems: MenuItem[] = [];
         let url = '/api/menu-items/';
 
-        while (url) {
-          const response = await axios.get(`${API_BASE}${url}`);
-          allItems = [...allItems, ...response.data.results];
-          url = response.data.next ? response.data.next.replace('https://burgirs.2.rahtiapp.fi', '') : '';
-        }
+        const response = await axios.get(`${API_BASE}${url}`);
+        allItems = [...allItems, ...response.data];
 
         setMenuItems(allItems);
 
@@ -144,7 +140,6 @@ const Orders: React.FC = () => {
     const order_items = cart.map(item => item.id);
     try {
       const response = await axios.post(`${API_BASE}/api/orders/`, {
-        status: "pending",
         user_id: user.id,
         order_items: order_items,
       });
@@ -182,11 +177,8 @@ const Orders: React.FC = () => {
       let items: OrderItem[] = [];
       let itemUrl = '/api/order-items/';
 
-      while (itemUrl) {
-        const res = await axios.get(`${API_BASE}${itemUrl}`);
-        items = [...items, ...res.data.results];
-        itemUrl = res.data.next ? res.data.next.replace('https://burgirs.2.rahtiapp.fi', '') : '';
-      }
+      const res = await axios.get(`${API_BASE}${itemUrl}`);
+      items = [...items, ...res.data];
 
       setAllOrderItems(items);
     } catch (err) {
@@ -210,7 +202,7 @@ const Orders: React.FC = () => {
 
   return (
     // Main component rendering
-    <div className="p-8 flex flex-col items-center">
+    <div className="p-8 flex flex-col items-center bg-[#f2cbea]">
       <div className="mb-6">
         <button
           onClick={fetchUserOrders}
@@ -233,7 +225,7 @@ const Orders: React.FC = () => {
                     onClick={() => toggleExpand(order.id)}
                   >
                     <p>
-                      <span className="font-semibold">Order #{order.id}</span> - Status: <span className="capitalize">{order.status}</span>
+                      <span className="font-semibold">Order #{order.id}</span>
                     </p>
                     <p className="text-blue-500 text-sm">
                       {expandedOrderId === order.id ? 'Hide Details ▲' : 'View Details ▼'}
@@ -323,7 +315,7 @@ const Orders: React.FC = () => {
 
                       <button
                         onClick={() => addToCart(item)}
-                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                        className="bg-[#b36be3] text-white px-4 py-2 rounded hover:bg-[#794899] transition"
                         disabled={!quantities[item.id]}
                       >
                         Add to Order

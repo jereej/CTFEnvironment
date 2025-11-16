@@ -11,16 +11,7 @@ interface MenuItem {
   price: number;
 }
 
-const categoryOrder = ["appetizer", "main course", "drink", "snack", "dessert"];
-
-const categoryIcons: Record<string, string> = {
-  // Icons for each category
-  appetizer: "🥟",
-  "main course": "🍽️",
-  drink: "🥤",
-  snack: "🍟",
-  dessert: "🍰",
-};
+const categoryOrder = ["sandwich", "side dish", "drink", "dessert"];
 
 const formatCategoryName = (str: string) => {
   // Convert hyphenated names to space-separated and capitalize each word
@@ -42,16 +33,13 @@ const Menu: React.FC = () => {
       let allItems: MenuItem[] = [];
       let url = '/api/menu-items/';
     
-      try {
-        while (url) {
-          const response = await axios.get(`${API_BASE}${url}`);
-          allItems = [...allItems, ...response.data.results];
-          url = response.data.next ? response.data.next.replace('https://burgirs.2.rahtiapp.fi', '') : ''; // adjust next page URL
-        }
-    
+    try {
+        const response = await axios.get(`${API_BASE}${url}`);
+        allItems = [...allItems, ...response.data];
         setMenuItems(allItems);
         setLoading(false);
-      } catch (err) {
+      }
+        catch (err) {
         console.error('Fetch error:', err);
         setError((err as Error).message);
         setLoading(false);
@@ -77,7 +65,7 @@ const Menu: React.FC = () => {
   };
   
   return (
-    <div className="flex justify-center p-4">
+    <div className="flex justify-center bg-[#f2cbea] p-4">
       <div className="max-w-6xl w-full">
         {Object.keys(groupedItems)
           .sort((a, b) => {
@@ -97,7 +85,6 @@ const Menu: React.FC = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold mb-6 text-center flex items-center justify-center gap-2">
-                <span>{categoryIcons[type.toLowerCase()]}</span>
                 <span>{formatCategoryName(type)}</span>
               </h2>
               <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

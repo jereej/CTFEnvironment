@@ -64,7 +64,7 @@ const Home: React.FC = () => {
 
             <button
               onClick={handleLogout}
-              className="px-6 py-3 bg-red-500 text-black rounded-2xl hover:bg-[#b099bf] transition">
+              className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
               Log Out
             </button>
 

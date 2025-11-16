@@ -102,7 +102,7 @@ def populate_menuitem(n=10):
     Args:
         n (int): Number of menu items to create.
     """
-    item_types = ["sandwich", "drink", "sides", "dessert"]
+    item_types = ["sandwich", "drink", "side dish", "dessert"]
     menuitems_created = 0
 
     for i in range(n):
