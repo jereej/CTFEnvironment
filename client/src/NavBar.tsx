@@ -33,9 +33,9 @@ const NavBar: React.FC = () => {
       <div className="flex items-center">
         <Link to="/">
           <img
-            src="/common_logo.png"  // Adjust path if necessary
+            src="/common_logo.png"
             alt="Les Baguettes Logo"
-            className="h-12 w-auto"   // Tailwind styles to control size
+            className="h-12 w-auto"
             style={{borderRadius: '5%'}}
           />
         </Link>
