@@ -68,9 +68,6 @@ const NavBar: React.FC = () => {
             <Link to="/admin/menu" className="text-gray-700 hover:text-blue-600 font-semibold">
               Manage Menu
             </Link>
-            <Link to="/admin/tables" className="text-gray-700 hover:text-blue-600 font-semibold">
-              Manage Tables
-            </Link>
             <Link to="/admin/orders" className="text-gray-700 hover:text-blue-600 font-semibold">
               Manage Orders
             </Link>

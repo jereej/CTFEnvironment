@@ -7,11 +7,13 @@ import axios from 'axios';
 interface User {
   id: number;
   name: string;
+  password: string;
 }
 
 const Login: React.FC = () => {
   // Define the state variables for username, error message, loading state, and sign-up mode
   const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
@@ -64,7 +66,7 @@ const Login: React.FC = () => {
           localStorage.removeItem('isAdmin');
           navigate('/');
         } else {
-          setError('User not found.');
+          setError('Username + password combination not found.');
         }
       }
     } catch (err) {
@@ -95,10 +97,10 @@ return (
       />
 
       <input
-        type="text"
+        type="password"
         placeholder="Enter your password"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         className="w-full mb-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
       />
 
