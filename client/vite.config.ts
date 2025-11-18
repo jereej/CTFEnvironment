@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://burgirs.2.rahtiapp.fi',
+        target: 'http://localhost:8000',
         changeOrigin: true,
       },
     },
