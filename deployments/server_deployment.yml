@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ctf-env-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ctf-env-server
+  template:
+    metadata:
+      labels:
+        app: ctf-env-server
+    spec:
+      containers:
+      - name: ctf-env-server
+        image: jereej/ctfenvironment-server:latest
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ctf-env-server-service
+spec:
+  selector:
+    app: ctf-env-server-service
+  ports:
+  - port: 80
+    targetPort: 8080
