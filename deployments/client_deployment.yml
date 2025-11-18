@@ -25,6 +25,7 @@ metadata:
 spec:
   selector:
     app: ctf-env-client
+  type: NodePort
   ports:
   - port: 80
     targetPort: 5173
