@@ -22,6 +22,13 @@ interface OrderItem {
   amount: number;
 }
 
+interface CartItem {
+  id: number;
+  item_id: number;
+  amount: number;
+  user_id: number;
+}
+
 interface GroupedItems {
   [type: string]: MenuItem[];
 }
@@ -115,8 +122,8 @@ const Orders: React.FC = () => {
         amount,
       });
 
-      const createdOrderItem: OrderItem = response.data;
-      setCart(prev => [...prev, createdOrderItem]);
+      const createdCartItem: CartItem = response.data;
+      setCart(prev => [...prev, createdCartItem]);
       setQuantities(prev => ({ ...prev, [item.id]: 0 }));
     } catch (err) {
       console.error('Failed to add to cart:', err);
@@ -147,23 +154,35 @@ const Orders: React.FC = () => {
     const user = JSON.parse(storedUser);
 
     setPlacingOrder(true);
-    const order_items = cart.map(item => item.id);
     try {
-      const response = await axios.post(`${API_BASE}/api/orders/`, {
+      const orderResponse = await axios.post(`${API_BASE}/api/orders/`, {
         user_id: user.id,
-        order_items: order_items,
+        order_items: [],
       });
+      const orderId = orderResponse.data.id;
 
-      console.log('Order placed:', response.data);
+      for (const cartItem of cart) {
+        await axios.post(`${API_BASE}/api/order-items/`, {
+          item_id: cartItem.item_id,
+          amount: cartItem.amount,
+          order: orderId,
+        });
+      }
+
+      for (const cartItem of cart) {
+        await axios.delete(`${API_BASE}/api/cart-items/${cartItem.id}/`);
+      }
+
       setCart([]);
       alert('Order placed successfully!');
     } catch (err) {
       console.error('Failed to place order:', err);
+      alert('Failed to place order.');
     } finally {
       setPlacingOrder(false);
     }
   };
-
+  
   const fetchUserOrders = async () => {
     // Fetch user orders, send GET request to API
     const storedUser = localStorage.getItem('user');
@@ -354,20 +373,20 @@ return (
               <h2 className="text-2xl font-bold mb-4">Your Cart</h2>
 
               <div className="flex flex-col gap-4">
-                {cart.map((orderItem) => {
-                  const menuItem = findMenuItem(orderItem.item_id);
+                {cart.map((cartItem) => {
+                  const menuItem = findMenuItem(cartItem.item_id);
                   return (
-                    <div key={orderItem.id} className="flex justify-between items-center border-b pb-2">
+                    <div key={cartItem.id} className="flex justify-between items-center border-b pb-2">
                       <div>
                         <p className="font-semibold">{menuItem?.name || 'Unknown Item'}</p>
-                        <p className="text-gray-500 text-sm">Amount: {orderItem.amount}</p>
+                        <p className="text-gray-500 text-sm">Amount: {cartItem.amount}</p>
                       </div>
                       <div className="flex items-center gap-4">
                         <span className="font-bold">
-                          {menuItem ? (menuItem.price * orderItem.amount).toFixed(2) : '0.00'} €
+                          {menuItem ? (menuItem.price * cartItem.amount).toFixed(2) : '0.00'} €
                         </span>
                         <button
-                          onClick={() => removeFromCart(orderItem.id)}
+                          onClick={() => removeFromCart(cartItem.id)}
                           className="text-red-500 hover:text-red-700 text-sm font-semibold"
                         >
                           Remove
