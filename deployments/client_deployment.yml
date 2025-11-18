@@ -15,6 +15,9 @@ spec:
       containers:
       - name: ctf-env-client
         image: jereej/ctfenvironment-client:latest
+        env:
+          - name: VITE_SERVER_URL
+            value: "http://ctf-env-server-service"
         ports:
         - containerPort: 5173
 ---
@@ -25,9 +28,7 @@ metadata:
 spec:
   selector:
     app: ctf-env-client
-  type: NodePort
   ports:
   - protocol: TCP
     port: 80
     targetPort: 5173
-    nodePort: 30517
