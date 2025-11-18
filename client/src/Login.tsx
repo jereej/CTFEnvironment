@@ -4,12 +4,6 @@ import { API_BASE } from './config';
 
 import axios from 'axios';
 
-interface User {
-  id: number;
-  name: string;
-  password: string;
-}
-
 const Login: React.FC = () => {
   // Define the state variables for username, error message, loading state, and sign-up mode
   const [username, setUsername] = useState('');
@@ -20,19 +14,9 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const fetchAllUsers = async (): Promise<User[]> => {
-    // Fetch all users from the API
-    let allUsers: User[] = [];
-    let url = '/api/users/';
-    const response = await axios.get(`${API_BASE}${url}`);
-    allUsers = [...allUsers, ...response.data];
-    return allUsers;
-  };
-
   const handleLoginOrSignUp = async () => {
-    // Handle login or sign-up based on the mode
-    if (!username.trim()) {
-      setError('Please enter a name');
+    if (!username.trim() || !password.trim()) {
+      setError('Please enter both a username and password');
       return;
     }
 
@@ -40,39 +24,44 @@ const Login: React.FC = () => {
     setError(null);
 
     try {
-      const users = await fetchAllUsers();
-
-      const foundUser = users.find((user: User) => user.name.toLowerCase() === username.toLowerCase());
-
       if (isSignUp) {
-        // SIGN UP flow
-        if (foundUser) {
-          setError('Username already taken.');
-        } else {
-          const createResponse = await axios.post(`${API_BASE}/api/users/`, { 
-            name: username, password: password},  {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          });
-          console.log(createResponse.data)
-          localStorage.setItem('user', JSON.stringify(createResponse.data));
-          localStorage.removeItem('isAdmin');
-          navigate('/');
-        }
+        // SIGN UP
+        const createResponse = await axios.post(`${API_BASE}/api/users/`, {
+          name: username,
+          password: password,
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        // Store the user in localStorage
+        const newUser = createResponse.data;
+        localStorage.setItem('user', JSON.stringify(newUser));
+        localStorage.removeItem('isAdmin');
+        navigate('/');
       } else {
-        // LOGIN flow
-        if (foundUser) {
-          localStorage.setItem('user', JSON.stringify(foundUser));
-          localStorage.removeItem('isAdmin');
-          navigate('/');
-        } else {
-          setError('Username + password combination not found.');
-        }
+        // LOGIN
+        const loginResponse = await axios.post(`${API_BASE}/api/login/`, {
+          name: username,
+          password: password,
+        });
+
+        // Successful login
+        const loggedInUser = loginResponse.data;
+        localStorage.setItem('user', JSON.stringify(loggedInUser));
+        localStorage.removeItem('isAdmin');
+        navigate('/');
       }
-    } catch (err) {
-      console.error('Error during login/signup:', err);
-      setError('Error connecting to server');
+    } catch (err: any) {
+      console.error('Error during login or signup:', err);
+      if (err.response && err.response.data && err.response.data.error) {
+        setError(err.response.data.error);
+      } else if (isSignUp) {
+        setError('Failed to create account. Ensure username is available and password meets requirements.');
+      } else {
+        setError('Login failed. Check your username and password.');
+      }
     } finally {
       setLoading(false);
     }

@@ -2,9 +2,10 @@
 This module contains the views for the REST API.
 """
 from drf_spectacular.utils import extend_schema_view, extend_schema
-from rest_framework import viewsets
-from rest_framework.decorators import action
+from rest_framework import viewsets, status
 from rest_framework.response import Response
+from rest_framework.decorators import api_view, action
+from django.contrib.auth.hashers import check_password
 
 from baguettes.models import User, MenuItem, OrderItem, Order, CartItem
 from baguettes.serializers import UserSerializer, MenuItemSerializer, OrderItemSerializer, OrderSerializer, CartItemSerializer
@@ -139,3 +140,28 @@ class CartItemViewSet(viewsets.ModelViewSet):
     """
     queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer
+
+
+@api_view(['POST'])
+def login_view(request):
+    username = request.data.get('name')
+    password = request.data.get('password')
+    
+    if not username or not password:
+        return Response({"error": "Username and password required."}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        # Try to find the user by name (case-insensitive)
+        user = User.objects.get(name__iexact=username)
+    except User.DoesNotExist:
+        return Response({"error": "Invalid username and password combination"}, status=status.HTTP_401_UNAUTHORIZED)
+
+    # Check the password using Django's password checker
+    if check_password(password, user.password):
+        return Response({
+            "id": user.id,
+            "name": user.name,
+            "has_premium": user.has_premium,
+        })
+    else:
+        return Response({"error": "Invalid username and password combination"}, status=status.HTTP_401_UNAUTHORIZED)
