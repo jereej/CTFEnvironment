@@ -12,7 +12,7 @@ from baguettes.models import User, MenuItem, Order, OrderItem
 # Support functions:
 
 
-def create_random_password(length=12):
+def generate_raw_password(length):
     lowercase = "abcdefghijklmnopqrstuvwxyz"
     uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     numbers = "0123456789"
@@ -30,7 +30,7 @@ def create_random_password(length=12):
     random.shuffle(password)
 
     plaintext = ''.join(password)
-    return sha256(plaintext.encode('utf-8')).hexdigest()
+    return plaintext
 
 def get_next_available_user_number():
     """
@@ -82,14 +82,23 @@ def populate_users(n=10):
     Args:
         n (int): Number of users to create.
     """
+    from django.contrib.auth.hashers import make_password
+
     users_created = 0
-    for i in range(n):
+    for _ in range(n):
         new_number = get_next_available_user_number()
         name = f"User{new_number}"
-        password = create_random_password()
+
+        raw_password = generate_raw_password(random.randint(8, 15)) 
+        encoded_password = make_password(raw_password)
+
         has_premium = random.choice([True, False])
-        
-        user = User.objects.create(name=name, password=password, has_premium=has_premium)
+
+        user = User.objects.create(
+            name=name,
+            password=encoded_password,
+            has_premium=has_premium
+        )
         users_created += 1
         print(f"Created User {user.id}: {name}")
 

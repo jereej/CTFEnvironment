@@ -49,7 +49,8 @@ const Login: React.FC = () => {
         if (foundUser) {
           setError('Username already taken.');
         } else {
-          const createResponse = await axios.post(`${API_BASE}/api/users/`, { name: username },  {
+          const createResponse = await axios.post(`${API_BASE}/api/users/`, { 
+            name: username, password: password},  {
             headers: {
               'Content-Type': 'application/json',
             },
