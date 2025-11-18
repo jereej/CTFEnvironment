@@ -24,7 +24,7 @@ metadata:
   name: ctf-env-server-service
 spec:
   selector:
-    app: ctf-env-server-service
+    app: ctf-env-server
   ports:
   - port: 80
     targetPort: 8080
