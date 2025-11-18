@@ -76,24 +76,10 @@ const AdminLogin: React.FC = () => {
         </button>
 
         <button
-            onClick={() => navigate('/admin/tables')}
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-        >
-            Manage Tables
-        </button>
-
-        <button
             onClick={() => navigate('/admin/orders')}
             className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
         >
             Manage Orders
-        </button>
-
-        <button
-            onClick={() => navigate('/admin/reservations')}
-            className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
-        >
-            Manage Reservations
         </button>
         </div>
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { API_BASE } from './config';
-import { fetchAllPaginated } from './fetchAllPaginated';
 
 interface MenuItem {
   id: number;
@@ -49,25 +48,31 @@ const AdminOrders: React.FC = () => {
     fetchData();
   }, []);
 
+
   const fetchData = async () => {
-    // Fetch all orders, order items, menu items, and users
+    // Helper to fetch and normalize API responses
+    const fetchEndpoint = (endpoint: string) =>
+      axios.get(`${API_BASE}/api/${endpoint}/`).then(res => res.data.results ?? res.data);
+
     try {
       const [fetchedOrders, fetchedOrderItems, fetchedMenuItems, fetchedUsers] = await Promise.all([
-        fetchAllPaginated<Order>('/api/orders/'),
-        fetchAllPaginated<OrderItem>('/api/order-items/'),
-        fetchAllPaginated<MenuItem>('/api/menu-items/'),
-        fetchAllPaginated<User>('/api/users/')
+        fetchEndpoint("orders"),
+        fetchEndpoint("order-items"),
+        fetchEndpoint("menu-items"),
+        fetchEndpoint("users"),
       ]);
 
+      // Sort orders by descending ID
       fetchedOrders.sort((a: Order, b: Order) => b.id - a.id);
 
+      // Update state
       setOrders(fetchedOrders);
       setOrderItems(fetchedOrderItems);
       setMenuItems(fetchedMenuItems);
       setUsers(fetchedUsers);
     } catch (err) {
-      console.error('Error fetching data:', err);
-      setError('Failed to load orders.');
+      console.error("Error fetching data:", err);
+      setError("Failed to load orders.");
     } finally {
       setLoading(false);
     }

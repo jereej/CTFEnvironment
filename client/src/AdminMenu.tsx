@@ -19,7 +19,7 @@ const AdminMenu: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', description: '', type: '', price: '' });
   const [error, setError] = useState<string | null>(null);
 
-  const types = ['appetizer', 'main course', 'drink', 'snack', 'dessert'];
+  const types = ["sandwich", "side dish", "drink", "dessert"];
   const categoryOrder = types;
 
   useEffect(() => {
@@ -40,11 +40,8 @@ const AdminMenu: React.FC = () => {
     try {
       let allItems: MenuItem[] = [];
       let url = `/api/menu-items/`;
-      while (url) {
-        const res = await axios.get(`${API_BASE}${url}`);
-        allItems = [...allItems, ...(res.data.results || res.data)];
-        url = res.data.next ? res.data.next.replace('https://burgirs.2.rahtiapp.fi', '') : '';
-      }
+      const res = await axios.get(`${API_BASE}${url}`);
+      allItems = [...allItems, ...res.data];
       setMenuItems(allItems);
       const grouped = allItems.reduce((acc: Record<string, MenuItem[]>, item) => {
         acc[item.type] = acc[item.type] || [];

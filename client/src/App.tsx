@@ -8,7 +8,6 @@ import NavBar from './NavBar';
 // Admin components
 import AdminLogin from './AdminLogin';
 import AdminMenu from './AdminMenu';
-import AdminTables from './AdminTables';
 import AdminOrders from './AdminOrders';
 
 const App: React.FC = () => {
@@ -22,7 +21,6 @@ const App: React.FC = () => {
       <Route path="/orders" element={<Orders />} />
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/admin/menu" element={<AdminMenu />} />
-      <Route path="/admin/tables" element={<AdminTables />} />
       <Route path="/admin/orders" element={<AdminOrders />} />
     </Routes>
     </>
