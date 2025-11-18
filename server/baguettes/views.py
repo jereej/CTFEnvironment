@@ -114,11 +114,20 @@ class OrderViewSet(viewsets.ModelViewSet):
     destroy=extend_schema(summary="Delete order item", description="Delete an order item by ID.",
                           responses={204: None, 404: None}))
 class OrderItemViewSet(viewsets.ModelViewSet):
-    """
-    A ViewSet for managing order items.
-    """
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
+
+    def create(self, request, *args, **kwargs):
+        order_id = request.data.get('order')
+        item_id = request.data.get('item_id')
+        amount = int(request.data.get('amount', 0))
+        existing = OrderItem.objects.filter(order_id=order_id, item_id=item_id).first()
+        if existing:
+            existing.amount += amount
+            existing.save()
+            serializer = self.get_serializer(existing)
+            return Response(serializer.data)
+        return super().create(request, *args, **kwargs)
 
 @extend_schema_view(
     list=extend_schema(summary="List cart items", description="Retrieve a list of all order items.",
