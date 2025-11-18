@@ -50,9 +50,6 @@ const NavBar: React.FC = () => {
             </Link>
             {user ? (
               <>
-                <Link to="/reservations" className="text-gray-700 hover:text-blue-600 font-semibold">
-                  Reservations
-                </Link>
                 <Link to="/orders" className="text-gray-700 hover:text-blue-600 font-semibold">
                   Orders
                 </Link>
@@ -76,9 +73,6 @@ const NavBar: React.FC = () => {
             </Link>
             <Link to="/admin/orders" className="text-gray-700 hover:text-blue-600 font-semibold">
               Manage Orders
-            </Link>
-            <Link to="/admin/reservations" className="text-gray-700 hover:text-blue-600 font-semibold">
-              Manage Reservations
             </Link>
           </>
         )}
