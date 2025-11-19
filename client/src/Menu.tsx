@@ -6,6 +6,7 @@ import axios from 'axios';
 interface MenuItem {
   id: number;
   name: string;
+  is_premium: boolean;
   description: string;
   type: string;
   price: number;
@@ -92,13 +93,19 @@ return (
             <h2 className="text-3xl font-bold mb-6 text-center flex items-center justify-center gap-2">
               <span>{formatCategoryName(type)}</span>
             </h2>
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 grid">
               {groupedItems[type].map((item) => (
                 <div 
-                  key={item.id} 
-                  className="p-6 border rounded-2xl shadow-md hover:shadow-xl hover:scale-105 transition-transform duration-300 bg-white"
-                >
-                  <h3 className="text-xl font-semibold mb-2">{capitalizeFirstLetter(item.name)}</h3>
+                  key={item.id}
+                  className="relative p-6 border rounded-2xl shadow-md hover:shadow-xl hover:scale-105 transition-transform duration-300 bg-white">
+                  {item.is_premium && (
+                    <div className="absolute -top-2 -left-2 bg-gradient-to-r from-yellow-300 to-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-tr-lg rounded-bl-lg shadow-md">
+                      PREMIUM
+                    </div>
+                  )}
+                  <h3 className="text-xl font-semibold mb-2">
+                    {capitalizeFirstLetter(item.name)}
+                  </h3>
                   <p className="text-gray-600 mb-2">{item.description}</p>
                   <p className="text-lg font-bold">{item.price} €</p>
                 </div>
