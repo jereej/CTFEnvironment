@@ -14,6 +14,7 @@ interface MenuItem {
   description: string;
   type: string;
   price: number;
+  is_premium: boolean;
 }
 
 interface OrderItem {
@@ -47,7 +48,9 @@ const Orders: React.FC = () => {
   const [placingOrder, setPlacingOrder] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const categoryOrder = ["appetizer", "main course", "drink", "snack", "dessert"];
+  const categoryOrder = ["sandwich", "side dish", "drink", "dessert"];
+  const storedUser = localStorage.getItem("user");
+const user = storedUser ? JSON.parse(storedUser) : null;
 
   useEffect(() => {
     const fetchMenuItems = async () => {
@@ -86,7 +89,12 @@ const Orders: React.FC = () => {
   }, []);
 
   const increaseQuantity = (itemId: number) => {
-    // Increase amount of item, prevent negative quantities
+    const item = menuItems.find(m => m.id === itemId);
+    if (item?.is_premium && !user?.has_premium) {
+      alert("This is a premium item. Upgrade to Premium to order this item.");
+      return;
+    }
+
     setQuantities(prev => ({
       ...prev,
       [itemId]: (prev[itemId] || 0) + 1
@@ -326,7 +334,15 @@ return (
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {groupedItems[type].map(item => (
-                    <div key={item.id} className="p-6 border rounded-2xl shadow-md bg-white flex flex-col items-center">
+                    <div 
+                      key={item.id} 
+                      className="relative p-6 border rounded-2xl shadow-md bg-white flex flex-col items-center"
+                    >
+                      {item.is_premium && (
+                        <div className="absolute -top-2 -left-2 bg-gradient-to-r from-yellow-300 to-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-tr-lg rounded-bl-lg shadow-md">
+                          PREMIUM
+                        </div>
+                      )}
                       <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
                       <p className="text-gray-600 mb-2">{item.description}</p>
                       <p className="text-lg font-bold mb-4">{item.price} €</p>
@@ -334,14 +350,18 @@ return (
                       <div className="flex items-center gap-4 mb-4">
                         <button
                           onClick={() => decreaseQuantity(item.id)}
-                          className="bg-red-500 text-white rounded-full px-3 py-1"
+                          disabled={item.is_premium && !user?.has_premium}
+                            className={`bg-red-500 text-white rounded-full px-3 py-1 
+                            ${item.is_premium && !user?.has_premium ? 'opacity-50 cursor-not-allowed' : ''}`}
                         >
                           -
                         </button>
                         <span>{quantities[item.id] || 0}</span>
                         <button
                           onClick={() => increaseQuantity(item.id)}
-                          className="bg-green-500 text-white rounded-full px-3 py-1"
+                          disabled={item.is_premium && !user?.has_premium}
+                            className={`bg-green-500 text-white rounded-full px-3 py-1 
+                            ${item.is_premium && !user?.has_premium ? 'opacity-50 cursor-not-allowed' : ''}`}
                         >
                           +
                         </button>
@@ -349,9 +369,9 @@ return (
 
                       <button
                         onClick={() => addToCart(item)}
-                        className="bg-[#b36be3] text-white px-4 py-2 rounded hover:bg-[#794899] transition"
-                        disabled={!quantities[item.id]}
-                      >
+                          disabled={(!quantities[item.id]) || (item.is_premium && !user?.has_premium)}
+                          className={`bg-[#b36be3] text-white px-4 py-2 rounded transition 
+                          ${item.is_premium && !user?.has_premium ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#794899]'}`}>
                         Add to Order
                       </button>
                     </div>

@@ -67,11 +67,8 @@ const Menu: React.FC = () => {
   
 return (
   <div className="relative flex justify-center min-h-screen bg-[url('/bakery_overlay.png')] bg-cover bg-center p-4">
-    {/* Overlay */}
     <div className="absolute inset-0 bg-[#f2cbea]/70"></div>
-    {/* You can adjust the color and opacity, e.g. bg-black/30 */}
 
-    {/* Content */}
     <div className="relative z-10 max-w-6xl w-full">
       {Object.keys(groupedItems)
         .sort((a, b) => {
