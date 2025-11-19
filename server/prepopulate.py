@@ -1,7 +1,8 @@
 import os
 import django
 import random
-from hashlib import sha256
+from django.contrib.auth.hashers import make_password
+
 
 # Set up Django environment
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
@@ -82,8 +83,6 @@ def populate_users(n=10):
     Args:
         n (int): Number of users to create.
     """
-    from django.contrib.auth.hashers import make_password
-
     users_created = 0
     for _ in range(n):
         new_number = get_next_available_user_number()
@@ -114,11 +113,11 @@ def populate_menuitem(n=10):
     item_types = ["sandwich", "drink", "side dish", "dessert"]
     menuitems_created = 0
 
-    for i in range(n):
+    for _ in range(n):
         item_type = random.choice(item_types)
         new_number = get_next_available_item_number(item_type)
         name = f"{item_type} {new_number}"
-        description = f"Description for {item_type} {i + 1}"
+        description = f"Description for {item_type} {new_number}"
         price = round(random.uniform(5.0, 35.0), 2)
         is_premium = random.choice([True, False])
         
