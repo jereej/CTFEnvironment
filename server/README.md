@@ -28,11 +28,11 @@ python prepopulate.py
 python manage.py runserver
 ```
 
-Make migrations: Observes changes made to the models, and **must be run every time when a model is altered to use the latest versions of the models**.
+Make migrations: Observes changes made to the models, and creates the database file. **Must be run every time when a model is altered to use the latest versions of the models**.
 
-Migrate: Applies the observed changes to models, and creates the database file.
+Migrate: Applies the observed changes to models.
 
-Pre-populate: Adds random information to all models in the database.
+Pre-populate: Adds random information to all models (except cart_items) in the database.
 
 Run server: Starts the development server. Adding the endpoint **/api/** to the URL of the development server takes you to the API Root.
 
