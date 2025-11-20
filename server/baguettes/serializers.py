@@ -6,6 +6,7 @@ from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from baguettes.models import User, MenuItem, OrderItem, Order, CartItem
 
+
 class UserSerializer(serializers.ModelSerializer):
     """
     Serializer for the User model.
@@ -37,6 +38,7 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data['password'])
         return super().create(validated_data)
+
 
 class MenuItemSerializer(serializers.ModelSerializer):
     """
@@ -76,7 +78,6 @@ class OrderItemSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
-
 class OrderSerializer(serializers.ModelSerializer):
     user_id = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all(), source='user'
@@ -97,21 +98,15 @@ class OrderSerializer(serializers.ModelSerializer):
         # Aggregate duplicate items
         item_amount_map = {}
         for item in order_items_data:
-            item_id = item['item'].id  # or just item['item_id'] if that's in your dict
+            item_id = item['item'].id
             amount = item['amount']
             item_amount_map[item_id] = item_amount_map.get(item_id, 0) + amount
 
-        # Create each unique item once
+        # Create each unique item once with total amount
         for item_id, total_amount in item_amount_map.items():
             OrderItem.objects.create(order=order, item_id=item_id, amount=total_amount)
 
         return order
-
-
-
-
-
-
 
 
 class CartItemSerializer(serializers.ModelSerializer):

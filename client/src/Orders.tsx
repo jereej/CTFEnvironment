@@ -56,10 +56,8 @@ const Orders: React.FC = () => {
         return;
       }
       try {
-        let allItems: MenuItem[] = [];
-        let url = '/api/menu-items/';
-        const response = await axios.get(`${API_BASE}${url}`);
-        allItems = [...allItems, ...response.data];
+        const response = await axios.get(`${API_BASE}/api/menu-items/`);
+        const allItems: MenuItem[] = response.data;
         setMenuItems(allItems);
 
         const grouped = allItems.reduce((groups: Record<string, MenuItem[]>, item) => {
@@ -75,10 +73,10 @@ const Orders: React.FC = () => {
         setLoading(false);
       }
     };
-
     fetchMenuItems();
   }, []);
 
+  // Increase quantity for an item
   const increaseQuantity = (itemId: number) => {
     setQuantities(prev => ({
       ...prev,
@@ -86,6 +84,7 @@ const Orders: React.FC = () => {
     }));
   };
 
+  // Decrease quantity for an item but not below 0
   const decreaseQuantity = (itemId: number) => {
     setQuantities(prev => ({
       ...prev,
@@ -93,6 +92,7 @@ const Orders: React.FC = () => {
     }));
   };
 
+  // Add selected quantity of item to cart for logged-in user
   const addToCart = async (item: MenuItem) => {
     const amount = quantities[item.id];
     const storedUser = localStorage.getItem('user');
@@ -116,8 +116,8 @@ const Orders: React.FC = () => {
     }
   };
 
+  // Remove all cart items with specified item_id from cart and backend
   const removeFromCart = async (itemId: number) => {
-    // Remove all entries with this item_id from cart state and backend
     const itemsToRemove = cart.filter(item => item.item_id === itemId);
     for (const item of itemsToRemove) {
       try {
@@ -129,6 +129,7 @@ const Orders: React.FC = () => {
     setCart(prev => prev.filter(item => item.item_id !== itemId));
   };
 
+  // Place order from the current cart
   const placeOrder = async () => {
     if (cart.length === 0) return;
     const storedUser = localStorage.getItem('user');
@@ -164,6 +165,7 @@ const Orders: React.FC = () => {
     }
   };
 
+  // Fetch user orders and related order items
   const fetchUserOrders = async () => {
     const storedUser = localStorage.getItem('user');
     if (!storedUser) {
@@ -171,23 +173,16 @@ const Orders: React.FC = () => {
       return;
     }
     const user = JSON.parse(storedUser);
-
     try {
-      let allOrders: Order[] = [];
-      const url = `/api/users/${user.id}/orders/`;
+      const response = await axios.get(`${API_BASE}/api/users/${user.id}/orders/`);
+      setUserOrders(response.data);
 
-      const response = await axios.get(`${API_BASE}${url}`);
-      allOrders = [...allOrders, ...response.data];
-      setUserOrders(allOrders);
+      const itemsRes = await axios.get(`${API_BASE}/api/order-items/`);
+      setAllOrderItems(itemsRes.data);
+
       setViewingOrders(true);
-
-      let items: OrderItem[] = [];
-      let itemUrl = '/api/order-items/';
-      const res = await axios.get(`${API_BASE}${itemUrl}`);
-      items = [...items, ...res.data];
-      setAllOrderItems(items);
     } catch (err) {
-      console.error('Failed to fetch user orders or order items:', err);
+      console.error('Failed to fetch orders:', err);
       setError('Failed to fetch your orders.');
     }
   };
@@ -200,19 +195,19 @@ const Orders: React.FC = () => {
     return menuItems.find(m => m.id === itemId);
   };
 
-  // *** MAIN CART AGGREGATION LOGIC ***
-  const mergedCart = cart.reduce((acc: Record<number, CartItem>, item) => {
-    const key = item.item_id;
-    if (!acc[key]) {
-      acc[key] = { ...item };
+  // Merge duplicate cart items by summing amount
+  const mergedCart: Record<number, CartItem> = cart.reduce((acc, item) => {
+    if (!acc[item.item_id]) {
+      acc[item.item_id] = { ...item };
     } else {
-      acc[key].amount += item.amount;
+      acc[item.item_id].amount += item.amount;
     }
     return acc;
-  }, {});
+  }, {} as Record<number, CartItem>);
+  
   const displayCart: CartItem[] = Object.values(mergedCart);
 
-  if (error == 'You must be logged in to place an order.') {
+  if (error === 'You must be logged in to place an order.') {
     return <div className="min-h-screen flex justify-center items-center text-red-500">{error}</div>;
   }
   if (loading) {
@@ -224,10 +219,7 @@ const Orders: React.FC = () => {
       <div className="absolute inset-0 bg-[#f2cbea]/70"></div>
       <div className="relative z-10 w-full flex flex-col items-center">
         <div className="mb-6">
-          <button
-            onClick={fetchUserOrders}
-            className="px-6 py-3 bg-green-500 text-white rounded-2xl hover:bg-green-600 transition"
-          >
+          <button onClick={fetchUserOrders} className="px-6 py-3 bg-green-500 text-white rounded-2xl hover:bg-green-600 transition">
             View My Orders
           </button>
         </div>
@@ -239,16 +231,9 @@ const Orders: React.FC = () => {
               <div className="flex flex-col gap-4">
                 {userOrders.map(order => (
                   <div key={order.id} className="border-b pb-4">
-                    <div
-                      className="flex justify-between items-center cursor-pointer"
-                      onClick={() => toggleExpand(order.id)}
-                    >
-                      <p>
-                        <span className="font-semibold">Order #{order.id}</span>
-                      </p>
-                      <p className="text-blue-500 text-sm">
-                        {expandedOrderId === order.id ? 'Hide Details ▲' : 'View Details ▼'}
-                      </p>
+                    <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleExpand(order.id)}>
+                      <p><span className="font-semibold">Order #{order.id}</span></p>
+                      <p className="text-blue-500 text-sm">{expandedOrderId === order.id ? 'Hide Details ▲' : 'View Details ▼'}</p>
                     </div>
                     {expandedOrderId === order.id && (
                       <div className="mt-2 pl-4">
@@ -262,9 +247,7 @@ const Orders: React.FC = () => {
                                 <p className="font-semibold">{menuItem?.name || 'Unknown Item'}</p>
                                 <p className="text-gray-500 text-sm">Amount: {orderItem.amount}</p>
                               </div>
-                              <p className="font-bold">
-                                {menuItem ? (menuItem.price * orderItem.amount).toFixed(2) : '0.00'} €
-                              </p>
+                              <p className="font-bold">{menuItem ? (menuItem.price * orderItem.amount).toFixed(2) : '0.00'} €</p>
                             </div>
                           );
                         })}
@@ -286,10 +269,7 @@ const Orders: React.FC = () => {
             ) : (
               <p>You have no orders yet.</p>
             )}
-            <button
-              onClick={() => setViewingOrders(false)}
-              className="mt-6 px-6 py-3 bg-blue-500 text-white rounded-2xl hover:bg-blue-600 transition"
-            >
+            <button onClick={() => setViewingOrders(false)} className="mt-6 px-6 py-3 bg-blue-500 text-white rounded-2xl hover:bg-blue-600 transition">
               Back to Create Order
             </button>
           </div>
@@ -310,25 +290,11 @@ const Orders: React.FC = () => {
                         <p className="text-gray-600 mb-2">{item.description}</p>
                         <p className="text-lg font-bold mb-4">{item.price} €</p>
                         <div className="flex items-center gap-4 mb-4">
-                          <button
-                            onClick={() => decreaseQuantity(item.id)}
-                            className="bg-red-500 text-white rounded-full px-3 py-1"
-                          >
-                            -
-                          </button>
+                          <button onClick={() => decreaseQuantity(item.id)} className="bg-red-500 text-white rounded-full px-3 py-1">-</button>
                           <span>{quantities[item.id] || 0}</span>
-                          <button
-                            onClick={() => increaseQuantity(item.id)}
-                            className="bg-green-500 text-white rounded-full px-3 py-1"
-                          >
-                            +
-                          </button>
+                          <button onClick={() => increaseQuantity(item.id)} className="bg-green-500 text-white rounded-full px-3 py-1">+</button>
                         </div>
-                        <button
-                          onClick={() => addToCart(item)}
-                          className="bg-[#b36be3] text-white px-4 py-2 rounded hover:bg-[#794899] transition"
-                          disabled={!quantities[item.id]}
-                        >
+                        <button onClick={() => addToCart(item)} className="bg-[#b36be3] text-white px-4 py-2 rounded hover:bg-[#794899] transition" disabled={!quantities[item.id]}>
                           Add to Order
                         </button>
                       </div>
@@ -358,13 +324,8 @@ const Orders: React.FC = () => {
                           <p className="text-gray-500 text-sm">Amount: {cartItem.amount}</p>
                         </div>
                         <div className="flex items-center gap-4">
-                          <span className="font-bold">
-                            {menuItem ? (menuItem.price * cartItem.amount).toFixed(2) : '0.00'} €
-                          </span>
-                          <button
-                            onClick={() => removeFromCart(cartItem.item_id)}
-                            className="text-red-500 hover:text-red-700 text-sm font-semibold"
-                          >
+                          <span className="font-bold">{menuItem ? (menuItem.price * cartItem.amount).toFixed(2) : '0.00'} €</span>
+                          <button onClick={() => removeFromCart(cartItem.item_id)} className="text-red-500 hover:text-red-700 text-sm font-semibold">
                             Remove
                           </button>
                         </div>
