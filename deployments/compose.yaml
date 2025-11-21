@@ -1,0 +1,17 @@
+services:
+  baguette_frontend:
+    image: jereej/ctfenvironment-client
+    ports:
+      - "80:5173"  # Host:Container
+    networks:
+      - front-nw
+      - back-nw
+
+  baguette_backend:
+    image: jereej/ctfenvironment-server
+    networks:
+      - back-nw
+
+networks:
+  front-nw: {}
+  back-nw: {}
