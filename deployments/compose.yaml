@@ -7,13 +7,21 @@ services:
       - frontend_build:/frontend_build
 
   baguette_backend:
-    image: jereej/ctfenvironment-server
+    build:
+      context: .
+      dockerfile: Dockerfile
     expose:
       - "8080"
     environment:
-    - DJANGO_ALLOWED_HOSTS=${PUBLIC_IP}
+      - DJANGO_ALLOWED_HOSTS=${PUBLIC_IP}
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_DEBUG=False
+      # Uncomment if using Postgres
+      # - DATABASE_URL=postgres://user:pass@postgres:5432/dbname
     networks:
       - app-net
+    depends_on:
+      - baguette_frontend
 
   nginx:
     image: nginx:latest
