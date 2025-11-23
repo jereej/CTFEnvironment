@@ -32,10 +32,10 @@ const Menu: React.FC = () => {
     // Check if the user is an admin
     const fetchAllMenuItems = async () => {
       let allItems: MenuItem[] = [];
-      let url = '/api/menu-items/';
+      let url = 'menu-items/';
     
     try {
-        const response = await axios.get(`${url}`);
+        const response = await axios.get(`${API_BASE}${url}`);
         allItems = [...allItems, ...response.data];
         setMenuItems(allItems);
         setLoading(false);
