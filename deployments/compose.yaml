@@ -1,17 +1,33 @@
 services:
   baguette_frontend:
     image: jereej/ctfenvironment-client
-    ports:
-      - "80:5173"  # Host:Container
     networks:
-      - front-nw
-      - back-nw
+      - app-net
+    volumes:
+      - frontend_build:/frontend_build
 
   baguette_backend:
     image: jereej/ctfenvironment-server
+    expose:
+      - "8080"
     networks:
-      - back-nw
+      - app-net
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"               # Single public entry point
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - frontend_build:/usr/share/nginx/html
+    depends_on:
+      - baguette_frontend
+      - baguette_backend
+    networks:
+      - app-net
 
 networks:
-  front-nw: {}
-  back-nw: {}
+  app-net: {}
+
+volumes:
+  frontend_build:

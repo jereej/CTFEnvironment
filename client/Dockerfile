@@ -14,14 +14,9 @@ COPY . .
 
 RUN npm run build
 
-FROM node:18-alpine
+FROM alpine:3.18
+WORKDIR /build
 
-WORKDIR /app
+COPY --from=builder /app/dist ./dist
 
-RUN npm install -g serve
-COPY --from=builder /app/dist /app
-
-EXPOSE 5173
-
-# Start the server
-CMD ["serve", "-s", ".", "-l", "tcp://0.0.0.0:5173"]
+CMD ["sh", "-c", "cp -r /build/dist/* /frontend_build"]
