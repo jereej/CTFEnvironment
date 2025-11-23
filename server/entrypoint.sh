@@ -4,6 +4,9 @@ set -e
 # Apply database migrations
 python manage.py migrate --noinput
 
+# Run prepopulation script
+python prepopulation.py
+
 # Collect static files (optional at runtime)
 python manage.py collectstatic --noinput || true
 
