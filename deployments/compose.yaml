@@ -16,12 +16,14 @@ services:
       - DJANGO_ALLOWED_HOSTS=${PUBLIC_IP}
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - DJANGO_DEBUG=False
-      # Uncomment if using Postgres
-      # - DATABASE_URL=postgres://user:pass@postgres:5432/dbname
+      - POSTGRES_DB=app
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=app
+      - DATABASE_URL=postgres://app:app@postgres:5432/app
     networks:
       - app-net
     depends_on:
-      - baguette_frontend
+      - postgres
 
   nginx:
     image: nginx:latest
@@ -41,3 +43,4 @@ networks:
 
 volumes:
   frontend_build:
+  pgdata:
