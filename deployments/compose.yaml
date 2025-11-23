@@ -10,6 +10,8 @@ services:
     image: jereej/ctfenvironment-server
     expose:
       - "8080"
+    environment:
+    - DJANGO_ALLOWED_HOSTS=${PUBLIC_IP}
     networks:
       - app-net
 
