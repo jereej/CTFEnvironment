@@ -21,14 +21,12 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy project
 COPY . .
 
-# Collect static files
-RUN python manage.py collectstatic --noinput || true
+# Copy entrypoint script
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
-# Run Gunicorn
-CMD gunicorn project.wsgi:application \
-    --bind 0.0.0.0:$PORT \
-    --workers 4 \
-    --timeout 120 \
-    --keep-alive 120 \
-    --access-logfile - \
-    --error-logfile -
+# Expose port
+EXPOSE 8080
+
+# Run entrypoint
+ENTRYPOINT ["/app/entrypoint.sh"]
