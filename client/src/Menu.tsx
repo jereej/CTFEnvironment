@@ -35,7 +35,7 @@ const Menu: React.FC = () => {
       let url = '/api/menu-items/';
     
     try {
-        const response = await axios.get(`${API_BASE}${url}`);
+        const response = await axios.get(`${url}`);
         allItems = [...allItems, ...response.data];
         setMenuItems(allItems);
         setLoading(false);
