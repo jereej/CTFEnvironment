@@ -47,6 +47,7 @@ const Orders: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [placingOrder, setPlacingOrder] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const categoryOrder = ["sandwich", "side dish", "drink", "dessert"];
   const storedUser = localStorage.getItem("user");
@@ -249,13 +250,23 @@ return (
 
     {/* Content */}
     <div className="relative z-10 w-full flex flex-col items-center">
-      <div className="mb-6">
+      <div className="mb-6 space-x-4" >
         <button
           onClick={fetchUserOrders}
           className="px-6 py-3 bg-green-500 text-white rounded-2xl hover:bg-green-600 transition"
         >
           View My Orders
         </button>
+        <button
+            onClick={() => setIsCartOpen(!isCartOpen)}
+            className={`px-6 py-3 rounded-2xl text-white font-semibold transition ${
+              isCartOpen
+                ? 'outline outline-2 outline-[#b36be3] bg-white text-[#b36be3] hover:bg-gray-300 hover:text-[#794899]'
+                : 'bg-[#b36be3] hover:bg-[#794899]'
+            }`}
+          >
+            {`Open Cart (${cart.length})`}
+          </button>
       </div>
 
       {viewingOrders && (
@@ -383,56 +394,96 @@ return (
                 </div>
               </div>
             ))}
+        </>
+      )}
+    </div>
+    <div
+      className="fixed top-[72px] right-0 h-[calc(100vh-4rem)] z-40 pointer-events-none"
+    >
+      <div
+        className={`w-[450px] bg-white shadow-xl h-full flex flex-col transform transition-transform duration-300 ease-out
+          ${isCartOpen ? 'translate-x-0' : 'translate-x-full'} 
+          pointer-events-auto`}
+      >
+        <div className="px-4 py-3 border-b flex items-center justify-between">
+          <h2 className="text-xl font-bold">Your Cart</h2>
+          <button
+            onClick={() => setIsCartOpen(false)}
+            className="text-gray-500 hover:text-gray-700 text-sm"
+          >
+            Close ✕
+          </button>
+        </div>
+
+        <div className="flex-1 overflow-y-auto p-4">
+          {cart.length === 0 ? (
+            <p className="text-gray-500 text-sm">Your cart is empty.</p>
+          ) : (
+            <div className="flex flex-col gap-4">
+              {cart.map((cartItem) => {
+                const menuItem = findMenuItem(cartItem.item_id);
+                return (
+                  <div
+                    key={cartItem.id}
+                    className="flex justify-between items-center border-b pb-2"
+                  >
+                    <div>
+                      <p className="font-semibold">
+                        {menuItem?.name || 'Unknown Item'} x {cartItem.amount}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <span className="font-bold">
+                        {menuItem
+                          ? (menuItem.price * cartItem.amount).toFixed(2)
+                          : '0.00'}{' '}
+                        €
+                      </span>
+                      <button
+                        onClick={() => removeFromCart(cartItem.id)}
+                        className="text-red-500 hover:text-red-700 text-xs font-semibold"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="px-4 py-4 border-t">
+          <div className="flex justify-between items-center text-lg font-bold mb-3">
+            <span>Total:</span>
+            <span>
+              {cart
+                .reduce((total, item) => {
+                  const menuItem = findMenuItem(item.item_id);
+                  return menuItem ? total + menuItem.price * item.amount : total;
+                }, 0)
+                .toFixed(2)}{' '}
+              €
+            </span>
+          </div>
 
           <button
-            onClick={placeOrder}
-            className={`mt-8 px-8 py-4 text-white font-bold rounded-2xl transition ${cart.length === 0 ? 'bg-gray-400 cursor-not-allowed' : 'bg-purple-600 hover:bg-purple-700'}`}
+            onClick={async () => {
+              await placeOrder();
+              setIsCartOpen(false); // auto-close still works
+            }}
             disabled={cart.length === 0 || placingOrder}
+            className={`w-full px-4 py-3 rounded-2xl text-white font-semibold transition ${
+              cart.length === 0 || placingOrder
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-purple-600 hover:bg-purple-700'
+            }`}
           >
             {placingOrder ? 'Placing Order...' : 'Place Order'}
           </button>
-
-          {cart.length > 0 && (
-            <div className="mt-12 w-full max-w-4xl bg-white shadow-md rounded-2xl p-6">
-              <h2 className="text-2xl font-bold mb-4">Your Cart</h2>
-
-              <div className="flex flex-col gap-4">
-                {cart.map((cartItem) => {
-                  const menuItem = findMenuItem(cartItem.item_id);
-                  return (
-                    <div key={cartItem.id} className="flex justify-between items-center border-b pb-2">
-                      <div>
-                        <p className="font-semibold">{menuItem?.name || 'Unknown Item'} x {cartItem.amount}</p>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <span className="font-bold">
-                          {menuItem ? (menuItem.price * cartItem.amount).toFixed(2) : '0.00'} €
-                        </span>
-                        <button
-                          onClick={() => removeFromCart(cartItem.id)}
-                          className="text-red-500 hover:text-red-700 text-sm font-semibold"
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="mt-6 flex justify-between items-center text-xl font-bold">
-                <span>Total:</span>
-                <span>
-                  {cart.reduce((total, item) => {
-                    const menuItem = findMenuItem(item.item_id);
-                    return menuItem ? total + menuItem.price * item.amount : total;
-                  }, 0).toFixed(2)} €
-                </span>
-              </div>
-            </div>
-          )}
-        </>
-      )}
+        </div>
+      </div>
     </div>
   </div>
 );
