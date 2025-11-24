@@ -39,7 +39,7 @@ const Orders: React.FC = () => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [groupedItems, setGroupedItems] = useState<GroupedItems>({});
   const [quantities, setQuantities] = useState<Record<number, number>>({});
-  const [cart, setCart] = useState<OrderItem[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
   const [userOrders, setUserOrders] = useState<Order[]>([]);
   const [allOrderItems, setAllOrderItems] = useState<OrderItem[]>([]);
   const [viewingOrders, setViewingOrders] = useState(false);
@@ -63,9 +63,7 @@ const user = storedUser ? JSON.parse(storedUser) : null;
       
       try {
         let allItems: MenuItem[] = [];
-        let url = '/api/menu-items/';
-
-        const response = await axios.get(`${API_BASE}${url}`);
+        const response = await axios.get(`${API_BASE}/api/menu-items/`);
         allItems = [...allItems, ...response.data];
 
         setMenuItems(allItems);
@@ -77,8 +75,12 @@ const user = storedUser ? JSON.parse(storedUser) : null;
         }, {});
         setGroupedItems(grouped);
 
+        const user = JSON.parse(storedUser);
+        const cartResponse = await axios.get(`${API_BASE}/api/users/${user.id}/cart-items/`);
+        setCart(cartResponse.data);
+
       } catch (err) {
-        console.error('Failed to fetch menu items:', err);
+        console.error('Failed to fetch menu or cart:', err);
         setError('Failed to load menu.');
       } finally {
         setLoading(false);
@@ -124,14 +126,14 @@ const user = storedUser ? JSON.parse(storedUser) : null;
     const user = JSON.parse(storedUser);
 
     try {
-      const response = await axios.post(`${API_BASE}/api/cart-items/`, {
+      await axios.post(`${API_BASE}/api/cart-items/`, {
         user_id: user.id,
         item_id: item.id,
         amount,
       });
 
-      const createdCartItem: CartItem = response.data;
-      setCart(prev => [...prev, createdCartItem]);
+      const cartResponse = await axios.get(`${API_BASE}/api/users/${user.id}/cart-items/`);
+      setCart(cartResponse.data);
       setQuantities(prev => ({ ...prev, [item.id]: 0 }));
     } catch (err) {
       console.error('Failed to add to cart:', err);
@@ -141,7 +143,9 @@ const user = storedUser ? JSON.parse(storedUser) : null;
   const removeFromCart = async (cartItemId: number) => {
     try {
       await axios.delete(`${API_BASE}/api/cart-items/${cartItemId}/`);
-      setCart(prev => prev.filter(item => item.id !== cartItemId));
+
+      const cartResponse = await axios.get(`${API_BASE}/api/users/${user.id}/cart-items/`);
+      setCart(cartResponse.data);
     } catch (err) {
       console.error('Failed to remove item from cart:', err);
       alert('Failed to remove item from cart.');
@@ -398,8 +402,7 @@ return (
                   return (
                     <div key={cartItem.id} className="flex justify-between items-center border-b pb-2">
                       <div>
-                        <p className="font-semibold">{menuItem?.name || 'Unknown Item'}</p>
-                        <p className="text-gray-500 text-sm">Amount: {cartItem.amount}</p>
+                        <p className="font-semibold">{menuItem?.name || 'Unknown Item'} x {cartItem.amount}</p>
                       </div>
                       <div className="flex items-center gap-4">
                         <span className="font-bold">

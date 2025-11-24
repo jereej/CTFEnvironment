@@ -54,7 +54,8 @@ class OrderItem(models.Model):
     
 
 class CartItem(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    """Represents an item and its amount and in a cart, and the user who has the item in their cart."""
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="cart_items")
     item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     amount = models.IntegerField()
 

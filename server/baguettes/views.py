@@ -24,7 +24,9 @@ from baguettes.serializers import UserSerializer, MenuItemSerializer, OrderItemS
                                  request=UserSerializer, responses={200: UserSerializer, 400: None, 404: None}),
     destroy=extend_schema(summary="Delete user", description="Delete a user by ID.", responses={204: None, 404: None}),
     orders=extend_schema(summary="List user orders", description="Retrieve all orders for a specific user.",
-                         responses={200: OrderSerializer}))
+                         responses={200: OrderSerializer}),
+    cart_items=extend_schema(summary="List user cart items", description="Retrieve all cart items for a specific user.",
+                         responses={200: CartItemSerializer}))
 class UserViewSet(viewsets.ModelViewSet):
     """
     A ViewSet for managing users.
@@ -42,6 +44,17 @@ class UserViewSet(viewsets.ModelViewSet):
         user = self.get_object()
         orders = user.orders.all()
         serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data)
+    
+    @action(detail=True, methods=['get'], url_path='cart-items') 
+    # pylint: disable=unused-argument
+    def cart_items(self, request, pk=None):
+        """
+        Retrieve all cart items for a specific user.
+        """
+        user = self.get_object()
+        cart_items = user.cart_items.all()
+        serializer = CartItemSerializer(cart_items, many=True)
         return Response(serializer.data)
 
     def perform_create(self, serializer):
@@ -120,13 +133,14 @@ class OrderItemViewSet(viewsets.ModelViewSet):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
 
+
 @extend_schema_view(
     list=extend_schema(summary="List cart items", description="Retrieve a list of all order items.",
-                       responses={200: OrderItemSerializer}),
+                       responses={200: CartItemSerializer}),
     create=extend_schema(summary="Create cart item", description="Create a new cart item with the provided details.",
-                         request=OrderItemSerializer, responses={201: OrderItemSerializer, 400: None}),
+                         request=CartItemSerializer, responses={201: CartItemSerializer, 400: None}),
     retrieve=extend_schema(summary="Retrieve cart item", description="Get details of a specific cart item by ID.",
-                           responses={200: OrderItemSerializer, 404: None}),
+                           responses={200: CartItemSerializer, 404: None}),
     update=extend_schema(summary="Update cart item", description="Update all fields of an cart item.",
                          request=CartItemSerializer, responses={200: CartItemSerializer, 400: None, 404: None}),
     partial_update=extend_schema(summary="Partially update cart item",
