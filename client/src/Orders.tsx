@@ -153,6 +153,46 @@ const user = storedUser ? JSON.parse(storedUser) : null;
     }
   };
 
+  const increaseCartItem = async (cartItem: CartItem) => {
+    try {
+      await axios.patch(`${API_BASE}/api/cart-items/${cartItem.id}/`, {
+        amount: cartItem.amount + 1,
+      });
+
+      // Refresh cart
+      const storedUser = localStorage.getItem("user");
+      const user = storedUser ? JSON.parse(storedUser) : null;
+      const cartResponse = await axios.get(`${API_BASE}/api/users/${user.id}/cart-items/`);
+      setCart(cartResponse.data);
+
+    } catch (err) {
+      console.error("Failed to increase cart item amount:", err);
+    }
+  };
+
+  const decreaseCartItem = async (cartItem: CartItem) => {
+    try {
+      const newAmount = cartItem.amount - 1;
+
+      if (newAmount <= 0) {
+        // Remove item automatically
+        await axios.delete(`${API_BASE}/api/cart-items/${cartItem.id}/`);
+      } else {
+        await axios.patch(`${API_BASE}/api/cart-items/${cartItem.id}/`, {
+          amount: newAmount,
+        });
+      }
+
+      // Refresh cart
+      const storedUser = localStorage.getItem("user");
+      const user = storedUser ? JSON.parse(storedUser) : null;
+      const cartResponse = await axios.get(`${API_BASE}/api/users/${user.id}/cart-items/`);
+      setCart(cartResponse.data);
+
+    } catch (err) {
+      console.error("Failed to decrease cart item amount:", err);
+    }
+  };
 
   const placeOrder = async () => {
     // Place order, send POST request to API
@@ -253,19 +293,19 @@ return (
       <div className="mb-6 space-x-4" >
         <button
           onClick={fetchUserOrders}
-          className="px-6 py-3 bg-green-500 text-white rounded-2xl hover:bg-green-600 transition"
+          className="w-[175px] px-6 py-3 bg-green-500 text-white rounded-2xl hover:bg-green-600 transition"
         >
           View My Orders
         </button>
         <button
             onClick={() => setIsCartOpen(!isCartOpen)}
-            className={`px-6 py-3 rounded-2xl text-white font-semibold transition ${
+            className={`w-[175px] px-6 py-3 rounded-2xl text-white font-semibold transition ${
               isCartOpen
                 ? 'outline outline-2 outline-[#b36be3] bg-white text-[#b36be3] hover:bg-gray-300 hover:text-[#794899]'
                 : 'bg-[#b36be3] hover:bg-[#794899]'
             }`}
           >
-            {`Open Cart (${cart.length})`}
+            {isCartOpen ? `Close Cart` : `Open Cart (${cart.length})`}
           </button>
       </div>
 
@@ -429,16 +469,36 @@ return (
                   >
                     <div>
                       <p className="font-semibold">
-                        {menuItem?.name || 'Unknown Item'} x {cartItem.amount}
+                        {menuItem?.name || 'Unknown Item'}
                       </p>
                     </div>
                     <div className="flex items-center gap-4">
-                      <span className="font-bold">
-                        {menuItem
-                          ? (menuItem.price * cartItem.amount).toFixed(2)
-                          : '0.00'}{' '}
-                        €
+
+                      {/* Decrease Button */}
+                      <button
+                        onClick={() => decreaseCartItem(cartItem)}
+                        className="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600"
+                      >
+                        –
+                      </button>
+
+                      {/* Amount */}
+                      <span className="font-semibold">{cartItem.amount}</span>
+
+                      {/* Increase Button */}
+                      <button
+                        onClick={() => increaseCartItem(cartItem)}
+                        className="bg-green-500 text-white px-2 py-1 rounded-md hover:bg-green-600"
+                      >
+                        +
+                      </button>
+
+                      {/* Price */}
+                      <span className="font-bold ml-2">
+                        {menuItem ? (menuItem.price * cartItem.amount).toFixed(2) : '0.00'} €
                       </span>
+
+                      {/* Remove button */}
                       <button
                         onClick={() => removeFromCart(cartItem.id)}
                         className="text-red-500 hover:text-red-700 text-xs font-semibold"

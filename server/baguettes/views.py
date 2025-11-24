@@ -155,6 +155,23 @@ class CartItemViewSet(viewsets.ModelViewSet):
     queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer
 
+    def create(self, request, *args, **kwargs):
+        user_id = request.data.get("user_id")
+        item_id = request.data.get("item_id")
+        amount = int(request.data.get("amount", 1))
+
+        # Check if cart already has this item for this user
+        try:
+            existing = CartItem.objects.get(user_id=user_id, item_id=item_id)
+            existing.amount += amount
+            existing.save()
+            serializer = self.get_serializer(existing)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        except CartItem.DoesNotExist:
+            # Normal creation
+            return super().create(request, *args, **kwargs)
+
 
 @api_view(['POST'])
 def login_view(request):
