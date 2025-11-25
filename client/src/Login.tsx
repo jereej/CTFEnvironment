@@ -26,7 +26,7 @@ const Login: React.FC = () => {
     try {
       if (isSignUp) {
         // SIGN UP
-        const createResponse = await axios.post(`${API_BASE}/api/users/`, {
+        const createResponse = await axios.post(`${API_BASE}users/`, {
           name: username,
           password: password,
         }, {
@@ -42,7 +42,7 @@ const Login: React.FC = () => {
         navigate('/');
       } else {
         // LOGIN
-        const loginResponse = await axios.post(`${API_BASE}/api/login/`, {
+        const loginResponse = await axios.post(`${API_BASE}login/`, {
           name: username,
           password: password,
         });

@@ -35,7 +35,7 @@ const NavBar: React.FC = () => {
         <img
           src="/common_logo.png"
           alt="Les Baguettes Logo"
-          className="h-12 w-auto rounded-md shadow-sm hover:opacity-90 transition"
+          className="h-12 w-auto rounded-md transition"
         />
       </Link>
 

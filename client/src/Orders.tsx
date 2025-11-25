@@ -64,7 +64,7 @@ const user = storedUser ? JSON.parse(storedUser) : null;
       
       try {
         let allItems: MenuItem[] = [];
-        const response = await axios.get(`${API_BASE}/api/menu-items/`);
+        const response = await axios.get(`${API_BASE}menu-items/`);
         allItems = [...allItems, ...response.data];
 
         setMenuItems(allItems);
@@ -77,7 +77,7 @@ const user = storedUser ? JSON.parse(storedUser) : null;
         setGroupedItems(grouped);
 
         const user = JSON.parse(storedUser);
-        const cartResponse = await axios.get(`${API_BASE}/api/users/${user.id}/cart-items/`);
+        const cartResponse = await axios.get(`${API_BASE}users/${user.id}/cart-items/`);
         setCart(cartResponse.data);
 
       } catch (err) {
@@ -127,13 +127,13 @@ const user = storedUser ? JSON.parse(storedUser) : null;
     const user = JSON.parse(storedUser);
 
     try {
-      await axios.post(`${API_BASE}/api/cart-items/`, {
+      await axios.post(`${API_BASE}cart-items/`, {
         user_id: user.id,
         item_id: item.id,
         amount,
       });
 
-      const cartResponse = await axios.get(`${API_BASE}/api/users/${user.id}/cart-items/`);
+      const cartResponse = await axios.get(`${API_BASE}users/${user.id}/cart-items/`);
       setCart(cartResponse.data);
       setQuantities(prev => ({ ...prev, [item.id]: 0 }));
     } catch (err) {
@@ -143,9 +143,9 @@ const user = storedUser ? JSON.parse(storedUser) : null;
 
   const removeFromCart = async (cartItemId: number) => {
     try {
-      await axios.delete(`${API_BASE}/api/cart-items/${cartItemId}/`);
+      await axios.delete(`${API_BASE}cart-items/${cartItemId}/`);
 
-      const cartResponse = await axios.get(`${API_BASE}/api/users/${user.id}/cart-items/`);
+      const cartResponse = await axios.get(`${API_BASE}users/${user.id}/cart-items/`);
       setCart(cartResponse.data);
     } catch (err) {
       console.error('Failed to remove item from cart:', err);
@@ -155,14 +155,14 @@ const user = storedUser ? JSON.parse(storedUser) : null;
 
   const increaseCartItem = async (cartItem: CartItem) => {
     try {
-      await axios.patch(`${API_BASE}/api/cart-items/${cartItem.id}/`, {
+      await axios.patch(`${API_BASE}cart-items/${cartItem.id}/`, {
         amount: cartItem.amount + 1,
       });
 
       // Refresh cart
       const storedUser = localStorage.getItem("user");
       const user = storedUser ? JSON.parse(storedUser) : null;
-      const cartResponse = await axios.get(`${API_BASE}/api/users/${user.id}/cart-items/`);
+      const cartResponse = await axios.get(`${API_BASE}users/${user.id}/cart-items/`);
       setCart(cartResponse.data);
 
     } catch (err) {
@@ -176,9 +176,9 @@ const user = storedUser ? JSON.parse(storedUser) : null;
 
       if (newAmount <= 0) {
         // Remove item automatically
-        await axios.delete(`${API_BASE}/api/cart-items/${cartItem.id}/`);
+        await axios.delete(`${API_BASE}cart-items/${cartItem.id}/`);
       } else {
-        await axios.patch(`${API_BASE}/api/cart-items/${cartItem.id}/`, {
+        await axios.patch(`${API_BASE}cart-items/${cartItem.id}/`, {
           amount: newAmount,
         });
       }
@@ -186,7 +186,7 @@ const user = storedUser ? JSON.parse(storedUser) : null;
       // Refresh cart
       const storedUser = localStorage.getItem("user");
       const user = storedUser ? JSON.parse(storedUser) : null;
-      const cartResponse = await axios.get(`${API_BASE}/api/users/${user.id}/cart-items/`);
+      const cartResponse = await axios.get(`${API_BASE}users/${user.id}/cart-items/`);
       setCart(cartResponse.data);
 
     } catch (err) {
@@ -208,14 +208,14 @@ const user = storedUser ? JSON.parse(storedUser) : null;
 
     setPlacingOrder(true);
     try {
-      const orderResponse = await axios.post(`${API_BASE}/api/orders/`, {
+      const orderResponse = await axios.post(`${API_BASE}orders/`, {
         user_id: user.id,
         order_items: [],
       });
       const orderId = orderResponse.data.id;
 
       for (const cartItem of cart) {
-        await axios.post(`${API_BASE}/api/order-items/`, {
+        await axios.post(`${API_BASE}order-items/`, {
           item_id: cartItem.item_id,
           amount: cartItem.amount,
           order: orderId,
@@ -223,7 +223,7 @@ const user = storedUser ? JSON.parse(storedUser) : null;
       }
 
       for (const cartItem of cart) {
-        await axios.delete(`${API_BASE}/api/cart-items/${cartItem.id}/`);
+        await axios.delete(`${API_BASE}cart-items/${cartItem.id}/`);
       }
 
       setCart([]);
@@ -248,18 +248,14 @@ const user = storedUser ? JSON.parse(storedUser) : null;
 
     try {
       let allOrders: Order[] = [];
-      const url = `/api/users/${user.id}/orders/`;
-
-      const response = await axios.get(`${API_BASE}${url}`);
+      const response = await axios.get(`${API_BASE}users/${user.id}/orders/`);
       allOrders = [...allOrders, ...response.data];
       setUserOrders(allOrders);
       setViewingOrders(true);
 
       // Fetch all order items
       let items: OrderItem[] = [];
-      let itemUrl = '/api/order-items/';
-
-      const res = await axios.get(`${API_BASE}${itemUrl}`);
+      const res = await axios.get(`${API_BASE}order-items/`);
       items = [...items, ...res.data];
 
       setAllOrderItems(items);
@@ -299,10 +295,10 @@ return (
         </button>
         <button
             onClick={() => setIsCartOpen(!isCartOpen)}
-            className={`w-[175px] px-6 py-3 rounded-2xl text-white font-semibold transition ${
+            className={`w-[175px] px-6 py-3 rounded-2xl font-semibold transition ${
               isCartOpen
                 ? 'outline outline-2 outline-[#b36be3] bg-white text-[#b36be3] hover:bg-gray-300 hover:text-[#794899]'
-                : 'bg-[#b36be3] hover:bg-[#794899]'
+                : 'bg-[#b36be3] text-white hover:bg-[#794899]'
             }`}
           >
             {isCartOpen ? `Close Cart` : `Open Cart (${cart.length})`}

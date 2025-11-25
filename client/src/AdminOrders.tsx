@@ -52,7 +52,7 @@ const AdminOrders: React.FC = () => {
   const fetchData = async () => {
     // Helper to fetch and normalize API responses
     const fetchEndpoint = (endpoint: string) =>
-      axios.get(`${API_BASE}/api/${endpoint}/`).then(res => res.data.results ?? res.data);
+      axios.get(`${API_BASE}${endpoint}/`).then(res => res.data.results ?? res.data);
 
     try {
       const [fetchedOrders, fetchedOrderItems, fetchedMenuItems, fetchedUsers] = await Promise.all([
@@ -97,7 +97,7 @@ const AdminOrders: React.FC = () => {
       const order = orders.find(o => o.id === orderId);
       if (!order) return;
 
-      await axios.put(`${API_BASE}/api/orders/${orderId}/`, {
+      await axios.put(`${API_BASE}orders/${orderId}/`, {
         ...order,
         status: newStatus
       });

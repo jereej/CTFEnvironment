@@ -39,8 +39,7 @@ const AdminMenu: React.FC = () => {
     // Fetch all menu items from the API
     try {
       let allItems: MenuItem[] = [];
-      let url = `/api/menu-items/`;
-      const res = await axios.get(`${API_BASE}${url}`);
+      const res = await axios.get(`${API_BASE}menu-items/`);
       allItems = [...allItems, ...res.data];
       setMenuItems(allItems);
       const grouped = allItems.reduce((acc: Record<string, MenuItem[]>, item) => {
@@ -97,9 +96,9 @@ const AdminMenu: React.FC = () => {
       };
 
       if (formMode === 'add') {
-        await axios.post(`${API_BASE}/api/menu-items/`, payload);
+        await axios.post(`${API_BASE}menu-items/`, payload);
       } else if (formMode === 'edit' && editingItem) {
-        await axios.put(`${API_BASE}/api/menu-items/${editingItem.id}/`, payload);
+        await axios.put(`${API_BASE}menu-items/${editingItem.id}/`, payload);
       }
 
       await fetchMenu();
@@ -114,7 +113,7 @@ const AdminMenu: React.FC = () => {
     // Confirm and delete a menu item
     if (!window.confirm('Are you sure you want to delete this item?')) return;
     try {
-      await axios.delete(`${API_BASE}/api/menu-items/${id}/`);
+      await axios.delete(`${API_BASE}menu-items/${id}/`);
       await fetchMenu();
     } catch (err) {
       console.error('Failed to delete item:', err);
