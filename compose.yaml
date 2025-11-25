@@ -25,10 +25,11 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "80:80"               # Single public entry point
+      - "443:443"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - frontend_build:/usr/share/nginx/html
+      - ./certs:/etc/nginx/certs:ro
     depends_on:
       - baguette_frontend
       - baguette_backend

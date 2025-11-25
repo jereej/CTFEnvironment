@@ -26,7 +26,7 @@ The PostgreSQL database is the place where all necessary data about orders, user
 ## Deployment
 
 ### Prerequisites
->These instructions are for (Debian-based) Linux machines only.
+> These instructions are for Linux machines only.
 
 As previously mentioned, the whole environment is deployed using `docker compose`. This means that you need to have a working [Docker installation](https://docs.docker.com/engine/install/) on your machine you plan to host the environment on. Please see the official Docker Engine installation guides if you have not already. After installation, check that the command `docker compose` or `docker-compose` works on your machine.
 
@@ -35,6 +35,15 @@ Also, we mentioned earlier that this is not a completely out-of-the-box solution
 ```
 PUBLIC_IP=xxx.xxx.xxx.xxx
 ```
+
+After setting the `PUBLIC_IP` value, you need to generate some SSL keys that will be used to deploy the environment. You can easily generate the keys by running the `generate_ssl.sh` script. All the commands you need to run are:
+
+```sh
+chmod +x generate_ssl.sh
+sudo ./generate_ssl.sh
+```
+
+With these steps, you are ready to deploy the environment.
 
 ### Deploying the environment
 > NOTE: Depending on your docker installation, the docker command itself might require sudo rights.
