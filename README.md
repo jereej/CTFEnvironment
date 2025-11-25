@@ -30,27 +30,11 @@ The PostgreSQL database is the place where all necessary data about orders, user
 
 As previously mentioned, the whole environment is deployed using `docker compose`. This means that you need to have a working [Docker installation](https://docs.docker.com/engine/install/) on your machine you plan to host the environment on. Please see the official Docker Engine installation guides if you have not already. After installation, check that the command `docker compose` or `docker-compose` works on your machine.
 
-Also, we mentioned earlier that this is not a completely out-of-the-box solution. This is due to two environment variables listed in the `compose.yaml` file: `${PUBLIC_IP}` and `${DJANGO_SECRET_KEY}`. Before using `docker compose` to deploy the environment, we need to set these variables. If you want to make the environment variables persistent, you can:
+Also, we mentioned earlier that this is not a completely out-of-the-box solution. This is due to the `PUBLIC_IP` environment variable in the `compose.yaml` file. When you want to run this environment, you need to set the variable yourself. The easiest way to do that is to create a `.env` file in the same directory the `compose.yaml` file is located at and add the following line to it:
 
-Edit the ~/.profile file:
 ```
-...
-# Add these
-export PUBLIC_IP="zzz.zzz.zzz.zzz"
-export DJANGO_SECRET_KEY="..."
+PUBLIC_IP=xxx.xxx.xxx.xxx
 ```
-Save the file, restart the shell (or run `source ~/.profile`) and check with echo that they are persistent:
-```sh
-echo $PUBLIC_IP
-echo $DJANGO_SECRET_KEY
-```
-Or if you want to simply use them once, you can give the following commands in the terminal:
-```sh
-PUBLIC_IP="zzz.zzz.zzz.zzz"
-DJANGO_SECRET_KEY="..."
-```
-
-More in-depth guides about setting environment variables can be found from [here](https://docs.digicert.com/de/digicert-keylocker/overview/secure-credentials/set-up-secure-credentials-for-linux/persistent-environment-variables-for-linux.html).
 
 ### Deploying the environment
 > NOTE: Depending on your docker installation, the docker command itself might require sudo rights.
