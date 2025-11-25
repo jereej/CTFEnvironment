@@ -47,6 +47,7 @@ With these steps, you are ready to deploy the environment.
 
 ### Deploying the environment
 > NOTE: Depending on your docker installation, the docker command itself might require sudo rights.
+
 > NOTE: Depending on your docker installation, you might need to use docker-compose instead of docker compose.
 
 Now that the set-up is done, all you have to simply do is give the command to deploy it.
