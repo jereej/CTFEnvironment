@@ -53,12 +53,19 @@ const Login: React.FC = () => {
         localStorage.removeItem('isAdmin');
         navigate('/');
       }
-    } catch (err: any) {
-      console.error('Error during login or signup:', err);
-      if (err.response && err.response.data && err.response.data.error) {
-        setError(err.response.data.error);
-      } else if (isSignUp) {
-        setError('Failed to create account. Ensure username is available and password meets requirements.');
+    } catch (err: unknown) {
+      console.error("Error during login or signup:", err);
+      if (err && typeof err === "object" && "response" in err) {
+        const axiosErr = err as { response?: { data?: { error?: string } } };
+        if (axiosErr.response?.data?.error) {
+          setError(axiosErr.response.data.error);
+          return;
+        }
+      }
+      if (isSignUp) {
+        setError(
+          "Failed to create account. Ensure username is available and password meets requirements."
+        );
       } else {
         setError('Login failed. Check your username and password.');
       }
