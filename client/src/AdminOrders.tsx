@@ -35,8 +35,6 @@ const AdminOrders: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const statuses = ['Pending', 'Registered', 'Preparing', 'Done', 'Cancelled'];
-
   useEffect(() => {
 
     const storedUser = localStorage.getItem('isAdmin');
@@ -91,24 +89,6 @@ const AdminOrders: React.FC = () => {
     }, 0).toFixed(2);
   };
 
-  const updateOrderStatus = async (orderId: number, newStatus: string) => {
-    // Update the status of an order
-    try {
-      const order = orders.find(o => o.id === orderId);
-      if (!order) return;
-
-      await axios.put(`${API_BASE}orders/${orderId}/`, {
-        ...order,
-        status: newStatus
-      });
-
-      await fetchData();
-    } catch (err) {
-      console.error('Failed to update status:', err);
-      alert('Failed to update order status.');
-    }
-  };
-
   if (error) return <div className="min-h-screen flex justify-center items-center text-red-500">{error}</div>;
 
   return (
@@ -124,20 +104,6 @@ const AdminOrders: React.FC = () => {
             <div>
               <h2 className="text-xl font-semibold">Order #{order.id}</h2>
               <p className="text-sm text-gray-600">User: {findUserName(order.user_id)}</p>
-              <p className="text-sm">Status: {order.status}</p>
-            </div>
-            <div className="flex gap-2 items-center">
-              <label htmlFor={`status-${order.id}`} className="mr-2 text-sm font-medium">Change status:</label>
-              <select
-                id={`status-${order.id}`}
-                value={order.status}
-                onChange={(e) => updateOrderStatus(order.id, e.target.value)}
-                className="border rounded px-2 py-1"
-              >
-                {statuses.map(status => (
-                  <option key={status} value={status}>{status}</option>
-                ))}
-              </select>
             </div>
           </div>
 

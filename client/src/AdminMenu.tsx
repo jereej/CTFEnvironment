@@ -8,6 +8,7 @@ interface MenuItem {
   description: string;
   type: string;
   price: number;
+  is_premium: boolean;
 }
 
 const AdminMenu: React.FC = () => {
@@ -16,7 +17,7 @@ const AdminMenu: React.FC = () => {
   const [groupedItems, setGroupedItems] = useState<Record<string, MenuItem[]>>({});
   const [formMode, setFormMode] = useState<'add' | 'edit' | null>(null);
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
-  const [formData, setFormData] = useState({ name: '', description: '', type: '', price: '' });
+  const [formData, setFormData] = useState({ name: '', description: '', type: '', price: '', is_premium: ''});
   const [error, setError] = useState<string | null>(null);
 
   const types = ["sandwich", "side dish", "drink", "dessert"];
@@ -56,7 +57,7 @@ const AdminMenu: React.FC = () => {
 
   const openAddForm = () => {
     // Open the form for adding a new menu item
-    setFormData({ name: '', description: '', type: '', price: '' });
+    setFormData({ name: '', description: '', type: '', price: '', is_premium: ''});
     setFormMode('add');
     setEditingItem(null);
   };
@@ -67,7 +68,8 @@ const AdminMenu: React.FC = () => {
       name: item.name,
       description: item.description,
       type: item.type,
-      price: item.price.toString()
+      price: item.price.toString(),
+      is_premium: item.is_premium.toString()
     });
     setFormMode('edit');
     setEditingItem(item);
@@ -77,7 +79,7 @@ const AdminMenu: React.FC = () => {
     // Close the form and reset the state
     setFormMode(null);
     setEditingItem(null);
-    setFormData({ name: '', description: '', type: '', price: '' });
+    setFormData({ name: '', description: '', type: '', price: '' , is_premium: ''});
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -93,6 +95,7 @@ const AdminMenu: React.FC = () => {
         description: formData.description,
         type: formData.type,
         price: parseFloat(formData.price),
+        is_premium: formData.is_premium,
       };
 
       if (formMode === 'add') {
@@ -200,6 +203,20 @@ const AdminMenu: React.FC = () => {
               <option value="">Select type</option>
               {types.map(t => (
                 <option key={t} value={t}>{t}</option>
+              ))}
+            </select>
+
+            <select
+              name="is_premium"
+              value={formData.is_premium}
+              onChange={handleChange}
+              className="w-full mb-3 p-2 border rounded"
+            >
+              <option value="">Select premium status</option>
+              {[true, false].map(val => (
+                <option key={String(val)} value={String(val)}>
+                  {val ? "Premium" : "Regular"}
+                </option>
               ))}
             </select>
 
