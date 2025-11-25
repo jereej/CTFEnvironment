@@ -5,6 +5,7 @@ import Menu from './Menu';
 import Login from './Login';
 import Orders from './Orders';
 import NavBar from './NavBar';
+import BackRooms from './BackRooms';
 // Admin components
 import AdminLogin from './AdminLogin';
 import AdminMenu from './AdminMenu';
@@ -21,6 +22,7 @@ const App: React.FC = () => {
       <Route path="/menu" element={<Menu />} />
       <Route path="/login" element={<Login />} />
       <Route path="/orders" element={<Orders />} />
+      <Route path="/backrooms" element={<BackRooms />} />
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/admin/menu" element={<AdminMenu />} />
       <Route path="/admin/orders" element={<AdminOrders />} />

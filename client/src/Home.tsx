@@ -30,9 +30,14 @@ const Home: React.FC = () => {
 return (
   <div className="relative min-h-screen flex flex-col items-center justify-center bg-[url('/bakery_overlay.png')] bg-cover bg-center p-4">
     {/* Overlay */}
-    <div className="absolute inset-0 bg-[#f2cbea]/70"></div>
-    {/* You can change bg-black/30 to any color, e.g. bg-[#f2cbea]/40 */}
-
+    <div className="absolute inset-0 bg-[#f2cbea]/70"/>
+    <Link to="/backrooms" className="absolute top-8 left-8 z-20">
+        <img
+          src="/door_logo.png"
+          className="h-12 w-auto hover:scale-105 transition-transform"
+          style={{ width: '100px', height: '100px', objectFit: 'contain'}}
+        />
+      </Link>
     {/* Content */}
     <div className="relative z-10 flex flex-col items-center">
       {/* Logo */}
