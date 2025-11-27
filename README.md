@@ -66,3 +66,7 @@ docker compose up -d
 ```
 
 After running `docker compose up -d` the environment is hosted at `http://YOUR_MACHINE_IP:80` and you should be able to access it remotely. Make sure to check your firewall settings and that you have the required port open.
+
+## Further development
+
+If you wish to use this repository to further develop the client or the server and test your changes on your machine locally, see the `README.md` files in the `client` and `server` folders. Make sure to run the commands given in the instructions **in the respective directory** (e.g. `cd` to the `client` folder before running the commands in the client's`README.md` file).
