@@ -43,23 +43,55 @@ const BackRooms: React.FC = () => {
     }
 
 return (
-    <div className="absolute inset-0 bg-[#0A0C0E]">
-    {/* Overlay */}
+    <>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-[#0A0C0E]"/>
         {/* Content */}
         <div className="absolute min-h-screen w-full bg-[url('/backrooms.png')] bg-contain bg-center bg-no-repeat">
 
-            {/* Door button */}
-            <div className="absolute top-[43%] left-[26%] -translate-x-1/2 -translate-y-1/2 z-20 flex flex-row gap-4">
-                <div className="flex flex-row gap-4 space-x-52">
-                    <Link to="/">
-                        <button 
-                            className="px-6 py-3 bg-[#302D31FF] text-white rounded-2xl hover:bg-[#756C7AFF] transition">
-                            Back to menu
-                        </button>      
-                    </Link>
-                </div>
-            </div>
+            {/* Hover group */}
+            <div className="relative w-full h-full group">
 
+                {/* Hover zone */}
+                <div
+                    onClick={() => navigate("/")}
+                    className="
+                        absolute 
+                        z-10
+                        pointer-events-auto
+                        opacity-0
+                        group-hover:opacity-100
+                        cursor-pointer
+                    "
+                    style={{
+                        top: "280px",
+                        left: "520px",
+                        width: "300px",
+                        height: "500px",
+                    }}
+                />
+
+                {/* SVG overlay */}
+                <svg
+                    className="absolute inset-0 pointer-events-none z-30"
+                    viewBox="0 0 1920 1080"
+                >
+                    <path
+                        d="M450 265 L565 255 L565 560 L450 540 Z"
+                        fill="none"
+                        strokeWidth="8"
+                        className="
+                            transition-[stroke,filter] duration-300 
+                            stroke-transparent
+                            group-hover:stroke-[#f2d55c]
+                            group-hover:drop-shadow-[0_0_10px_#f2d55c]
+                            group-hover:drop-shadow-[0_0_20px_#f2d55c]
+                        "
+                    />
+                </svg>
+
+            </div>
+            
             {/* Screen content */}
             <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-20 flex flex-row gap-4">
                 <div className="flex flex-row gap-4 space-x-52">
@@ -94,40 +126,36 @@ return (
                         className="text-white">
                         <p>&lt; Back</p> 
                         </button>
-                      <h1 className="text-2xl font-bold mb-6 text-center">
+                        <h1 className="text-2xl font-bold mb-6 text-center">
                         Sign in
-                      </h1>
-                                    
-                      <input
+                        </h1>          
+                        <input
                         type="text"
                         placeholder="Enter your username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         className="w-full mb-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                      />
-                
-                      <input
+                        />
+                        <input
                         type="password"
                         placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="w-full mb-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                      />
-
+                        />
                         {error && <p className="text-[#9B3131FF] text-center mb-4">{error}</p>}
-
-                      <button
-                  onClick={handleLogin}
-                  className="w-full bg-[#b36be3] text-white py-2 rounded-lg hover:bg-[#794899] transition disabled:opacity-50"
-                >
-                    Log In
-                </button>
+                        <button
+                            onClick={handleLogin}
+                            className="w-full bg-[#b36be3] text-white py-2 rounded-lg hover:bg-[#794899] transition disabled:opacity-50"
+                        >
+                            Log In
+                        </button>
                     </div>)
                     }
                 </div>
             </div>
         </div>
-    </div>
+    </>
 );
 };
 
