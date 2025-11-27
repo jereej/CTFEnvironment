@@ -28,13 +28,13 @@ const BackRooms: React.FC = () => {
 
         if (sourceMail === true){
             if (username == "dough" && password == "baguette"){
-                navigate("/menu");
+                navigate("/backrooms/mail");
             } else {
                 setError("Incorrect credentials");
             }
         } else if (sourceMail === false) {
             if (username == "admin" && password == "admin"){
-                navigate("/login");
+                navigate("/backrooms/oms");
             } else {
                 setError("Incorrect credentials");
             }
