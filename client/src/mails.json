@@ -2,10 +2,12 @@
     "mails": [
         {
             "id": 0,
-            "header": "otsikko",
-            "sender": "lahettaja",
-            "recipient": "vastaanottaja",
-            "content": "Tässä on paljon sisältöä hehehehehe xd nyt pitää keksiä joku tosi pitkä viesti en keksikkään vaan Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "header": "Flour delivery postponed - A14BC236SF34363",
+            "sender": "Susan Supplier (susansupplier@bakerygoods.com)",
+            "recipient": "bakeryorders@lesbaguettes.com",
+            "content": "Dear receiver,\n regret to inform that your order A14BC236SF34363 has been delayed at will be delivered to you on Friday 12.12.2025. You can track your order from [here](https://bakerygoods.com/orders/a14bC236sf34363) or by navigating to the 'Track Your Order' section on our [website](https://bakerygoods.com).\n\n We are terrible sorry for the inconvenience.\n\nSincerely,\nSusan Supplier, BakeryGoods Sales Representative",
+            "date": "7.12.2025",
+            "time": "3:38 PM",
             "isSuspicious": false
         },
         {
@@ -14,6 +16,8 @@
             "sender": "lahettaja",
             "recipient": "vastaanottaja",
             "content": "Tässä on paljon sisältöä hehehehehe xd nyt pitää keksiä joku tosi pitkä viesti en keksikkään vaan Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Tässä on paljon sisältöä hehehehehe xd nyt pitää keksiä joku tosi pitkä viesti en keksikkään vaan Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Tässä on paljon sisältöä hehehehehe xd nyt pitää keksiä joku tosi pitkä viesti en keksikkään vaan Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "date": "24.12.2025",
+            "time": "12:56 AM",
             "isSuspicious": true
         },
         {
@@ -22,14 +26,18 @@
             "sender": "lahettaja",
             "recipient": "vastaanottaja",
             "content": "Tässä on paljon sisältöä hehehehehe xd nyt pitää keksiä joku tosi pitkä viesti en keksikkään vaan Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "date": "24.12.2025",
+            "time": "12:56 AM",
             "isSuspicious": true
         },
         {
             "id": 3,
-            "header": "otsikko",
-            "sender": "lahettaja",
-            "recipient": "vastaanottaja",
-            "content": "Tässä on paljon sisältöä hehehehehe xd nyt pitää keksiä joku tosi pitkä viesti en keksikkään vaan Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "header": "Tasty baguettes to Japan - 日本へ美味しいバゲットのお届け",
+            "sender": "良い人一郎 (ichirou.iihito@kinjonopanyasan)",
+            "recipient": "bakeryorders@lesbaguettes.com",
+            "content": "はじめまして、近所のパン屋さんを代表しております、良い人一郎と申します。突然ご連絡差し上げて失礼いたします。\n\n早速ですが、一つの質問があります。もし可能であれば、貴店のとても美味しいバゲットを日本へ、それで私のパン屋にお届けいただくことができましょうか。\n\n去年の夏休みの時に、お店に伺いしました。それで「世界一フランス風北欧バゲット」を味見しました。一口目から心が奪われた気がしました。それから、そのバゲットの味しか考えていません。\n\nお忙しいところ恐れ入りますが、何卒よろしくお願い申し上げます。\n良い人一郎",
+            "date": "24.12.2025",
+            "time": "12:56 AM",
             "isSuspicious": false
         },
         {
@@ -38,6 +46,8 @@
             "sender": "lahettaja",
             "recipient": "vastaanottaja",
             "content": "Tässä onTässä on paljon sisältöä hehehehehe xd nyt pitää keksiä joku tosi pitkä viesti en keksikkään vaan Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Tässä on paljon sisältöä hehehehehe xd nyt pitää keksiä joku tosi pitkä viesti en keksikkään vaan Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Tässä on paljon sisältöä hehehehehe xd nyt pitää keksiä joku tosi pitkä viesti en keksikkään vaan Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. paljon sisältöä hehehehehe xd nyt pitää keksiä joku tosi pitkä viesti en keksikkään vaan Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "date": "24.12.2025",
+            "time": "12:56 AM",
             "isSuspicious": true
         },
         {
@@ -46,6 +56,8 @@
             "sender": "lahettaja",
             "recipient": "vastaanottaja",
             "content": "Tässä on paljon sisältöä hehehehehe xd nyt pitää keksiä joku tosi pitkä viesti en keksikkään vaan Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "date": "24.12.2025",
+            "time": "12:56 AM",
             "isSuspicious": true
         }
     ]
