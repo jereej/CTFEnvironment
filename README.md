@@ -1,6 +1,6 @@
 # CTFEnvironment
 
-The CTFEnvironment is a project that aims to teach some cybersecurity concepts to the "average person" using simple examples and analogies. The environment is browser-based, so all the user needs to do is connect to it through a browser. The environment is containerized and deployed utilizing [Docker Compose](https://docs.docker.com/compose/), allowing for easy set-up. However, the project is **not** a completely out-of-the-box solution, meaning some small changes are needed to make the environment run correctly (*see the Deployment section*).
+The CTFEnvironment is a university course project that aims to teach some cybersecurity concepts to the "average person" using simple examples and analogies. The environment is browser-based, so all the user needs to do is connect to it through a browser. The environment is containerized and deployed utilizing [Docker Compose](https://docs.docker.com/compose/), allowing for easy set-up. However, the project is **not** a completely out-of-the-box solution, meaning some small changes are needed to make the environment run correctly (*see the Deployment section*).
 
 ![lesbaguettes](/client/public/baguette_logo.png)
 
