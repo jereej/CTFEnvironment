@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { JSX, useState } from "react";
 import data from "./mails.json";
 
 interface Mail {
@@ -7,6 +7,8 @@ interface Mail {
     sender: string;
     recipient: string;
     content: string;
+    date: string;
+    time: string;
     isSuspicious: boolean;
 }
 
@@ -36,6 +38,85 @@ const Mail: React.FC = () => {
     };
 
     const allMarked = Object.keys(answers).length === mails.length;
+
+    function linkify(text: string): (string | JSX.Element)[] {
+        // Markdown link: [text](http(s)://...)
+        const mdLinkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+
+        // Raw URL: http://... or https://...
+        const rawUrlRegex = /(https?:\/\/[^\s]+)/g;
+
+        // Combined pattern
+        const combined = new RegExp(`${mdLinkRegex.source}|${rawUrlRegex.source}`, "g");
+
+        const pieces: (string | JSX.Element)[] = [];
+        let lastIndex = 0;
+        let match: RegExpExecArray | null;
+
+        while ((match = combined.exec(text)) !== null) {
+            const fullMatch = match[0];
+
+            // Push plain text before match
+            if (match.index > lastIndex) {
+            pieces.push(text.slice(lastIndex, match.index));
+            }
+
+            // Markdown link matched
+            if (match[2]) {
+            const linkText = match[1];
+            const url = match[2];
+
+            pieces.push(
+                <a
+                key={`md-${match.index}`}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 underline"
+                >
+                {linkText}
+                </a>
+            );
+            }
+            // Raw URL matched
+            else if (match[0].startsWith("http")) {
+            const url = match[0];
+
+            pieces.push(
+                <a
+                key={`raw-${match.index}`}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 underline"
+                >
+                {url}
+                </a>
+            );
+            }
+
+            lastIndex = match.index + fullMatch.length;
+        }
+
+        // Push remaining text
+        if (lastIndex < text.length) {
+            pieces.push(text.slice(lastIndex));
+        }
+
+        // Convert \n to <br/>
+        const withBreaks = pieces.flatMap((part, i) => {
+            if (typeof part !== "string") return [part];
+
+            const lines = part.split("\n");
+            return lines.flatMap((line, j) =>
+            j < lines.length - 1
+                ? [line, <br key={`br-${i}-${j}`} />]
+                : [line]
+            );
+        });
+
+        return withBreaks;
+    }
 
     return (
         <div className="absolute inset-0 bg-[#1C1C1DFF]">
@@ -69,9 +150,11 @@ const Mail: React.FC = () => {
                                         ${selectedMail?.id === mail.id ? "bg-gray-700" : ""}
                                     `}
                                 >
-                                    <h2 className="text-white font-semibold">{mail.header}</h2>
+                                    <h2 className="text-white font-bold">{mail.header.slice(0,50)}</h2>
+                                    <p className="text-gray-300 text-sm">{mail.sender}</p>
                                     <p className="text-gray-400 text-sm">
-                                        {mail.sender} - {mail.content.slice(0, 50)}...
+                                        {mail.content.slice(0, 50)}...
+                                        <br/>{mail.date} {mail.time}
                                     </p>
                                 </div>
                             ))}
@@ -96,15 +179,20 @@ const Mail: React.FC = () => {
                                 <div className="bg-gray-900 text-white rounded-lg p-6 shadow-inner">
                                     <h2 className="text-2xl font-bold mb-2">{selectedMail.header}</h2>
 
-                                    <p className="text-gray-400 mb-1">
+                                    <p className="text-gray-400">
                                         <strong>From:</strong> {selectedMail.sender}
                                     </p>
 
-                                    <p className="text-gray-400 mb-4">
+                                    <p className="text-gray-400 mb-2">
                                         <strong>To:</strong> {selectedMail.recipient}
                                     </p>
+                                    <p className="text-gray-400 mb-3">
+                                        {selectedMail.date} {selectedMail.time}
+                                    </p>
 
-                                    <p className="mb-6">{selectedMail.content}</p>
+                                    <div className="mb-6">
+                                        {linkify(selectedMail.content)}
+                                    </div>
                                 </div>
 
                                 {answers[selectedMail.id] !== undefined ? (
