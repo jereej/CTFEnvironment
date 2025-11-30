@@ -150,7 +150,7 @@ const Mail: React.FC = () => {
                                         ${selectedMail?.id === mail.id ? "bg-gray-700" : ""}
                                     `}
                                 >
-                                    <h2 className="text-white font-bold">{mail.header.slice(0,50)}</h2>
+                                    <h2 className="text-white font-bold">{mail.header.slice(0,30)}...</h2>
                                     <p className="text-gray-300 text-sm">{mail.sender}</p>
                                     <p className="text-gray-400 text-sm">
                                         {mail.content.slice(0, 50)}...
