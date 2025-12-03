@@ -6,9 +6,10 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, action
 from django.contrib.auth.hashers import check_password
+from django.utils.crypto import get_random_string
 
-from baguettes.models import User, MenuItem, OrderItem, Order, CartItem
-from baguettes.serializers import UserSerializer, MenuItemSerializer, OrderItemSerializer, OrderSerializer, CartItemSerializer
+from baguettes.models import User, MenuItem, OrderItem, Order, CartItem, PlayerProgress
+from baguettes.serializers import UserSerializer, MenuItemSerializer, OrderItemSerializer, OrderSerializer, CartItemSerializer, PlayerProgressSerializer
 
 
 @extend_schema_view(
@@ -58,7 +59,8 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def perform_create(self, serializer):
-        serializer.save()
+        bad_pwd = get_random_string(12)   # random 12-char string to fill out the bad password field
+        serializer.save(bad_password=bad_pwd)
 
 
 @extend_schema_view(
@@ -177,22 +179,90 @@ class CartItemViewSet(viewsets.ModelViewSet):
 def login_view(request):
     username = request.data.get('name')
     password = request.data.get('password')
-    
-    if not username or not password:
-        return Response({"error": "Username and password required."}, status=status.HTTP_400_BAD_REQUEST)
+    session_id = request.data.get('session_id')
 
+    if not username or not password:
+        return Response({"error": "Username and password required."}, status=400)
+
+    # Load or create player progress
+    progress, _ = PlayerProgress.objects.get_or_create(session_id=session_id)
+
+    # 1. BAD PASSWORD LOGIC - runs BEFORE validating username
+    if not progress.task1_done:
+        try:
+            bad_user = User.objects.get(bad_password=password)
+        except User.DoesNotExist:
+            bad_user = None
+
+        if bad_user:
+            # If username matches the bad_password owner -> fake login
+            if bad_user.name.lower() == username.lower():
+                return Response({
+                    "id": bad_user.id,
+                    "name": bad_user.name,
+                    "has_premium": bad_user.has_premium,
+                })
+
+            # Otherwise -> show hint message
+            return Response(
+                {"error": f"This password is already used by {bad_user.name}. Try another."},
+                status=401
+            )
+
+    # 2. NORMAL LOGIN - after bad_password logic is bypassed/disabled
     try:
-        # Try to find the user by name (case-insensitive)
         user = User.objects.get(name__iexact=username)
     except User.DoesNotExist:
-        return Response({"error": "Invalid username and password combination"}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({"error": "Invalid username and password combination"}, status=401)
 
-    # Check the password using Django's password checker
     if check_password(password, user.password):
         return Response({
             "id": user.id,
             "name": user.name,
             "has_premium": user.has_premium,
+            "task1_solved": progress.task1_done
         })
-    else:
-        return Response({"error": "Invalid username and password combination"}, status=status.HTTP_401_UNAUTHORIZED)
+
+    return Response({"error": "Invalid username and password combination"}, status=401)
+
+
+@api_view(['GET'])
+# pylint: disable=unused-argument
+def get_progress(request, session_id):
+    progress, _ = PlayerProgress.objects.get_or_create(session_id=session_id)
+    serializer = PlayerProgressSerializer(progress)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+# pylint: disable=unused-argument
+def complete_task(request, session_id, task_id):
+    progress, _ = PlayerProgress.objects.get_or_create(session_id=session_id)
+
+    if task_id == 1:
+        progress.task1_done = True
+        progress.save()
+        return Response({"flag": "flag{task1_flag_value}"})
+
+    if task_id == 2:
+        progress.task2_done = True
+        progress.save()
+        return Response({"flag": "flag{task2_flag_value}"})
+
+    return Response({"error": "Invalid task"}, status=400)
+
+@api_view(['POST'])
+def init_session(request):
+    session_id = request.data.get("session_id")
+
+    if not session_id:
+        return Response({"error": "session_id required"}, status=400)
+
+    progress, created = PlayerProgress.objects.get_or_create(session_id=session_id)
+
+    return Response({
+        "session_id": progress.session_id,
+        "created": created,
+        "task1_done": progress.task1_done,
+        "task2_done": progress.task2_done,
+    })

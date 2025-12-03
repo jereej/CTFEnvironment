@@ -1,4 +1,8 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { API_BASE } from './config';
+
 // Importing page components
 import Home from "./Home";
 import Menu from './Menu';
@@ -15,8 +19,27 @@ import AdminOrders from './AdminOrders';
 // Other components
 import NotFound from './NotFound';
 
+function getOrCreateSessionId(): string {
+  let id = localStorage.getItem("ctf_session_id");
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem("ctf_session_id", id);
+    console.log("Created new CTF session:", id);
+  }
+  return id;
+}
+
 const App: React.FC = () => {
   const location = useLocation();
+
+  // Create session ID once on app startup
+  useEffect(() => {
+    const id = getOrCreateSessionId();
+
+    axios.post(`${API_BASE}session/init/`, {
+      session_id: id
+    });    
+  }, []);
 
   // Hide navbar only on /backrooms
   const hideNav = location.pathname.startsWith("/backrooms");

@@ -10,15 +10,18 @@ django.setup()
 
 from baguettes.models import User, MenuItem, Order, OrderItem
 
+lowercase = "abcdefghijklmnopqrstuvwxyz"
+uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+numbers = "0123456789"
+special = "!@#$%^&*()"
+all_characters = lowercase + uppercase + numbers + special
+
 # Support functions:
 
-
 def generate_raw_password(length):
-    lowercase = "abcdefghijklmnopqrstuvwxyz"
-    uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    numbers = "0123456789"
-    special = "!@#$%^&*()"
-
+    """
+    Generates a random password of specified length that meets complexity requirements.
+    """
     password = [
         random.choice(lowercase),
         random.choice(uppercase),
@@ -26,7 +29,6 @@ def generate_raw_password(length):
         random.choice(special),
     ]
 
-    all_characters = lowercase + uppercase + numbers + special
     password += [random.choice(all_characters) for _ in range(length - 4)]
     random.shuffle(password)
 
@@ -90,18 +92,27 @@ def populate_users(n=10):
 
         raw_password = generate_raw_password(random.randint(8, 15)) 
         encoded_password = make_password(raw_password)
-
         has_premium = random.choice([True, False])
+        bad_password = ''.join(random.choices(all_characters, k=10))
 
         user = User.objects.create(
             name=name,
             password=encoded_password,
-            has_premium=has_premium
+            has_premium=has_premium,
+            bad_password=bad_password
         )
         users_created += 1
         print(f"Created User {user.id}: {name}")
 
     print(f"\nSuccessfully created {users_created} users.\n")
+
+    #create Britney's account
+    User.objects.create(
+        name="brittnney13",
+        password="Abcd1234!",
+        has_premium=True,
+        bad_password="abcd1234"
+    )
 
 def populate_menuitem(n=10):
     """

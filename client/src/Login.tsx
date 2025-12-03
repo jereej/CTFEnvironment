@@ -42,9 +42,11 @@ const Login: React.FC = () => {
         navigate('/');
       } else {
         // LOGIN
+        const session_id = localStorage.getItem("ctf_session_id");
         const loginResponse = await axios.post(`${API_BASE}login/`, {
           name: username,
           password: password,
+          session_id: session_id
         });
 
         // Successful login

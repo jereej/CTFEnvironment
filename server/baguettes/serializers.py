@@ -4,7 +4,7 @@ Serializers for the application.
 import re
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
-from baguettes.models import User, MenuItem, OrderItem, Order, CartItem
+from baguettes.models import User, MenuItem, OrderItem, Order, CartItem, PlayerProgress
 
 class UserSerializer(serializers.ModelSerializer):
     """
@@ -12,9 +12,10 @@ class UserSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = User
-        fields = ['id', 'name', 'password', 'has_premium']
+        fields = ['id', 'name', 'password', 'has_premium', 'bad_password']
         extra_kwargs = {
             'password': {'write_only': True},  # Don't expose password in GET
+            'bad_password': {'write_only': True, 'required': False},
         }
 
     def validate_password(self, value):
@@ -92,3 +93,9 @@ class CartItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
         fields = ['id', 'user_id', 'item_id', 'amount']
+
+
+class PlayerProgressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PlayerProgress
+        fields = ['session_id', 'task1_done', 'task2_done']
