@@ -8,7 +8,8 @@
             "content": "Dear Les Baguettes,\n\nWe regret to inform you that your order A14BC236SF34363 has been delayed and it will be delivered to you on Friday 12.12.2025. You can track your order from [here](https://bakerygoods.com/orders/a14bC236sf34363) or by navigating to the 'Track Your Order' section on our [website](https://bakerygoods.com).\n\n We are terrible sorry for the inconvenience.\n\nSincerely,\nSusan Supplier, BakeryGoods Sales Representative",
             "date": "7.12.2025",
             "time": "3:38 PM",
-            "isSuspicious": false
+            "isSuspicious": false,
+            "explanation": "This mail is not considered suspicious because first of all: all the information is correct and seems legitimate in the context of a bakery shop's inbox. The order number matches in the message and the title, dates are realistic and the links seem genuine when inspected. However, it is best practice to not include any links in emails because even legitimate-seeming URLs can be malicious (f.ex. the letter 'a' could be a cyrillic 'a' and the user might not notice it)."
         },
         {
             "id": 1,
@@ -18,7 +19,8 @@
             "content": "Dear Rosé Recruiter,\n\nI am Jay Jobseeker and I am applying for the Baker position that you are offering at Les Baguettes. I found your job listing at the local newspaper and I thought I would give applying a go! As I am a newgradute from [Université de la farine, Marseille](https://farineuniversite.fr/home/vraiment-une-page-reelle/voler-informations), I do not have the minimum 5 years of work experience that you require for this early-career position, but I have worked alongside my studies as a baker at a local michelin-star bakery called [La Pâtisserie de la Viennoiserie](https://lapatisseriedlv.fr/abc6f623cf6r2453/stealcreds) for four years and I did my internship there.\n\nI will gladly tell more about myself. Thank you for your consideration.\n\nThere were some problems in attaching my CV as a PDF file so here is a link to it: [CV_jayjobseeker.pdf](https://cv-jj-scrdsfusrs.com/PSx7jaTfh128DhkBlXziXyjyhodhHdngJ34Bjtrgf)",
             "date": "5.12.2025",
             "time": "11:42 AM",
-            "isSuspicious": true
+            "isSuspicious": true,
+            "explanation": "This mail is considered suspicious due to several reasons. The first, most obvious one, is that the sender's email address tries to imitate gmail.com by having similar-looking characters. The second reason are the links to the university and bakery. When hovered over, it can be clearly seen that the do not lead anywhere legitimate, especially the one with /stealcreds in the URL. The third one is the CV link. There is no reason for anyone to send a CV as a link instead of a file, and the link is quite clearly malicious."
         },
         {
             "id": 2,
@@ -28,7 +30,8 @@
             "content": "Dearest One\n\nI'm Mrs Judith Peters a Successful business Woman dealing with Exportation, I got your mail contact through search in order to let you know my Ugly Situation.\nAm a dying Woman here in Los Angeles California Hospital Bed in (USA),I Lost my Husband and my only Daughter for Covid-19 in March 2020 I'm dying with a cancer disease at the moment.\n\nMy Doctor open-up to me that he is Afraid to tell me my Condition and inside me, I already know that I'm not going to survive and I can't live alone without my Family on Earth.\n\nI have a project that I am about to hand over to you. and I already instructed the Heritage Bank to transfer my fund sum of $50,000.000.00usd to you, so as to enable you to give 50% to Charitable Home and take 50% for yourself.\n\nDon't think otherwise and why would anybody send someone you barely know to help you deliver a message, help me do this for the happiness of my soul.\n\nPlease, do as I said there was someone from your State that I deeply love so very very much and I miss her so badly I have no means to reach any Charitable Home there,that is why I go for a personal search of the Country and State and\n\nI got your mail contact through search to let you know my Bitterness and the situation that i am passing through.\nPlease help me accomplish my goal,ask my Attorney to help me keep you notice failure for me to reach you in person.\nThe Doctor said I have a few days to live, please contact my attorney with the following email address and phone number as soon as possible, I am finding it difficult to breathe now and I am not sure if I can stay up to  two week. Name Attorney Chaplain Upright\nEmail:attorneycchplain@attorneyoffice.com\n\nPlease hurry up to contact my attorney so that he can direct you on how you will hand over 50% of the $50,000,000.00 to Charity, i really want to achieve that goal by helping the Charity organization before I die.\n\nMy Regards.\nMrs Judith Peters",
             "date": "2.12.2025",
             "time": "11:11 PM",
-            "isSuspicious": true
+            "isSuspicious": true,
+            "explanation": "This mail is considered suspicious due to the nature of the message. The message is sourced from an article 'What the Nigerian prince scams became in 2024' (link: https://securelist.com/nigerian-scams-2024/115388/). The 'Nigerian prince scam' or 'Nigerian letter' scams are types of messages designed to lure victims into an email exchange with scammers. The themes of the messages can vary but the one used in this mail is an email from a wealthy benefactor. It urges the victim to quickly take action due to the short lifespan of the sender."
         },
         {
             "id": 3,
@@ -38,7 +41,8 @@
             "content": "はじめまして、近所のパン屋さんを代表しております、善人一郎と申します。突然ご連絡差し上げて失礼いたします。\n\n早速ですが、一つの質問があります。もし可能であれば、貴店のとても美味しいバゲットを日本へ、それで私のパン屋にお届けいただくことができましょうか。去年の夏休みの時に、お店に伺いしました。それで「世界一フランス風北欧バゲット」を味見しました。一口目から心が奪われた気がしました。それから、そのバゲットの味しか考えていません。同じような体験をお客さんたちに提供することが欲しい。\n\nお忙しいところ恐れ入りますが、何卒よろしくお願い申し上げます。\n善人一郎\n\n[Translated by BaguetteTranslate]\n\n Nice to meet you, I am Zennin Ichirou, the representative of Kinjo no Panyasan.\n\nGetting straight to the point, I have a question. If it is possible, could you please deliver some of your tasty baguettes to Japan, and to my shop. I visited your shop during my summer vacation last year. I got to taste the 'World's best French-style nordic baguette' and I fell in love with it from the first bite. I have not been able to think about anything else ever since. I want to provide a similar experience to my customers too.\n\nI am sorry to bother you during your busy schedule. I look forward to working with you.\nZennin Ichirou",
             "date": "30.11.2025",
             "time": "10:45 PM",
-            "isSuspicious": false
+            "isSuspicious": false,
+            "explanation": "This mail is not considered suspicious because the message seems very genuine considering the context of the bakery. All the information about the sender can be verified esaily and there are no links in the mail."
         },
         {
             "id": 4,
@@ -48,7 +52,8 @@
             "content": "Dear user,\n\nYou're Ammzzon prime account is expring in 2 days. Click the link to resurbscribe http://ammazon.br/prime/stealcreds/",
             "date": "27.11.2025",
             "time": "10:00 AM",
-            "isSuspicious": true
+            "isSuspicious": true,
+            "explanation": "This mail is considered suspicious due to several reasons. One reason is the server address, @ammazon.br which is imitating @amazon.br. The second reason is that the used language is very poor, an automated message from Amazon will not contain obvious spelling mistakes. The third reason is the link with the /stealcreds endpoint."
         },
         {
             "id": 5,
@@ -58,7 +63,8 @@
             "content": "Dear user,\n\nWe have noticed that your Microsoft account: LES BAGUETTES has had some suspicious activity recently. To check the activity and resolve the situation, click the following link: https://rnicrosoft.com/accounts/ab172c12fijjyh48jg/activities/2x1lbxtuhuy28g?p=12x8yv9o18uyv4rtb\n\nMicrosoft Support",
             "date": "26.11.2025",
             "time": "8:32 AM",
-            "isSuspicious": true
+            "isSuspicious": true,
+            "explanation": "This mail is considered suspicious due to few reasons. The first one is the sender address, instead of @microsoft.com the address is @rnicrosoft.com. Similarly, the link that is present in the mail also has the rnicrosoft.com domain."
         }
     ]
 }
