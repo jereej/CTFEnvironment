@@ -1,5 +1,5 @@
 import React, { JSX, useState } from "react";
-import data from "./mails.json";
+import data from "./jsons/mails.json";
 
 interface Mail {
     id: number;
@@ -10,12 +10,15 @@ interface Mail {
     date: string;
     time: string;
     isSuspicious: boolean;
+    explanation: string;
 }
 
 const Mail: React.FC = () => {
     const mails: Mail[] = data.mails;
     const [selectedMail, setSelectedMail] = useState<Mail | null>(null);
     const [answers, setAnswers] = useState<Record<number, boolean>>({});
+    const [canShowExplanations, setCanShowExplanations] = useState(false);
+    const [showExplanationForMail, setShowExplanationForMail] = useState<Record<number, boolean>>({});
 
 
     const markSuspiciousity = (mailId: number, guess: boolean) => {
@@ -23,18 +26,20 @@ const Mail: React.FC = () => {
     };
 
     const checkResults = () => {
-    let correct = 0;
-    let total = mails.length;
+        setCanShowExplanations(true);
+        let correct = 0;
+        let total = mails.length;
 
-    mails.forEach(mail => {
-        const userAnswer = answers[mail.id];
-        if (userAnswer === mail.isSuspicious) {
-            correct++;
-        }
-    });
+        mails.forEach(mail => {
+            const userAnswer = answers[mail.id];
+            if (userAnswer === mail.isSuspicious) {
+                correct++;
+            }
+        });
 
-    const percentage = (correct / total) * 100;
-    alert(`Correct: ${correct}/${total} (${percentage.toFixed(1)}%)`);
+        const percentage = (correct / total) * 100;
+        alert(`Correct: ${correct}/${total} (${percentage.toFixed(1)}%)
+you can check the explanations by clicking 'show explanation' under each mail`);
     };
 
     const allMarked = Object.keys(answers).length === mails.length;
@@ -159,7 +164,7 @@ const Mail: React.FC = () => {
                                 </div>
                             ))}
                             {allMarked && (
-                                <div className="flex justify-center py-4">
+                                <div className="flex flex-col items-center py-4 gap-2">
                                     <button
                                         onClick={checkResults}
                                         className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded"
@@ -214,6 +219,34 @@ const Mail: React.FC = () => {
                                         >
                                             Mark as not suspicious
                                         </button>
+                                    </div>
+                                )}
+
+                                {/* EXPLANATION (only if results checked) */}
+                                {canShowExplanations && (
+                                    <div className="mt-4">
+                                        <button
+                                            onClick={() =>
+                                                setShowExplanationForMail(prev => ({
+                                                    ...prev,
+                                                    [selectedMail.id]: !prev[selectedMail.id]
+                                                }))
+                                            }
+                                            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded"
+                                        >
+                                            {showExplanationForMail[selectedMail.id]
+                                                ? "Hide Explanation"
+                                                : "Show Explanation"}
+                                        </button>
+
+                                        {showExplanationForMail[selectedMail.id] && (
+                                            <div className="mt-4 bg-gray-800 p-4 rounded-lg border border-gray-700">
+                                                <h3 className="text-white-xl font-semibold mb-2">Explanation</h3>
+                                                <p className="text-gray-300 whitespace-pre-line">
+                                                    {selectedMail.explanation}
+                                                </p>
+                                            </div>
+                                        )}
                                     </div>
                                 )}
                             </>
