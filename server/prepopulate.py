@@ -106,12 +106,12 @@ def populate_users(n=10):
 
     print(f"\nSuccessfully created {users_created} users.\n")
 
-    #create Britney's account
-    User.objects.create(
-        name="brittnney13",
-        password="Abcd1234!",
-        has_premium=True,
-        bad_password="abcd1234"
+    # Excpilitly create Britney's account
+    User.objects.get_or_create(
+        name ="brittnney13",
+        password = "Abcd1234!",
+        has_premium = True,
+        bad_password = "abcd1234"
     )
 
 def populate_menuitem(n=10):
