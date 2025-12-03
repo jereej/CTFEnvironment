@@ -109,7 +109,7 @@ def populate_users(n=10):
     # Excpilitly create Britney's account
     User.objects.get_or_create(
         name ="brittnney13",
-        password = "Abcd1234!",
+        password = make_password("Abcd1234!"),
         has_premium = True,
         bad_password = "abcd1234"
     )
