@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE } from './config';
+import Confetti from "react-confetti";
 
 const Home: React.FC = () => {
   // State to manage user login status
   // and user information
   const [user, setUser] = useState<{ id: number; name: string } | null>(null);
   const [progress, setProgress] = useState<any>(null);
+  const [showConfetti, setShowConfetti] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -30,7 +32,16 @@ const Home: React.FC = () => {
     .get(`${API_BASE}progress/${sessionId}/`)
     .then(res => setProgress(res.data))
     .catch(err => console.error("Failed to fetch progress:", err));
-}, []);
+  }, []);
+
+  useEffect(() => {
+  if (!user || !progress) return;
+
+  if (user.name.toLowerCase() === "brittnney13" && progress.task1_done === false) {
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 5000);
+  }
+  }, [user, progress]); 
 
   const handleLogout = () => {
     // Clear user data from localStorage and reset user state
@@ -44,6 +55,14 @@ return (
   <div className="relative min-h-screen flex flex-col items-center justify-center bg-[url('/bakery_overlay.png')] bg-cover bg-center p-4">
     {/* Overlay */}
     <div className="absolute inset-0 bg-[#f2cbea]/70"/>
+    {showConfetti && (
+    <Confetti
+        width={window.innerWidth}
+        height={window.innerHeight}
+        numberOfPieces={500}
+        recycle={false}
+    />
+    )}
     <Link to="/backrooms" className="absolute top-8 left-8 z-20">
         <img
           src="/door_logo.png"

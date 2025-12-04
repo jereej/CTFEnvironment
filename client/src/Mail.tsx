@@ -1,5 +1,6 @@
 import React, { JSX, useState } from "react";
 import data from "./jsons/mails.json";
+import Confetti from "react-confetti";
 
 interface Mail {
     id: number;
@@ -21,6 +22,7 @@ const Mail: React.FC = () => {
     const [showExplanationForMail, setShowExplanationForMail] = useState<Record<number, boolean>>({});
     const [resultModalOpen, setResultModalOpen] = useState(false);
     const [resultText, setResultText] = useState("");
+    const [showConfetti, setShowConfetti] = useState(false);
 
 
     const markSuspiciousity = (mailId: number, guess: boolean) => {
@@ -43,6 +45,9 @@ const Mail: React.FC = () => {
         if (correct === total) {
             msg += `Perfect score! ${correct}/${total} correct!\n\n`;
             msg += `Here's a flag for you:\nBAGUETTE{task2_tempflag}\n\n`;
+
+            setShowConfetti(true);
+            setTimeout(() => setShowConfetti(false), 5000);
         } else {
             msg += `Correct: ${correct}/${total} (${percentage.toFixed(1)}%)\n\n`;
         }
@@ -137,6 +142,14 @@ const Mail: React.FC = () => {
 
     return (
         <div className="absolute inset-0 bg-[#1C1C1DFF]">
+            {showConfetti && (
+                <Confetti
+                    width={window.innerWidth}
+                    height={window.innerHeight}
+                    numberOfPieces={500}
+                    recycle={false}
+                />
+            )}
             <div className="absolute inset-0 min-h-screen w-full bg-[url('/mail.png')] bg-contain bg-center bg-no-repeat">
                 <div
                     className="
