@@ -2,6 +2,7 @@ import React, { JSX, useState } from "react";
 import data from "./jsons/mails.json";
 import Confetti from "react-confetti";
 import { Link } from "react-router-dom";
+import InstructionPopup from "./InstructionPopUp";
 
 interface Mail {
     id: number;
@@ -24,6 +25,17 @@ const Mail: React.FC = () => {
     const [resultModalOpen, setResultModalOpen] = useState(false);
     const [resultText, setResultText] = useState("");
     const [showConfetti, setShowConfetti] = useState(false);
+    const [instructionModalOpen, setInstructionModalOpen] = useState(true);
+
+    const instructions = 
+`Welcome to the Mail inspection task.
+
+In this task you are asked to read all six of the emails in the inbox and then mark them as suspicious or not suspicious.
+
+After marking all emails, you can check your results by clicking on the "Check Results" button under the last mail.
+
+After that, you can see the explanations for each mail, explaining why the given mail is suspicous or not.
+`;
 
 
     const markSuspiciousity = (mailId: number, guess: boolean) => {
@@ -311,6 +323,13 @@ const Mail: React.FC = () => {
                     </div>
                 </div>
             )}
+
+                {instructionModalOpen && (
+                    <InstructionPopup
+                    text={instructions}
+                    onClose={() => setInstructionModalOpen(false)}
+                    ></InstructionPopup>
+                )}
         </div>
     );
 };
