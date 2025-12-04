@@ -268,7 +268,7 @@ const Mail: React.FC = () => {
                                             <div className="mt-4 bg-gray-800 p-4 rounded-lg border border-gray-700">
                                                 <h3 className="text-white-xl font-semibold mb-2">Explanation</h3>
                                                 <p className="text-gray-300 whitespace-pre-line">
-                                                    {selectedMail.explanation}
+                                                    {linkify(selectedMail.explanation)}
                                                 </p>
                                             </div>
                                         )}
