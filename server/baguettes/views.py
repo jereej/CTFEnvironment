@@ -235,8 +235,10 @@ def get_progress(request, session_id):
 
 
 @api_view(['POST'])
-# pylint: disable=unused-argument
-def complete_task(request, session_id, task_id):
+def complete_task(request):
+    session_id = request.data.get("session_id")
+    task_id = int(request.data.get("task_id"))
+
     progress, _ = PlayerProgress.objects.get_or_create(session_id=session_id)
 
     if task_id == 1:

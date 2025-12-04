@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { API_BASE } from './config';
 
 const Home: React.FC = () => {
   // State to manage user login status
   // and user information
   const [user, setUser] = useState<{ id: number; name: string } | null>(null);
+  const [progress, setProgress] = useState<any>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,7 +20,17 @@ const Home: React.FC = () => {
     } else {
       setUser(null);
     }
-  }, [location]); // 👈 Depend on location changes!
+  }, [location]); // Depend on location changes!
+
+  useEffect(() => {
+  const sessionId = localStorage.getItem("ctf_session_id");
+  if (!sessionId) return;
+
+  axios
+    .get(`${API_BASE}progress/${sessionId}/`)
+    .then(res => setProgress(res.data))
+    .catch(err => console.error("Failed to fetch progress:", err));
+}, []);
 
   const handleLogout = () => {
     // Clear user data from localStorage and reset user state
@@ -53,6 +66,14 @@ return (
       {user && (
         <p className="text-black-700 mb-6 text-lg font-semibold">
           Welcome, {user.name}!
+        </p>
+      )}
+
+      {user && user.name.toLowerCase() === "brittnney13" &&
+      progress &&
+      progress.task1_done === false && (
+        <p className="text-black mb-6 text-lg font-bold">
+          BAGUETTE{`{task1_tempflag}`}
         </p>
       )}
 

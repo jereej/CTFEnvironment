@@ -20,6 +20,6 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('progress/<str:session_id>/', get_progress, name='get_progress'),
     path("session/init/", init_session),
-    path("task/complete/", complete_task),
+    path("tasks/", complete_task),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
