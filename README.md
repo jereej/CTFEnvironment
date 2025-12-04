@@ -8,6 +8,21 @@ The website that the user connects belongs to a fictional local family-owned bak
 
 Let's get this :bread:.
 
+## Tasks for the user
+In this section, we will explain the exercises associated with this environment. More "lore-accurate" instructions about the tasks can be found in the `baguette_news.pdf` file which is in the environment itself, which are the instructions the user will follow to complete the tasks. The tasks are numbered in an ascending difficulty order, meaning that tasks 1 and 2 are considered easier than tasks 3 and 4.
+
+### Task 1: Warm-up
+In this task the user will read the `baguette_news.pdf` file and complete the task based on the information found under the `1. The Wild World of Password Security` chapter. This task is essentially a very elementary exercise combining simple OSINT (Open-Source Intelligence) and some privilege escalation because the user should be able to access Britney's account based on the information found in the chapter. After a successful login, the user will be rewarded with a flag.
+
+### Task 2: Mail inspection
+In this task the user will navigate to `/backrooms` from the main page via the *definitely-not-very-obvious* backdoor. After that the user will log into the mail system via the credentials seen in the background image. After logging in, the user will be redirected to `/backrooms/mail` and the task can begin. The point of this task is that the user will read 6 mails, of which some are suspicious and some are not. The user has to mark each mail as not suspicious or suspicious. If the user gets all 6 correct, they will be rewarded with a flag.
+
+### Task 3: More comprehensive OSINT and privilege escalation
+In this task the user will perform more comperehensive OSINT and privilege escalation. The OSINT part of the exercise starts **outside** the CTF environment. The user will inspect some clues left in social media platforms, blog posts, etc. and use that information to get further access in/to the system. After successfully getting privileged access in the system, the user will be rewarded with a flag. (more in-depth explanation here)
+
+### Task 4: Linux environment usage
+In this task the user will navigate to `/backrooms` from the main page again through the same backdoor, and use the credentials to log into the OMS (Order Management System). After logging in the user will be redirected to `/backrooms/oms`, where an interactive Linux shell will be awaiting the user. (more in-depth explanation here)
+
 ## Project structure
 The below description is based on the `compose.yaml` found in this directory.
 
