@@ -12,6 +12,7 @@ import NavBar from './NavBar';
 import BackRooms from './BackRooms';
 import Mail from './Mail';
 import OMS from './OMS';
+import SubmitFlags from './SubmitFlags';
 // Admin components
 import AdminLogin from './AdminLogin';
 import AdminMenu from './AdminMenu';
@@ -41,8 +42,12 @@ const App: React.FC = () => {
     });    
   }, []);
 
-  // Hide navbar only on /backrooms
-  const hideNav = location.pathname.startsWith("/backrooms");
+  // Hide navbar on /backrooms and /submit-flags routes
+  const hiddenNavPaths = ["/backrooms", "/submit-flags"];
+
+  const hideNav = hiddenNavPaths.some(path =>
+  location.pathname.startsWith(path)
+);
 
   return (
     <>
@@ -56,6 +61,7 @@ const App: React.FC = () => {
         <Route path="/backrooms" element={<BackRooms />} />
         <Route path="/backrooms/mail" element={<Mail />} />
         <Route path="/backrooms/oms" element={<OMS />} />
+        <Route path="/submit-flags" element={<SubmitFlags />} />
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admin/menu" element={<AdminMenu />} />
         <Route path="/admin/orders" element={<AdminOrders />} />

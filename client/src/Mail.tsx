@@ -2,7 +2,7 @@ import React, { JSX, useState } from "react";
 import data from "./jsons/mails.json";
 import Confetti from "react-confetti";
 import { Link } from "react-router-dom";
-import InstructionPopup from "./InstructionPopUp";
+import InstructionPopup from "./InstructionPopup";
 
 interface Mail {
     id: number;

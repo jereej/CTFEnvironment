@@ -74,3 +74,15 @@ class PlayerProgress(models.Model):
 
     def __str__(self):
         return f"Progress for {self.session_id}"
+    
+
+class Task(models.Model):
+    task_id = models.IntegerField(unique=True)
+    flag = models.CharField(max_length=256)
+
+    class Meta:
+        ordering = ["task_id"]
+
+    def __str__(self):
+        return f"Task [{self.task_id} | Flag {self.flag}"
+    

@@ -1,0 +1,6 @@
+{
+  "1": "Thanks to your actions, Les Baguettes has noticed a critical flaw in its password security, and improved it significantly!\n\nCalled 'user-friendly' by the developers, the old system showed if someone else has the password you typed in use, to 'encourage creating unique passwords'. However, this also meant that an attacker could check if a password is in use by simply trying to log in with it.\n\nNow, with the new system, Les Baguettes' users can rest assured that their passwords are safe from such attacks, as hashing and salting are incorporated in addition to password requirements (min. 8 characters, must include numbers, lower- and uppercase letters, and a special character). Great job!\n\nYou also made Britney change her password, which is quite an accomplishment! (But the story doesn't tell: to what?)\n\nInformation about hashing and salting: link here",
+  "2": "no more scary emails yipee :3\n\nInformation about email security: link here",
+  "3": "Placeholder completion for task 3",
+  "4": "Placeholder completion for task 4"
+}

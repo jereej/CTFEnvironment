@@ -8,7 +8,7 @@ from django.contrib.auth.hashers import make_password
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
 django.setup()
 
-from baguettes.models import User, MenuItem, Order, OrderItem
+from baguettes.models import User, MenuItem, Order, OrderItem, Task
 
 lowercase = "abcdefghijklmnopqrstuvwxyz"
 uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -184,6 +184,34 @@ def populate_orders_and_orderitems(n=10):
 
     print(f"\nSuccessfully created {order_items_created} order items.\n")
 
+def populate_tasks():
+    tasks = [
+        {
+            "task_id": 1,
+            "flag": "BAGUETTE{task1_tempflag}"
+        },
+        {
+            "task_id": 2,
+            "flag": "BAGUETTE{task2_tempflag}"
+        },
+        {
+            "task_id": 3,
+            "flag": "BAGUETTE{task3_tempflag}"
+        },
+        {
+            "task_id": 4,
+            "flag": "BAGUETTE{task4_tempflag}"
+        }
+    ]
+
+    for t in tasks:
+        Task.objects.update_or_create(
+            task_id = t["task_id"],
+            flag= t["flag"],
+        )
+
+    print("Tasks populated successfully.")
+
 # Run the script
 if __name__ == "__main__":
     # Adjust the number as needed
@@ -191,3 +219,4 @@ if __name__ == "__main__":
     populate_users(n)
     populate_menuitem(n)
     populate_orders_and_orderitems(n)
+    populate_tasks()

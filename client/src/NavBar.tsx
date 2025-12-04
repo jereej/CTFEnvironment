@@ -42,6 +42,10 @@ const NavBar: React.FC = () => {
       {/* Right: Navigation */}
       <div className="flex items-center gap-6">
 
+        <Link to="/submit-flags/" className="text-gray-700 hover:text-blue-600 font-semibold">
+          Flags
+        </Link>
+
         {/* User Navigation */}
         {!isAdmin && (
           <>

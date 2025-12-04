@@ -8,7 +8,7 @@ from rest_framework.decorators import api_view, action
 from django.contrib.auth.hashers import check_password
 from django.utils.crypto import get_random_string
 
-from baguettes.models import User, MenuItem, OrderItem, Order, CartItem, PlayerProgress
+from baguettes.models import User, MenuItem, OrderItem, Order, CartItem, PlayerProgress, Task
 from baguettes.serializers import UserSerializer, MenuItemSerializer, OrderItemSerializer, OrderSerializer, CartItemSerializer, PlayerProgressSerializer
 
 
@@ -237,21 +237,44 @@ def get_progress(request, session_id):
 @api_view(['POST'])
 def complete_task(request):
     session_id = request.data.get("session_id")
-    task_id = int(request.data.get("task_id"))
+    task_id = request.data.get("task_id")
+    submitted_flag = request.data.get("flag")
+
+    if not session_id or not task_id or not submitted_flag:
+        return Response({"error": "session_id, task_id, and flag are required"}, status=400)
+
+    try:
+        task_id = int(task_id)
+    except ValueError:
+        return Response({"error": "Invalid task_id"}, status=400)
 
     progress, _ = PlayerProgress.objects.get_or_create(session_id=session_id)
 
-    if task_id == 1:
-        progress.task1_done = True
-        progress.save()
-        return Response({"flag": "flag{task1_flag_value}"})
+    try:
+        task = Task.objects.get(task_id=task_id)
+    except Task.DoesNotExist:
+        return Response({"error": "Unknown task"}, status=404)
 
-    if task_id == 2:
-        progress.task2_done = True
-        progress.save()
-        return Response({"flag": "flag{task2_flag_value}"})
+    # Check if already completed
+    task_field = f"task{task_id}_done"
+    already_done = getattr(progress, task_field, None)
 
-    return Response({"error": "Invalid task"}, status=400)
+    if already_done:
+        return Response({
+            "message": "Task already completed",
+            "flag_valid": True
+        })
+
+    # Validate the submitted flag
+    if submitted_flag.strip() == task.flag.strip():
+        setattr(progress, task_field, True)
+        progress.save()
+
+        return Response({
+            "success": True,
+        })
+
+    return Response({"error": "Invalid flag"}, status=400)
 
 @api_view(['POST'])
 def init_session(request):
