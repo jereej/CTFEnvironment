@@ -31,7 +31,7 @@
             "date": "2.12.2025",
             "time": "11:11 PM",
             "isSuspicious": true,
-            "explanation": "This mail is considered suspicious due to the nature of the message. The message is sourced from an article 'What the Nigerian prince scams became in 2024' (link: https://securelist.com/nigerian-scams-2024/115388/). The 'Nigerian prince scam' or 'Nigerian letter' scams are types of messages designed to lure victims into an email exchange with scammers. The themes of the messages can vary but the one used in this mail is an email from a wealthy benefactor. It urges the victim to quickly take action due to the short lifespan of the sender."
+            "explanation": "This mail is considered suspicious due to the nature of the message. The message is sourced from an article 'What the Nigerian prince scams became in 2024' (link: https://securelist.com/nigerian-scams-2024/115388/). The 'Nigerian prince scam' or 'Nigerian letter' scams are types of messages designed to lure victims into an email exchange with scammers. The themes of the messages can vary but the common idea is to manipulate the receivers' emotions. The one used in this mail pretends to be an email from a wealthy benefactor, and it urges the victim to quickly take action due to the short lifespan of the sender."
         },
         {
             "id": 3,
@@ -42,7 +42,7 @@
             "date": "30.11.2025",
             "time": "10:45 PM",
             "isSuspicious": false,
-            "explanation": "This mail is not considered suspicious because the message seems very genuine considering the context of the bakery. All the information about the sender can be verified esaily and there are no links in the mail."
+            "explanation": "This mail is not considered suspicious because the message seems very genuine considering the context of the bakery. All the information about the sender can be verified easily and there are no links in the mail."
         },
         {
             "id": 4,
@@ -53,7 +53,7 @@
             "date": "27.11.2025",
             "time": "10:00 AM",
             "isSuspicious": true,
-            "explanation": "This mail is considered suspicious due to several reasons. One reason is the server address, @ammazon.br which is imitating @amazon.br. The second reason is that the used language is very poor, an automated message from Amazon will not contain obvious spelling mistakes. The third reason is the link with the /stealcreds endpoint."
+            "explanation": "This mail is considered suspicious due to several reasons. One reason is the server address, @ammazon.br which is imitating @amazon.br. The second reason is that the used language is very poor, an automated message from Amazon will not contain obvious spelling mistakes. The third reason is the link with the /stealcreds endpoint. And from a logical standpoint, it is odd that a Finnish bakery would have an Amazon Prime account, especially a Brazilian one."
         },
         {
             "id": 5,

@@ -19,6 +19,8 @@ const Mail: React.FC = () => {
     const [answers, setAnswers] = useState<Record<number, boolean>>({});
     const [canShowExplanations, setCanShowExplanations] = useState(false);
     const [showExplanationForMail, setShowExplanationForMail] = useState<Record<number, boolean>>({});
+    const [resultModalOpen, setResultModalOpen] = useState(false);
+    const [resultText, setResultText] = useState("");
 
 
     const markSuspiciousity = (mailId: number, guess: boolean) => {
@@ -29,18 +31,28 @@ const Mail: React.FC = () => {
         setCanShowExplanations(true);
         let correct = 0;
         let total = mails.length;
+        let msg = "";
 
         mails.forEach(mail => {
             const userAnswer = answers[mail.id];
-            if (userAnswer === mail.isSuspicious) {
-                correct++;
-            }
+            if (userAnswer === mail.isSuspicious) correct++;
         });
 
         const percentage = (correct / total) * 100;
-        alert(`Correct: ${correct}/${total} (${percentage.toFixed(1)}%)
-you can check the explanations by clicking 'show explanation' under each mail`);
+
+        if (correct === total) {
+            msg += `Perfect score! ${correct}/${total} correct!\n\n`;
+            msg += `Here's a flag for you:\nBAGUETTE{task2_tempflag}\n\n`;
+        } else {
+            msg += `Correct: ${correct}/${total} (${percentage.toFixed(1)}%)\n\n`;
+        }
+
+        msg += `You can check the explanations by clicking "Show explanation" under each mail.`;
+
+        setResultText(msg);
+        setResultModalOpen(true);
     };
+        
 
     const allMarked = Object.keys(answers).length === mails.length;
 
@@ -258,6 +270,26 @@ you can check the explanations by clicking 'show explanation' under each mail`);
                     </div>
                 </div>
             </div>
+            {resultModalOpen && (
+                <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[9999]">
+                    <div className="bg-white text-black max-w-xl w-full p-6 rounded-xl shadow-2xl">
+                        <h2 className="text-2xl font-bold mb-4">Results</h2>
+
+                        <pre className="whitespace-pre-wrap bg-gray-100 p-4 rounded-lg text-sm max-h-[300px] overflow-y-auto">
+                            {resultText}
+                        </pre>
+
+                        <div className="flex justify-end mt-4">
+                            <button
+                                onClick={() => setResultModalOpen(false)}
+                                className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
