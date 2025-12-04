@@ -1,6 +1,7 @@
 import React, { JSX, useState } from "react";
 import data from "./jsons/mails.json";
 import Confetti from "react-confetti";
+import { Link } from "react-router-dom";
 
 interface Mail {
     id: number;
@@ -166,9 +167,16 @@ const Mail: React.FC = () => {
                     "
                 >
                     <div className="w-1/3 border-r border-gray-700 flex flex-col">
-                        <h1 className="text-2xl text-white p-4 border-b border-gray-700 flex-shrink-0">
-                            BaguetteMail🥖
-                        </h1>
+                        <div className="p-4 border-b border-gray-700 flex items-center justify-between">
+                            <Link to="/backrooms">
+                                <button className="text-white">
+                                    &lt; Back
+                                </button>
+                            </Link>
+                            <h1 className="text-2xl text-white">
+                                BaguetteMail🥖
+                            </h1>
+                        </div>
 
                         <div className="flex-1 overflow-y-auto">
                             {mails.map((mail) => (
