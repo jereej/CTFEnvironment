@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE } from './config';
 import Confetti from "react-confetti";
+import InstructionPopup from './InstructionPopup';
 
 const Home: React.FC = () => {
   // State to manage user login status
@@ -12,6 +13,8 @@ const Home: React.FC = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const instructions = 
+  `Welcome to the CTFEnvironment`
 
   useEffect(() => {
     // Check if user is logged in by checking localStorage
@@ -140,6 +143,10 @@ return (
         </Link>
       </div>
     </div>
+    <InstructionPopup
+    onClose={()=>{}}
+    text={instructions}
+    popupSource="home"></InstructionPopup>
   </div>
 );
 
