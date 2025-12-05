@@ -65,7 +65,7 @@ const InstructionPopup: React.FC<InstructionPopupParams> = ({
 
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[9999]">
-      <div className="bg-white text-black max-w-xl w-full p-6 rounded-xl shadow-2xl">
+      <div className="bg-white text-black max-w-3xl w-full p-10 rounded-2xl shadow-2xl">
         <h2 className="text-2xl font-bold mb-4">
           {isConfirmMode ? "Confirm Action" : "Instructions"}
         </h2>
