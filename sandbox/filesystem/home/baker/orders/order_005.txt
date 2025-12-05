@@ -1,0 +1,9 @@
+Order #005
+Date: 2024-12-02
+Customer: Cafe du Coin
+Items:
+- 20x Baguette Traditional
+- 10x Croissant
+- 10x Pain au Chocolat
+Total: 85.00 EUR
+Status: PENDING

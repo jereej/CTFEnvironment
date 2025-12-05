@@ -1,0 +1,14 @@
+================================================
+   ROOT ACCESS ACHIEVED!
+================================================
+
+Congratulations! You've successfully escalated
+your privileges to read root's files.
+
+This demonstrates why SUID binaries should be
+carefully audited - they can be exploited to
+access files that regular users shouldn't see.
+
+BAGUETTE{root_access_through_suid}
+
+================================================

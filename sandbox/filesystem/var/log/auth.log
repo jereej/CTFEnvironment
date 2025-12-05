@@ -1,0 +1,25 @@
+2024-12-01 08:00:00 - sshd: Server started
+2024-12-01 08:05:22 - sshd: Connection from 192.168.1.100
+2024-12-01 08:05:23 - sshd: Accepted password for baker from 192.168.1.100
+2024-12-01 17:30:00 - sshd: Session closed for baker
+2024-12-02 02:45:00 - sshd: Connection from 45.33.32.156
+2024-12-02 02:45:01 - sshd: Failed password for root from 45.33.32.156
+2024-12-02 02:45:02 - sshd: Failed password for root from 45.33.32.156
+2024-12-02 02:45:03 - sshd: Failed password for admin from 45.33.32.156
+2024-12-02 02:45:04 - sshd: Failed password for admin from 45.33.32.156
+2024-12-02 02:45:05 - sshd: Failed password for user from 45.33.32.156
+2024-12-02 02:45:06 - sshd: Connection from 45.33.32.156 closed (too many failures)
+2024-12-02 02:50:00 - sshd: Connection from 45.33.32.156
+2024-12-02 02:50:01 - sshd: Failed password for root from 45.33.32.156
+2024-12-02 02:50:02 - sshd: Failed password for root from 45.33.32.156
+2024-12-02 02:50:03 - sshd: Failed password for baker from 45.33.32.156
+2024-12-02 02:50:04 - sshd: Failed password for baker from 45.33.32.156
+2024-12-02 02:50:05 - sshd: Failed password for test from 45.33.32.156
+2024-12-02 02:50:06 - sshd: Connection from 45.33.32.156 closed (too many failures)
+2024-12-02 02:55:00 - sshd: Connection from 45.33.32.156
+2024-12-02 02:55:01 - sshd: Failed password for root from 45.33.32.156
+2024-12-02 02:55:02 - sshd: Failed password for admin from 45.33.32.156
+2024-12-02 02:55:03 - sshd: Failed password for postgres from 45.33.32.156
+2024-12-02 02:55:04 - sshd: Connection from 45.33.32.156 closed (too many failures)
+2024-12-02 08:00:00 - sshd: Connection from 192.168.1.100
+2024-12-02 08:00:01 - sshd: Accepted password for baker from 192.168.1.100

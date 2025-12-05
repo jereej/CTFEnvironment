@@ -1,0 +1,19 @@
+Baker's Notes - December 2024
+==============================
+
+TODO:
+- Check supplier delivery on Monday
+- Update inventory database
+- Review access logs (some suspicious activity?)
+- Change default passwords (been meaning to do this...)
+
+REMINDERS:
+- The encoded message from our supplier is in messages/
+- Order files are backed up daily in orders/
+- System logs are in /var/log/
+
+NOTE TO SELF:
+Someone mentioned there's a backup tool on the system
+with special permissions. Should check what it can do...
+
+- Baker

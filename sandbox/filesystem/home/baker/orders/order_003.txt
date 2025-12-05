@@ -1,0 +1,9 @@
+Order #003
+Date: 2024-12-01
+Customer: Philippe Martin
+Items:
+- 1x Baguette Traditional
+- 4x Croissant
+- 1x Tarte aux Pommes
+Total: 22.00 EUR
+Status: DELIVERED
