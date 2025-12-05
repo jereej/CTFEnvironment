@@ -71,6 +71,8 @@ class PlayerProgress(models.Model):
     session_id = models.CharField(max_length=64, unique=True)
     task1_done = models.BooleanField(default=False)
     task2_done = models.BooleanField(default=False)
+    task3_done = models.BooleanField(default=False)
+    task4_done = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Progress for {self.session_id}"

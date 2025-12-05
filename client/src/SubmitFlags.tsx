@@ -3,6 +3,7 @@ import axios from "axios";
 import { API_BASE } from "./config";
 import taskStories from "./jsons/taskStories.json";
 import { Link } from "react-router-dom";
+import InstructionPopup from "./InstructionPopup";
 
 type Progress = {
   task1_done: boolean;
@@ -15,6 +16,7 @@ const SubmitFlags: React.FC = () => {
   const [progress, setProgress] = useState<Progress | null>(null);
   const [inputs, setInputs] = useState({1: "", 2: "", 3: "", 4: ""});
   const [errors, setErrors] = useState({1: "", 2: "", 3: "", 4: ""});
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
   const sessionId = localStorage.getItem("ctf_session_id");
 
   // Load current task progress
@@ -22,7 +24,7 @@ const SubmitFlags: React.FC = () => {
     if (!sessionId) return;
 
     axios
-      .get(`${API_BASE}progress/${sessionId}/`)
+      .get(`${API_BASE}progress/get/${sessionId}/`)
       .then((res) => setProgress(res.data))
       .catch((err) => console.error("Failed to load progress", err));
   }, [sessionId]);
@@ -51,6 +53,27 @@ const SubmitFlags: React.FC = () => {
         ...prev,
         [taskId]: "Invalid flag. Try again."
       }));
+    }
+  };
+
+  const resetProgress = async () => {
+    if (!sessionId) return;
+
+    try {
+      await axios.post(`${API_BASE}progress/reset/${sessionId}/`);
+
+      setProgress({
+        task1_done: false,
+        task2_done: false,
+        task3_done: false,
+        task4_done: false,
+      });
+
+      setInputs({ 1: "", 2: "", 3: "", 4: "" });
+      setErrors({ 1: "", 2: "", 3: "", 4: "" });
+
+    } catch (err) {
+      console.error("Failed to reset progress", err);
     }
   };
 
@@ -122,6 +145,32 @@ const SubmitFlags: React.FC = () => {
           );
         })}
       </div>
+      <button
+        onClick={() => setShowResetConfirm(true)}
+        className="
+          fixed bottom-6 right-6
+          px-5 py-3
+          bg-red-600 hover:bg-red-700
+          text-white font-semibold
+          rounded-xl shadow-xl
+          transition
+          z-50
+        "
+      >
+        Reset Progress
+      </button>
+      {showResetConfirm && (
+        <InstructionPopup
+          text="Are you sure you want to reset your progress? This cannot be undone."
+          cancelText="Cancel"
+          confirmText="Yes, Reset"
+          onClose={() => setShowResetConfirm(false)}
+          onConfirm={async () => {
+            setShowResetConfirm(false);
+            await resetProgress();
+          }}
+        />
+      )}
     </div>
   );
 }

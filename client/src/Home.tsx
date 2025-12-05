@@ -29,7 +29,7 @@ const Home: React.FC = () => {
   if (!sessionId) return;
 
   axios
-    .get(`${API_BASE}progress/${sessionId}/`)
+    .get(`${API_BASE}progress/get/${sessionId}/`)
     .then(res => setProgress(res.data))
     .catch(err => console.error("Failed to fetch progress:", err));
   }, []);

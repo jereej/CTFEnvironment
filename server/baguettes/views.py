@@ -233,6 +233,18 @@ def get_progress(request, session_id):
     serializer = PlayerProgressSerializer(progress)
     return Response(serializer.data)
 
+@api_view(['POST'])
+# pylint: disable=unused-argument
+def reset_progress(request, session_id):
+    progress, _ = PlayerProgress.objects.get_or_create(session_id=session_id)
+    progress.task1_done = False
+    progress.task2_done = False
+    progress.task3_done = False
+    progress.task4_done = False
+    progress.save()
+    serializer = PlayerProgressSerializer(progress)
+    return Response(serializer.data)
+
 
 @api_view(['POST'])
 def complete_task(request):
@@ -290,4 +302,6 @@ def init_session(request):
         "created": created,
         "task1_done": progress.task1_done,
         "task2_done": progress.task2_done,
+        "task3_done": progress.task3_done,
+        "task4_done": progress.task4_done
     })

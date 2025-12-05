@@ -26,6 +26,7 @@ const Mail: React.FC = () => {
     const [resultText, setResultText] = useState("");
     const [showConfetti, setShowConfetti] = useState(false);
     const [instructionModalOpen, setInstructionModalOpen] = useState(true);
+    let msg = "";
 
     const instructions = 
 `Welcome to the Mail inspection task.
@@ -46,7 +47,7 @@ After that, you can see the explanations for each mail, explaining why the given
         setCanShowExplanations(true);
         let correct = 0;
         let total = mails.length;
-        let msg = "";
+        msg = "";
 
         mails.forEach(mail => {
             const userAnswer = answers[mail.id];
@@ -304,32 +305,19 @@ After that, you can see the explanations for each mail, explaining why the given
                 </div>
             </div>
             {resultModalOpen && (
-                <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[9999]">
-                    <div className="bg-white text-black max-w-xl w-full p-6 rounded-xl shadow-2xl">
-                        <h2 className="text-2xl font-bold mb-4">Results</h2>
-
-                        <pre className="whitespace-pre-wrap bg-gray-100 p-4 rounded-lg text-sm max-h-[300px] overflow-y-auto">
-                            {resultText}
-                        </pre>
-
-                        <div className="flex justify-end mt-4">
-                            <button
-                                onClick={() => setResultModalOpen(false)}
-                                className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
-                            >
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <InstructionPopup
+                    text={resultText}
+                    buttonText="OK"
+                    onClose={() => setResultModalOpen(false)}
+                ></InstructionPopup>
             )}
 
-                {instructionModalOpen && (
-                    <InstructionPopup
+            {instructionModalOpen && (
+                <InstructionPopup
                     text={instructions}
                     onClose={() => setInstructionModalOpen(false)}
-                    ></InstructionPopup>
-                )}
+                ></InstructionPopup>
+            )}
         </div>
     );
 };
