@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { API_BASE } from './config';
 import axios from 'axios';
+import InstructionPopup from "./InstructionPopup";
 
 interface Order {
   id: number;
@@ -45,13 +46,16 @@ const Orders: React.FC = () => {
   const [viewingOrders, setViewingOrders] = useState(false);
   const [expandedOrderId, setExpandedOrderId] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showOrderPlaced, setShowOrderPlaced] = useState(false);
+  const [orderPlacedMessage, setOrderPlacedMessage] = useState('');
   const [placingOrder, setPlacingOrder] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const categoryOrder = ["sandwich", "side dish", "drink", "dessert"];
   const storedUser = localStorage.getItem("user");
-const user = storedUser ? JSON.parse(storedUser) : null;
+  const user = storedUser ? JSON.parse(storedUser) : null;
+  
 
   useEffect(() => {
     const fetchMenuItems = async () => {
@@ -227,13 +231,14 @@ const user = storedUser ? JSON.parse(storedUser) : null;
       }
 
       setCart([]);
-      alert('Order placed successfully!');
+      setOrderPlacedMessage('Order placed successfully!');
     } catch (err) {
       console.error('Failed to place order:', err);
-      alert('Failed to place order.');
+      setOrderPlacedMessage('Failed to place order.');
     } finally {
       setPlacingOrder(false);
     }
+    setShowOrderPlaced(true);
   };
   
   const fetchUserOrders = async () => {
@@ -541,6 +546,19 @@ return (
         </div>
       </div>
     </div>
+    {showOrderPlaced && (
+      <InstructionPopup
+        text= {orderPlacedMessage}
+        headerText='Order Status'
+        confirmText="OK"
+        onClose={() => setShowOrderPlaced(false)}
+        forceShow={true}
+        popupSource='orders'
+        onConfirm={async () => {
+          setShowOrderPlaced(false);
+        }}
+      />
+    )}
   </div>
 );
 

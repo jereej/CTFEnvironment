@@ -163,7 +163,7 @@ const SubmitFlags: React.FC = () => {
         <InstructionPopup
           text="Are you sure you want to reset your progress? This cannot be undone."
           cancelText="Cancel"
-          confirmText="Yes, Reset"
+          confirmText="Reset"
           onClose={() => setShowResetConfirm(false)}
           forceShow={true}
           popupSource="flags"

@@ -10,7 +10,7 @@ interface InstructionPopupParams {
 
   // Optional confirm mode
   forceShow?: boolean;  // true ignores sessionStorage
-  buttonText?: string;
+  headerText?: string;
   confirmText?: string;
   cancelText?: string;
   onConfirm?: () => void;
@@ -18,10 +18,10 @@ interface InstructionPopupParams {
 
 const InstructionPopup: React.FC<InstructionPopupParams> = ({
   text,
+  headerText,
   onClose,
   popupSource,
   forceShow = false,
-  buttonText,
   confirmText,
   cancelText,
   onConfirm,
@@ -67,7 +67,7 @@ const InstructionPopup: React.FC<InstructionPopupParams> = ({
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[9999]">
       <div className="bg-white text-black max-w-3xl w-full p-10 rounded-2xl shadow-2xl">
         <h2 className="text-2xl font-bold mb-4">
-          {isConfirmMode ? "Confirm Action" : "Instructions"}
+          {headerText ?? (isConfirmMode ? "Confirm Action" : "Instructions")}
         </h2>
 
         <pre className="whitespace-pre-wrap bg-gray-100 p-4 rounded-lg text-sm max-h-[300px] overflow-y-auto">
@@ -96,7 +96,7 @@ const InstructionPopup: React.FC<InstructionPopupParams> = ({
               onClick={handleCloseInternal}
               className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
             >
-              {buttonText || "Understood"}
+              {confirmText || "Understood"}
             </button>
           )}
         </div>
