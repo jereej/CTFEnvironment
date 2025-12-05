@@ -14,7 +14,19 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const instructions = 
-  `Welcome to the CTFEnvironment`
+  `Welcome to the website of Les Baguettes.
+
+This website acts as the CTF environment where there are various tasks for you to complete.
+
+You can start by either creating an account or by logging in. Feel free to also just have a look around without an account but
+you will not be able to place orders without an account.
+
+In total there are 4 tasks for you to complete in (and outside) of this website. When you have completed an exercise, you can
+return the flag through the 'Flags' button and keep track of exercises you have completed so far.
+
+To keep things interesting, you will have to find the exercises by yourself. However, to help you get started, look for a newspaper. That might have some interesting information 😉.
+
+Good luck and have fun with the tasks! `
 
   useEffect(() => {
     // Check if user is logged in by checking localStorage
