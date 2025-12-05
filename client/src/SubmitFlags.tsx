@@ -165,6 +165,8 @@ const SubmitFlags: React.FC = () => {
           cancelText="Cancel"
           confirmText="Yes, Reset"
           onClose={() => setShowResetConfirm(false)}
+          forceShow={true}
+          popupSource="flags"
           onConfirm={async () => {
             setShowResetConfirm(false);
             await resetProgress();

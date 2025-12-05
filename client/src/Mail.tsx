@@ -308,12 +308,15 @@ After that, you can see the explanations for each mail, explaining why the given
                 <InstructionPopup
                     text={resultText}
                     buttonText="OK"
+                    popupSource="mail_results"
+                    forceShow={true}
                     onClose={() => setResultModalOpen(false)}
                 ></InstructionPopup>
             )}
 
             {instructionModalOpen && (
                 <InstructionPopup
+                    popupSource="mail"
                     text={instructions}
                     onClose={() => setInstructionModalOpen(false)}
                 ></InstructionPopup>
