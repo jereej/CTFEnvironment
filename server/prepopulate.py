@@ -1,6 +1,7 @@
 import os
 import django
 import random
+import json
 from django.contrib.auth.hashers import make_password
 
 
@@ -138,6 +139,20 @@ def populate_menuitem(n=10):
 
     print(f"\nSuccessfully created {menuitems_created} menu items.\n")
 
+def populate_real_menuitems():
+    """
+    Instead of randomly populating the MenuItem model, populate them with real data
+    since the menuitems are static in a real system too.
+    """
+    with open("menuitems.json", "r") as menuitems_file:
+        menuitems = json.load(menuitems_file)
+    for item in menuitems["items"]:
+        MenuItem.objects.create(name=item["name"], description=item["description"], type=item["type"],
+                                price=item["price"], is_premium=item["is_premium"])
+        print(f"populated {item["name"]} to menu items.")
+    print("All menu items have been populated.")
+        
+
 def populate_orders_and_orderitems(n=10):
     """
     Populates the Order model with random data.
@@ -217,6 +232,6 @@ if __name__ == "__main__":
     # Adjust the number as needed
     n = 20
     populate_users(n)
-    populate_menuitem(n)
+    populate_real_menuitems()
     populate_orders_and_orderitems(n)
     populate_tasks()
