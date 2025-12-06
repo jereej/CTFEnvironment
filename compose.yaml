@@ -1,13 +1,13 @@
 services:
   baguette_frontend:
-    image: jereej/ctfenvironment-client
+    build: ./client
     networks:
       - app-net
     volumes:
       - frontend_build:/frontend_build
 
   baguette_backend:
-    image: jereej/ctfenvironment-server
+    build: ./server
     expose:
       - "8080"
     environment:
@@ -48,6 +48,10 @@ services:
       - pgdata:/var/lib/postgresql/data/
     networks:
       - app-net
+
+  sandbox:
+    build: ./sandbox
+    image: lesbaguettes/sandbox:latest
 
 networks:
   app-net: {}

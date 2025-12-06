@@ -6,10 +6,11 @@ const NotFound: React.FC = () => {
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100 p-4">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Page Not Found</h1>
       <div className="mb-8">
-        <img 
-          src="/notfound.png" 
+        <img
+          src="/notfound.png"
           alt="Restaurant Logo"
-          style={{ width: '600px', height: '400px', objectFit: 'contain', borderRadius: '95%' }}
+          className="w-[280px] h-[190px] sm:w-[400px] sm:h-[270px] md:w-[600px] md:h-[400px] object-contain"
+          style={{ borderRadius: '95%' }}
         />
       </div>
       <p className="text-xl text-gray-600 mb-4">Oh no! This page is not found!</p>

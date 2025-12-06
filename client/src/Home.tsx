@@ -82,10 +82,11 @@ return (
     <div className="relative z-10 flex flex-col items-center">
       {/* Logo */}
       <div className="mb-8">
-        <img 
-          src="/baguette_logo.png" 
+        <img
+          src="/baguette_logo.png"
           alt="Restaurant Logo"
-          style={{ width: '600px', height: '400px', objectFit: 'contain', borderRadius: '33%' }}
+          className="w-[300px] h-[200px] md:w-[450px] md:h-[300px] lg:w-[600px] lg:h-[400px] object-contain"
+          style={{ borderRadius: '33%' }}
         />
       </div>
 
@@ -105,44 +106,44 @@ return (
       )}
 
       {/* Buttons */}
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
         {user ? (
           <>
             <Link to="/menu">
-              <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
+              <button className="w-full sm:w-auto px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
                 View Menu
               </button>
             </Link>
 
             <Link to="/orders">
-              <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
+              <button className="w-full sm:w-auto px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
                 Orders
               </button>
             </Link>
 
             <button
               onClick={handleLogout}
-              className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
+              className="w-full sm:w-auto px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
               Log Out
             </button>
           </>
         ) : (
           <>
             <Link to="/menu">
-              <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
+              <button className="w-full sm:w-auto px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
                 View Menu
               </button>
             </Link>
 
             <Link to="/login">
-              <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
+              <button className="w-full sm:w-auto px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
                 Log In
               </button>
             </Link>
           </>
         )}
         <Link to="/shop">
-          <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
+          <button className="w-full sm:w-auto px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
             Enter Shop
           </button>
         </Link>

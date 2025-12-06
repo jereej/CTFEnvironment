@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Shop: React.FC = () => {
     const [isNewsPaperOpen, setIsNewsPaperOpen] = useState(false);
@@ -58,95 +58,68 @@ return (
     {/* Shop background — NO min-h-screen */}
     <div className="absolute inset-0 w-full bg-[url('/shop_screen.png')] bg-contain bg-center bg-no-repeat">
 
-            {/* Hover group */}
-            <div className="relative w-full h-full group">
-
-                {/* Hover zone */}
-                <div
-                    onMouseEnter={() => setDoorHovered(true)}
-                    onMouseLeave={() => setDoorHovered(false)}
-                    onClick={() => navigate("/backrooms")}
-                    className="
-                        absolute 
-                        z-10
-                        opacity-0
-                        cursor-pointer
-                    "
+            {/* SVG overlay with clickable door and UI elements */}
+            <svg
+                className="absolute inset-0 z-10 w-full h-full pointer-events-none"
+                viewBox="0 0 1536 1024"
+                preserveAspectRatio="xMidYMid meet"
+            >
+                {/* Door hitbox */}
+                <path
+                    d="M699 57 L1065 57 L1065 600 L699 600 Z"
+                    fill="transparent"
+                    strokeWidth="8"
+                    className="cursor-pointer pointer-events-auto"
                     style={{
-                        top: "20px",
-                        left: "1100px",
-                        width: "600px",
-                        height: "800px",
-                    }}
-                />
-
-                {/* SVG overlay */}
-                <svg
-                    className="absolute inset-0 pointer-events-none z-30"
-                    viewBox="0 0 1920 1080"
-                >
-                    <path
-                        d="M890 50 L1240 50 L1240 565 L890 565 Z"
-                        fill="none"
-                        strokeWidth="8"
-                        style={{
                         stroke: doorHovered ? "#f2d55c" : "transparent",
                         filter: doorHovered
                             ? "drop-shadow(0 0 10px #f2d55c) drop-shadow(0 0 20px #f2d55c)"
                             : "none",
                         transition: "stroke 0.3s ease, filter 0.3s ease",
-                        }}
-                    />
-                </svg>
-            </div>
-                <Link to="/">
-                    <img
-                        src="/back_arrow.png"
-                        alt="Les Baguettes Logo"
-                        className="
-                            absolute 
-                            left-[15%] 
-                            top-[10%] h-20 
-                            -translate-x-1/2 
-                            -translate-y-1/2 
-                            transition"
-                    />
-                </Link>
-                <img
-                    src="/baguette_logo.png"
-                    alt="Les Baguettes Logo"
-                    className="
-                        absolute 
-                        left-[74%] 
-                        top-1/4 h-56 
-                        -translate-x-1/2 
-                        -translate-y-1/2 
-                        transition
-                        outline
-                        outline-4
-                        outline-[#757575]"
-                    style={{ width: '300px', height: '200px', borderRadius: '42%' }}
+                    }}
+                    onClick={() => navigate("/backrooms")}
+                    onMouseEnter={() => setDoorHovered(true)}
+                    onMouseLeave={() => setDoorHovered(false)}
                 />
-                <button
-                    onClick={() => setIsNewsPaperOpen(true)}
-                    className="
-                        absolute
-                        left-[74%]
-                        top-1/2
-                        -translate-x-1/2
-                        -translate-y-1/2
-                        z-40
-                        px-7
-                        py-5
-                        transition
-                    "
-                    >
-                    <img
-                        src="/newspaper.png"
-                        alt="Newspaper icon"
-                        className="h-56 w-auto rounded-md transition"
+
+                {/* Back arrow */}
+                <a href="/" className="pointer-events-auto">
+                    <image
+                        href="/back_arrow.png"
+                        x="30"
+                        y="30"
+                        width="80"
+                        height="80"
+                        className="cursor-pointer"
                     />
-                </button>
+                </a>
+
+                {/* Baguette logo with ellipse clip */}
+                <defs>
+                    <clipPath id="ellipseClip">
+                        <ellipse cx="1280" cy="190" rx="140" ry="90" />
+                    </clipPath>
+                </defs>
+                <image
+                    href="/baguette_logo.png"
+                    x="1140"
+                    y="100"
+                    width="280"
+                    height="180"
+                    clipPath="url(#ellipseClip)"
+                />
+
+                {/* Newspaper button */}
+                <image
+                    href="/newspaper.png"
+                    x="1050"
+                    y="380"
+                    width="260"
+                    height="200"
+                    className="cursor-pointer pointer-events-auto"
+                    onClick={() => setIsNewsPaperOpen(true)}
+                />
+            </svg>
         {isNewsPaperOpen && (
             <div
                 className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center"

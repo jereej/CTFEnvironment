@@ -165,20 +165,23 @@ After that, you can see the explanations for each mail, explaining why the given
                 />
             )}
             <div className="absolute inset-0 min-h-screen w-full bg-[url('/mail.png')] bg-contain bg-center bg-no-repeat">
-                <div
-                    className="
-                        absolute
-                        left-[324px]               
-                        top-[56px]                        
-                        flex
-                        w-[1274px]
-                        h-[635px]
-                        bg-[#1C1C1DFF]
-                        shadow-2xl
-                        overflow-hidden
-                        border border-gray-700
-                    "
+                <svg
+                    className="absolute inset-0 z-10 w-full h-full pointer-events-none"
+                    viewBox="0 0 1536 1024"
+                    preserveAspectRatio="xMidYMid meet"
                 >
+                    <foreignObject x="60" y="55" width="1420" height="713" className="pointer-events-auto">
+                        <div
+                            className="
+                                flex
+                                w-full
+                                h-full
+                                bg-[#1C1C1DFF]
+                                shadow-2xl
+                                overflow-hidden
+                                border border-gray-700
+                            "
+                        >
                     <div className="w-1/3 border-r border-gray-700 flex flex-col">
                         <div className="p-4 border-b border-gray-700 flex items-center justify-between">
                             <Link to="/backrooms">
@@ -301,8 +304,10 @@ After that, you can see the explanations for each mail, explaining why the given
                                 Select a mail to read
                             </div>
                         )}
-                    </div>
-                </div>
+                            </div>
+                        </div>
+                    </foreignObject>
+                </svg>
             </div>
             {resultModalOpen && (
                 <InstructionPopup
