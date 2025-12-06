@@ -1,0 +1,109 @@
+{
+  "items": [
+    {
+      "name": "The Les Baguettes Classic",
+      "description": "A classic that everyone knows and loves. Crispy and decadent freshly baked World's Best French-style Nordic Baguette with thinly sliced smoked ham and rich, creamy butter from local farms.",
+      "price": 6.50,
+      "is_premium": false,
+      "type": "Sandwiches"
+    },
+    {
+      "name": "The Chic Parm Club",
+      "description": "A delicious, tender and crispy chicken breast breaded and deepfried, topped with mozzarella and marinara sauce, stuffed between our chic club sandwich and toasted until perfection! Comes with a marinara dipping sauce because there can never be too much sauce!",
+      "price": 8.50,
+      "is_premium": false,
+      "type": "Sandwiches"
+    },
+    {
+      "name": "The Victorious Vegetal",
+      "description": "For our vegan friends, A crispy and decadent freshly baked World's Best French-style Nordic Baguette stuffed with our marinated mushrooms, roasted peppers and grilled zucchini. Topped off with fresh greens, cucumber and tomato slices.",
+      "price": 4.75,
+      "is_premium": false,
+      "type": "Sandwiches"
+    },
+    {
+      "name": "The Spectacular Seafood Shanty",
+      "description": "Our most luxurious sandwich for the special moments in life. Two slices of our traditional sourdough bread, toasted to perfection and topped with a thin layer of rich and decadent cream cheese, cold-smoked salmon, a dollop of crème fraîche, and caviar to top it off. Garnished with dill and chives.",
+      "price": 29.99,
+      "is_premium": true,
+      "type": "Sandwiches"
+    },
+    {
+      "name": "The Sweet Dreams Are Made of Cheese",
+      "description": "Our newest contender on the list, and the sweetest. A crispy and decadent freshly baked World's Best French-style Nordic Baguette stuffed with four types of cheese (Mozzarella, Fontina, Provolone and Parmiggiano Reggiano), toasted until perfection and served with some arugula and a sweet balsamic glaze to tie everything together.",
+      "price": 10.99,
+      "is_premium": true,
+      "type": "Sandwiches"
+    },
+    {
+      "name": "The Mighty Mozzarella",
+      "description": "Six delicious Mozzarella sticks served with Marinara dipping sauce",
+      "price": 5.99,
+      "is_premium": false,
+      "type": "Side dishes"
+    },
+    {
+      "name": "The Tender Chick",
+      "description": "Six Chicken Tenders served with a mayonnaise of your choice (Garlic, Chipotle, Curry, Paprika, Remoulade, Les Baguettes Special)",
+      "price": 7.99,
+      "is_premium": false,
+      "type": "Side dishes"
+    },
+    {
+      "name": "The veggie vat",
+      "description": "A classic salad with mixed vegetables and a House-made salad dressing.",
+      "price": 3.99,
+      "is_premium": true,
+      "type": "Side dishes"
+    },
+    {
+      "name": "Soda",
+      "description": "A 0.5L soda of your choice (coca-cola, fanta, sprite, mountain dew, orangina, jaffa)",
+      "price": 2.50,
+      "is_premium": false,
+      "type": "Drinks"
+    },
+    {
+      "name": "The OJ",
+      "description": "A 0.5L glass of freshly squeezed orange juice",
+      "price": 3.50,
+      "is_premium": false,
+      "type": "Drinks"
+    },
+    {
+      "name": "The eau de bubbles luxe",
+      "description": "Luxurious sparkling water infused with an organic lemon taste. The water is sourced from the sacred Montagne de Baguette.",
+      "price": 8.00,
+      "is_premium": true,
+      "type": "Drinks"
+    },
+    {
+      "name": "The Classic Croissant",
+      "description": "A Scrumptious classic croissant, nothing less, nothing more.",
+      "price": 2.99,
+      "is_premium": false,
+      "type": "Desserts"
+    },
+    {
+      "name": "The Crookie Concoction",
+      "description": "Our newest product, perhaps a blasphemous creation. A combination of a cookie and a croissant for the sweet-lovers.",
+      "price": 3.99,
+      "is_premium": false,
+      "type": "Desserts"
+    },
+    {
+      "name": "The Big Crunch",
+      "description": "A fan-favourite classic chocolate chip cookie, topped with flaky sea salt.",
+      "price": 2.95,
+      "is_premium": false,
+      "type": "Desserts"
+    },
+    {
+      "name": "The Big Apple",
+      "description": "A New York style cheesecake, topped with some apple compote.",
+      "price": 6.95,
+      "is_premium": true,
+      "type": "Desserts"
+    }
+  ]
+}
