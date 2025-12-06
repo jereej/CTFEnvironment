@@ -1,13 +1,13 @@
 services:
   baguette_frontend:
-    build: ./client
+    image: jereej/ctfenvironment-client
     networks:
       - app-net
     volumes:
       - frontend_build:/frontend_build
 
   baguette_backend:
-    build: ./server
+    image: jereej/ctfenvironment-server
     expose:
       - "8080"
     environment:
@@ -52,7 +52,7 @@ services:
   sandbox:
     build: ./sandbox
     image: lesbaguettes/sandbox:latest
-
+    
 networks:
   app-net: {}
 
