@@ -80,7 +80,7 @@ docker compose pull
 docker compose up -d
 ```
 
-After running `docker compose up -d` the environment is hosted at `http://YOUR_MACHINE_IP:80` and you should be able to access it remotely. Make sure to check your firewall settings and that you have the required port open.
+After running `docker compose up -d` the environment is hosted at `http://YOUR_MACHINE_IP:443` and you should be able to access it remotely. Make sure to check your firewall settings and that you have the required port open.
 
 ## Further development
 
