@@ -152,7 +152,7 @@ def populate_real_menuitems():
     for item in menuitems["items"]:
         MenuItem.objects.create(name=item["name"], description=item["description"], type=item["type"],
                                 price=item["price"], is_premium=item["is_premium"])
-        print(f"populated {item["name"]} to menu items.")
+        print(f"populated {item['name']} to menu items.")
     print("All menu items have been populated.")
         
 
