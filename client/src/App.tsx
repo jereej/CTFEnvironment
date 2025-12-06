@@ -9,6 +9,7 @@ import Menu from './Menu';
 import Login from './Login';
 import Orders from './Orders';
 import NavBar from './NavBar';
+import Shop from './Shop';
 import BackRooms from './BackRooms';
 import Mail from './Mail';
 import OMS from './OMS';
@@ -43,7 +44,7 @@ const App: React.FC = () => {
   }, []);
 
   // Hide navbar on /backrooms and /submit-flags routes
-  const hiddenNavPaths = ["/backrooms", "/submit-flags"];
+  const hiddenNavPaths = ["/backrooms", "/submit-flags", "/shop"];
 
   const hideNav = hiddenNavPaths.some(path =>
   location.pathname.startsWith(path)
@@ -58,6 +59,7 @@ const App: React.FC = () => {
         <Route path="/menu" element={<Menu />} />
         <Route path="/login" element={<Login />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/shop" element={<Shop />} />
         <Route path="/backrooms" element={<BackRooms />} />
         <Route path="/backrooms/mail" element={<Mail />} />
         <Route path="/backrooms/oms" element={<OMS />} />

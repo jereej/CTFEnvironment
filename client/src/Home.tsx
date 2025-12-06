@@ -78,13 +78,6 @@ return (
         recycle={false}
     />
     )}
-    <Link to="/backrooms" className="absolute top-8 left-8 z-20">
-        <img
-          src="/door_logo.png"
-          className="h-12 w-auto hover:scale-105 transition-transform"
-          style={{ width: '100px', height: '100px', objectFit: 'contain'}}
-        />
-      </Link>
     {/* Content */}
     <div className="relative z-10 flex flex-col items-center">
       {/* Logo */}
@@ -148,9 +141,9 @@ return (
             </Link>
           </>
         )}
-        <Link to="/admin">
+        <Link to="/shop">
           <button className="px-6 py-3 bg-[#f4e8fc] text-black rounded-2xl hover:bg-[#b099bf] transition">
-            Admin
+            Enter Shop
           </button>
         </Link>
       </div>

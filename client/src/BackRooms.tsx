@@ -54,7 +54,7 @@ return (
 
                 {/* Hover zone */}
                 <div
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/shop")}
                     className="
                         absolute 
                         z-10
