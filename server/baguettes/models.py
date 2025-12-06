@@ -17,8 +17,8 @@ class User(models.Model):
     
 class MenuItem(models.Model):
     """Represents a menu item that can be ordered."""
-    name = models.CharField(max_length=64, unique=True)
-    description = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
+    description = models.CharField(max_length=2048)
     type = models.CharField(max_length=20, default="main course")
     price = models.FloatField()
     is_premium = models.BooleanField(default=False)
