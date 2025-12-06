@@ -19,6 +19,9 @@ all_characters = lowercase + uppercase + numbers + special
 
 # Support functions:
 
+def check_if_db_already_populated():
+    return User.objects.exists() and MenuItem.objects.exists() and Order.objects.exists()
+
 def generate_raw_password(length):
     """
     Generates a random password of specified length that meets complexity requirements.
@@ -229,9 +232,12 @@ def populate_tasks():
 
 # Run the script
 if __name__ == "__main__":
-    # Adjust the number as needed
-    n = 20
-    populate_users(n)
-    populate_real_menuitems()
-    populate_orders_and_orderitems(n)
-    populate_tasks()
+    if check_if_db_already_populated():
+        print("Database has already been populated, skipping prepopulation.")
+    else:
+        # Adjust the number as needed
+        n = 20
+        populate_users(n)
+        populate_real_menuitems()
+        populate_orders_and_orderitems(n)
+        populate_tasks()
