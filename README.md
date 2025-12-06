@@ -74,6 +74,19 @@ When you want to stop running the deployment, you can run
 docker compose down
 ```
 
+*If you want to delete the existing volumes, you can run*
+```
+docker compose down -v
+```
+
+For some reason, if you run `docker compose down -v`, and you want to restart the environment, in order for the backend to run correctly you need to run
+```
+docker compose up -d
+docker compose down
+docker compose up -d
+```
+and it will work as normal.
+
 If you want to later run it and check that the deployment uses the latest images, you can do
 ```
 docker compose pull
