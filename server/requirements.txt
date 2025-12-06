@@ -32,3 +32,7 @@ uvicorn==0.34.0
 gunicorn==21.2.0
 whitenoise==6.6.0
 django-cors-headers==4.3.1
+channels==4.0.0
+daphne==4.0.0
+docker==7.1.0
+urllib3<2

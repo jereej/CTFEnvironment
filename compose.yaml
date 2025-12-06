@@ -17,6 +17,8 @@ services:
       - POSTGRES_USER=app
       - POSTGRES_PASSWORD=app
       - DATABASE_URL=postgres://app:app@postgres:5432/app
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - app-net
     depends_on:

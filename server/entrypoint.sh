@@ -10,11 +10,5 @@ python prepopulate.py
 # Collect static files (optional at runtime)
 python manage.py collectstatic --noinput || true
 
-# Start Gunicorn
-exec gunicorn project.wsgi:application \
-    --bind 0.0.0.0:$PORT \
-    --workers 4 \
-    --timeout 120 \
-    --keep-alive 120 \
-    --access-logfile - \
-    --error-logfile -
+# Start Daphne (ASGI server for WebSocket support)
+exec daphne -b 0.0.0.0 -p $PORT project.asgi:application

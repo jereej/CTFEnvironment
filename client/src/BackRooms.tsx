@@ -34,7 +34,7 @@ const BackRooms: React.FC = () => {
             }
         } else if (sourceMail === false) {
             if (username == "admin" && password == "admin"){
-                navigate("/backrooms/oms");
+                navigate("/backrooms/shell");
             } else {
                 setError("Incorrect credentials");
             }
@@ -97,7 +97,7 @@ return (
                 <div className="flex flex-row gap-4 space-x-52">
                     {!isPrompting?(
                         <>
-                        <button 
+                        <button
                         onClick={() => flipPromptingValue(true)}
                         className="px-6 py-3 bg-[#302D31FF] text-white rounded-2xl hover:bg-[#756C7AFF] transition">
                         <img
@@ -107,18 +107,18 @@ return (
                         />
                         Mail
                         </button>
-                        
+
                         <button
                         onClick={() => flipPromptingValue(false)}
                         className="px-6 py-3 bg-[#302D31FF] text-white rounded-2xl hover:bg-[#756C7AFF] transition">
                         <img
-                            src="/oms_logo.png"
+                            src="/command-prompt-svgrepo-com.svg"
                             className="h-12 w-auto hover:scale-105 transition-transform"
                             style={{ width: '100px', height: '100px', objectFit: 'contain'}}
                         />
-                        OMS
+                        Shell
                         </button>
-                        
+
                         </>
                     ):(<div className="relative z-10 bg-[#7D7780FF] p-8 rounded-2xl shadow-md w-full max-w-md">
                         <button 
