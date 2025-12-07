@@ -31,13 +31,28 @@ const NavBar: React.FC = () => {
     <nav className="sticky top-0 z-50 bg-[#dabed6] shadow-md flex justify-between items-center px-8 py-3">
       
       {/* Left: Logo */}
-      <Link to="/" className="flex items-center gap-2">
+      <div className="flex items-center gap-4">
+        <Link to="/" className="flex items-center gap-2">
+          <img
+            src="/common_logo.png"
+            alt="Les Baguettes Logo"
+            className="h-12 w-auto rounded-md transition"
+          />
+        </Link>
+
+        <a
+        href="https://instagram.com/lesbaguettes2025"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center"
+      >
         <img
-          src="/common_logo.png"
-          alt="Les Baguettes Logo"
-          className="h-12 w-auto rounded-md transition"
+          src="/instagram.png"
+          alt="Instagram"
+          className="h-12 w-auto rounded-md transition hover:opacity-80"
         />
-      </Link>
+      </a>
+    </div>
 
       {/* Right: Navigation */}
       <div className="flex items-center gap-6">
