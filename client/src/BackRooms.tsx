@@ -58,7 +58,7 @@ return (
             >
                 {/* Door hitbox */}
                 <path
-                    d="M180 270 L340 270 L340 592 L180 592 Z"
+                    d="M220 280 L350 270 L350 603 L220 583 Z"
                     fill="transparent"
                     strokeWidth="8"
                     className="cursor-pointer pointer-events-auto"
@@ -67,7 +67,7 @@ return (
                         filter: doorHovered
                             ? "drop-shadow(0 0 10px #f2d55c) drop-shadow(0 0 20px #f2d55c)"
                             : "none",
-                        transition: "stroke 0.3s ease, filter 0.3s ease",
+                        transition: "stroke 0.3s ease, filter 0.2s ease",
                     }}
                     onClick={() => navigate("/shop")}
                     onMouseEnter={() => setDoorHovered(true)}

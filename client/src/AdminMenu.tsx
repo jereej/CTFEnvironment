@@ -20,7 +20,7 @@ const AdminMenu: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', description: '', type: '', price: '', is_premium: ''});
   const [error, setError] = useState<string | null>(null);
 
-  const types = ["sandwich", "side dish", "drink", "dessert"];
+  const types = ["sandwiches", "side dishes", "drinks", "desserts"];
   const categoryOrder = types;
 
   useEffect(() => {
@@ -44,8 +44,9 @@ const AdminMenu: React.FC = () => {
       allItems = [...allItems, ...res.data];
       setMenuItems(allItems);
       const grouped = allItems.reduce((acc: Record<string, MenuItem[]>, item) => {
-        acc[item.type] = acc[item.type] || [];
-        acc[item.type].push(item);
+        const normalizedType = item.type.toLowerCase();
+        acc[normalizedType] = acc[normalizedType] || [];
+        acc[normalizedType].push(item);
         return acc;
       }, {});
       setGroupedItems(grouped);
