@@ -33,7 +33,7 @@ const Mail: React.FC = () => {
 
 In this task you are asked to read all six of the emails in the inbox and then mark them as suspicious or not suspicious.
 
-After marking all emails, you can check your results by clicking on the "Check Results" button under the last mail.
+After marking all emails, you can check your results by clicking on the "Check Results" button under the last mail. If you get a perfect score, you will be rewarded with a flag!
 
 After that, you can see the explanations for each mail, explaining why the given mail is suspicous or not.
 `;
