@@ -12,7 +12,7 @@ interface MenuItem {
   price: number;
 }
 
-const categoryOrder = ["sandwich", "side dish", "drink", "dessert"];
+const categoryOrder = ["sandwiches", "side dishes", "drinks", "desserts"];
 
 const formatCategoryName = (str: string) => {
   // Convert hyphenated names to space-separated and capitalize each word
