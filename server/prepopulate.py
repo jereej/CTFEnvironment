@@ -151,7 +151,7 @@ def populate_real_menuitems():
         menuitems = json.load(menuitems_file)
     for item in menuitems["items"]:
         MenuItem.objects.create(name=item["name"], description=item["description"], type=item["type"],
-                                price=item["price"], is_premium=item["is_premium"])
+                                price=item["price"], is_premium=item["is_premium"], is_initiated_as_premium=item["is_premium"])
         print(f"populated {item['name']} to menu items.")
     print("All menu items have been populated.")
         
@@ -214,11 +214,11 @@ def populate_tasks():
         },
         {
             "task_id": 3,
-            "flag": "BAGUETTE{task3_tempflag}"
+            "flag": "BAGUETTE{no_premium_no_problem}"
         },
         {
             "task_id": 4,
-            "flag": "BAGUETTE{task4_tempflag}"
+            "flag": "BAGUETTE{shell_master_baker}"
         }
     ]
 

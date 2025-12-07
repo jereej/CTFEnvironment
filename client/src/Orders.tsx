@@ -16,6 +16,7 @@ interface MenuItem {
   type: string;
   price: number;
   is_premium: boolean;
+  is_initiated_as_premium: boolean;
 }
 
 interface OrderItem {
@@ -51,6 +52,7 @@ const Orders: React.FC = () => {
   const [placingOrder, setPlacingOrder] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [progress, setProgress] = useState<{ task3_done?: boolean } | null>(null);
 
   const categoryOrder = ["sandwiches", "side dishes", "drinks", "desserts"];
   const storedUser = localStorage.getItem("user");
@@ -58,6 +60,15 @@ const Orders: React.FC = () => {
   
 
   useEffect(() => {
+
+    const sessionId = localStorage.getItem("ctf_session_id");
+      if (!sessionId) return;
+
+      axios
+        .get(`${API_BASE}progress/get/${sessionId}/`)
+        .then(res => setProgress(res.data))
+        .catch(() => setProgress(null));
+
     const fetchMenuItems = async () => {
       // Check if user is logged in
       const storedUser = localStorage.getItem('user');
@@ -235,7 +246,23 @@ const Orders: React.FC = () => {
       }
 
       setCart([]);
-      setOrderPlacedMessage('Order placed successfully!');
+
+      const hasPremiumMismatch = cart.some((cartItem) => {
+        const menuItem = menuItems.find(m => m.id === cartItem.item_id);
+        if (!menuItem) return false;
+
+        return menuItem.is_initiated_as_premium !== menuItem.is_premium;
+      });
+
+      const task3NotCompleted = progress?.task3_done === false;
+
+      let message = 'Order placed successfully!';
+
+      if (hasPremiumMismatch && task3NotCompleted) {
+        message += '\n\nFLAG: BAGUETTE{no_premium_no_problem}';
+      }
+
+      setOrderPlacedMessage(message);
     } catch (err) {
       console.error('Failed to place order:', err);
       setOrderPlacedMessage('Failed to place order.');

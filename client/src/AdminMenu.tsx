@@ -147,7 +147,13 @@ const AdminMenu: React.FC = () => {
           <h2 className="text-2xl font-semibold capitalize mb-4">{type}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {(groupedItems[type] || []).map(item => (
-              <div key={item.id} className="border p-4 rounded-lg shadow-sm flex flex-col justify-between bg-gray-50">
+              <div key={item.id} 
+                className="relative border p-4 rounded-lg shadow-sm flex flex-col justify-between bg-gray-50">
+                {item.is_premium && (
+                  <div className="absolute -top-2 -left-2 bg-gradient-to-r from-yellow-300 to-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-tr-lg rounded-bl-lg shadow-md">
+                    PREMIUM
+                  </div>
+                )}
                 <div>
                   <h3 className="text-lg font-bold">{item.name}</h3>
                   <p className="text-gray-600 mb-1">{item.description}</p>

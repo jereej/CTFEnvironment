@@ -22,6 +22,7 @@ class MenuItem(models.Model):
     type = models.CharField(max_length=20, default="main course")
     price = models.FloatField()
     is_premium = models.BooleanField(default=False)
+    is_initiated_as_premium = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["name"]
