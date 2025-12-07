@@ -1,0 +1,8 @@
+Order #021
+Date: 2024-12-23
+Customer: Hugo Robert
+Items:
+- 2x The Chic Parm Club
+- 3x The Victorious Vegetal
+Total: 31.25 EUR
+Status: DELIVERED

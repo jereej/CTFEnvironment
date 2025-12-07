@@ -1,0 +1,10 @@
+Order #029
+Date: 2024-12-18
+Customer: Philippe Martin
+Items:
+- 3x The Les Baguettes Classic
+- 3x The OJ
+- 3x The Big Crunch
+- 3x Soda
+Total: 46.35 EUR
+Status: PENDING

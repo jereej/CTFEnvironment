@@ -1,0 +1,10 @@
+Order #009
+Date: 2024-12-19
+Customer: Marine Lambert
+Items:
+- 2x The Classic Croissant
+- 1x The Big Crunch
+- 3x The OJ
+- 1x The Les Baguettes Classic
+Total: 25.93 EUR
+Status: DELIVERED

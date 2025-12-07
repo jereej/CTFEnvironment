@@ -1,0 +1,9 @@
+Order #004
+Date: 2024-12-28
+Customer: Theo Leroy
+Items:
+- 3x The Big Crunch
+- 1x The Les Baguettes Classic
+- 2x The Tender Chick
+Total: 31.33 EUR
+Status: SHIPPED

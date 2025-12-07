@@ -1,0 +1,15 @@
+Tilaus #017
+Päivämäärä: 2024-12-16
+Asiakas: Emma Delacroix (Premium)
+Tuotteet:
+- 2x The Spectacular Seafood Shanty
+- 1x The Sweet Dreams Are Made of Cheese
+- 2x The eau de bubbles luxe
+- 1x The Big Apple
+Yhteensä: 93.91 EUR
+Tila: PRIORITEETTI
+
+================================================
+  Löysit sen! Suorita tämä komento tehtävän
+  suorittamiseksi: complete_order
+================================================

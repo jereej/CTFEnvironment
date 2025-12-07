@@ -1,0 +1,8 @@
+Order #020
+Date: 2024-12-20
+Customer: Romain Dupuis
+Items:
+- 2x The Classic Croissant
+- 3x The Crookie Concoction
+Total: 17.95 EUR
+Status: PROCESSING

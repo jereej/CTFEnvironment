@@ -1,0 +1,8 @@
+Order #014
+Date: 2024-12-27
+Customer: Enzo Lefevre
+Items:
+- 3x The Mighty Mozzarella
+- 1x The OJ
+Total: 21.47 EUR
+Status: PENDING

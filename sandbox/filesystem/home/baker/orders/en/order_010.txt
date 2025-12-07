@@ -1,0 +1,10 @@
+Order #010
+Date: 2024-12-27
+Customer: Sarah Bonnet
+Items:
+- 2x The Crookie Concoction
+- 1x The Tender Chick
+- 2x The Big Crunch
+- 3x The Tender Chick
+Total: 45.84 EUR
+Status: PROCESSING

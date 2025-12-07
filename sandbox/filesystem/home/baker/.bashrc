@@ -9,6 +9,35 @@ alias la='ls -A'
 alias l='ls -CF'
 alias cls='clear'
 
+# Progress tracking directory
+PROGRESS_DIR="/tmp/.ctf_progress"
+mkdir -p "$PROGRESS_DIR" 2>/dev/null
+
+# Task completion commands
+complete_recipe() {
+    touch "$PROGRESS_DIR/task1_done"
+    echo ""
+    echo "  ✓ Task completed: Secret recipe found!"
+    echo "  ✓ Tehtävä suoritettu: Salainen resepti löydetty!"
+    echo ""
+}
+
+complete_message() {
+    touch "$PROGRESS_DIR/task2_done"
+    echo ""
+    echo "  ✓ Task completed: Supplier message decoded!"
+    echo "  ✓ Tehtävä suoritettu: Tavarantoimittajan viesti dekoodattu!"
+    echo ""
+}
+
+complete_order() {
+    touch "$PROGRESS_DIR/task3_done"
+    echo ""
+    echo "  ✓ Task completed: Premium order found!"
+    echo "  ✓ Tehtävä suoritettu: Premium-tilaus löydetty!"
+    echo ""
+}
+
 # Welcome message on login
 echo ""
 echo "==========================================="
@@ -34,14 +63,10 @@ help() {
     echo "Les Baguettes Internal System - Available Commands"
     echo "==================================================="
     echo ""
-    echo "Navigation:    cd, ls, pwd, tree"
+    echo "Navigation:    cd, ls, pwd"
     echo "File viewing:  cat, less, head, tail"
-    echo "Searching:     grep, find"
-    echo "Text editing:  nano, vim"
-    echo "Utilities:     file, strings, base64, xxd"
-    echo "Archives:      tar, gzip, gunzip"
-    echo "Database:      sqlite3"
-    echo "System:        backup_tool.sh (maintenance)"
+    echo "Searching:     grep"
+    echo "Utilities:     base64"
     echo ""
     echo "Type 'challenges' to see your objectives"
     echo "(Kirjoita 'apua' suomeksi / 'haasteet' tehtäviin)"
@@ -58,7 +83,6 @@ apua() {
     echo "                 ls      - listaa tiedostot"
     echo "                 ls -la  - listaa KAIKKI tiedostot (myös piilotetut)"
     echo "                 pwd     - näytä nykyinen kansio"
-    echo "                 tree    - näytä kansiorakenne"
     echo ""
     echo "Tiedostojen      cat     - näytä tiedoston sisältö"
     echo "katselu:         less    - selaa tiedostoa (q = poistu)"
@@ -66,23 +90,8 @@ apua() {
     echo "                 tail    - näytä tiedoston loppu"
     echo ""
     echo "Etsiminen:       grep    - etsi tekstiä tiedostoista"
-    echo "                 find    - etsi tiedostoja nimellä"
     echo ""
-    echo "Muokkaus:        nano    - helppo tekstieditori"
-    echo "                 vim     - edistynyt tekstieditori"
-    echo ""
-    echo "Työkalut:        file    - tunnista tiedostotyyppi"
-    echo "                 strings - näytä teksti binäärista"
-    echo "                 base64  - koodaa/dekoodaa base64"
-    echo "                 xxd     - näytä heksadesimaali"
-    echo ""
-    echo "Arkistot:        tar     - pura/pakkaa arkistoja"
-    echo "                 gzip    - pakkaa tiedostoja"
-    echo "                 gunzip  - pura pakattu tiedosto"
-    echo ""
-    echo "Tietokanta:      sqlite3 - SQLite-tietokanta"
-    echo ""
-    echo "Järjestelmä:     backup_tool.sh (ylläpito)"
+    echo "Työkalut:        base64  - koodaa/dekoodaa base64"
     echo ""
     echo "Kirjoita 'haasteet' nähdäksesi tehtävät"
     echo ""
@@ -90,62 +99,68 @@ apua() {
 
 # Challenges list (English)
 challenges() {
+    local task1=" "
+    local task2=" "
+    local task3=" "
+
+    [ -f "$PROGRESS_DIR/task1_done" ] && task1="X"
+    [ -f "$PROGRESS_DIR/task2_done" ] && task2="X"
+    [ -f "$PROGRESS_DIR/task3_done" ] && task3="X"
+
     echo ""
     echo "============================================================"
     echo "           LES BAGUETTES CTF CHALLENGES                     "
     echo "============================================================"
     echo ""
-    echo "  Level 1: The Basics"
-    echo "  [ ] Find the secret recipe hidden in baker's home"
-    echo "  [ ] Read the encoded message from the supplier"
-    echo "  [ ] Count how many orders were placed (hint: wc)"
+    echo "  [$task1] Find the secret recipe (hint: ls -la)"
+    echo "  [$task2] Figure out what the message sent by the supplier contains"
+    echo "      (hint: use base64 tool, try 'base64 --help' for usage)"
+    echo "  [$task3] Find the important order made by a Premium member"
+    echo "      (hint: use grep command, try 'grep --help' for usage)"
     echo ""
-    echo "  Level 2: Investigation"
-    echo "  [ ] Find who accessed the system at 3:00 AM"
-    echo "  [ ] Identify the IP with the most failed logins"
-    echo "  [ ] Extract customer data from the inventory database"
-    echo ""
-    echo "  Level 3: Advanced"
-    echo "  [ ] Find a way to read root's secret file"
-    echo "      (hint: look for unusual file permissions)"
-    echo "  [ ] Discover what's hidden in the backup archive"
-    echo ""
-    echo "  Flags are in format: BAGUETTE{...}"
-    echo ""
+
+    # Check if all tasks are complete
+    if [ -f "$PROGRESS_DIR/task1_done" ] && [ -f "$PROGRESS_DIR/task2_done" ] && [ -f "$PROGRESS_DIR/task3_done" ]; then
+        echo "  ★ ALL TASKS COMPLETED! ★"
+        echo ""
+        echo "  Your flag: BAGUETTE{shell_master_baker}"
+        echo ""
+    fi
+
     echo "============================================================"
     echo ""
 }
 
 # Challenges list (Finnish)
 haasteet() {
+    local task1=" "
+    local task2=" "
+    local task3=" "
+
+    [ -f "$PROGRESS_DIR/task1_done" ] && task1="X"
+    [ -f "$PROGRESS_DIR/task2_done" ] && task2="X"
+    [ -f "$PROGRESS_DIR/task3_done" ] && task3="X"
+
     echo ""
     echo "============================================================"
     echo "           LES BAGUETTES CTF-HAASTEET                       "
     echo "============================================================"
     echo ""
-    echo "  Taso 1: Perusteet"
-    echo "  [ ] Löydä leipurin kotikansioon piilotettu salainen resepti"
-    echo "      (vinkki: piilotiedostot alkavat pisteellä, kokeile ls -la)"
-    echo "  [ ] Lue tavarantoimittajan koodattu viesti"
-    echo "      (vinkki: base64 -d tiedostonimi)"
-    echo "  [ ] Laske montako tilausta on tehty (vinkki: wc -l)"
+    echo "  [$task1] Löydä salainen resepti (vinkki: ls -la)"
+    echo "  [$task2] Selvitä mitä tavarantoimittajan viesti sisältää"
+    echo "      (vinkki: käytä base64 työkalua, kokeile 'base64 --help')"
+    echo "  [$task3] Löydä Premium-asiakkaan tärkeä tilaus"
+    echo "      (vinkki: käytä grep-komentoa, kokeile 'grep --help')"
     echo ""
-    echo "  Taso 2: Tutkinta"
-    echo "  [ ] Selvitä kuka käytti järjestelmää klo 3:00 yöllä"
-    echo "      (vinkki: grep '03:' lokitiedostosta)"
-    echo "  [ ] Tunnista IP-osoite jolla on eniten epäonnistuneita kirjautumisia"
-    echo "      (vinkki: tutki /var/log/ kansiota)"
-    echo "  [ ] Poimi asiakastiedot inventaario-tietokannasta"
-    echo "      (vinkki: sqlite3 tietokanta.db 'SELECT * FROM taulu;')"
-    echo ""
-    echo "  Taso 3: Edistynyt"
-    echo "  [ ] Löydä tapa lukea rootin salainen tiedosto"
-    echo "      (vinkki: etsi tiedostoja joilla on erikoiset oikeudet)"
-    echo "  [ ] Selvitä mitä varmuuskopioarkistossa piilee"
-    echo "      (vinkki: tar -xzf arkisto.tar.gz)"
-    echo ""
-    echo "  Liput ovat muodossa: BAGUETTE{...}"
-    echo ""
+
+    # Check if all tasks are complete
+    if [ -f "$PROGRESS_DIR/task1_done" ] && [ -f "$PROGRESS_DIR/task2_done" ] && [ -f "$PROGRESS_DIR/task3_done" ]; then
+        echo "  ★ KAIKKI TEHTÄVÄT SUORITETTU! ★"
+        echo ""
+        echo "  Lippusi: BAGUETTE{shell_master_baker}"
+        echo ""
+    fi
+
     echo "============================================================"
     echo ""
 }
@@ -154,3 +169,7 @@ export -f help
 export -f apua
 export -f challenges
 export -f haasteet
+export -f complete_recipe
+export -f complete_message
+export -f complete_order
+export PROGRESS_DIR

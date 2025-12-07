@@ -1,0 +1,8 @@
+Order #005
+Date: 2024-12-15
+Customer: Clara Faure
+Items:
+- 1x The Mighty Mozzarella
+- 1x The Classic Croissant
+Total: 8.98 EUR
+Status: PENDING

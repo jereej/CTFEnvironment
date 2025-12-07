@@ -1,0 +1,8 @@
+Order #001
+Date: 2024-12-01
+Customer: Philippe Martin
+Items:
+- 3x The Crookie Concoction
+- 3x The Mighty Mozzarella
+Total: 29.94 EUR
+Status: SHIPPED

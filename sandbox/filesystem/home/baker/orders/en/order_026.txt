@@ -1,0 +1,10 @@
+Order #026
+Date: 2024-12-06
+Customer: Marine Lambert
+Items:
+- 3x The Mighty Mozzarella
+- 1x The Mighty Mozzarella
+- 1x The Big Crunch
+- 1x The Chic Parm Club
+Total: 35.41 EUR
+Status: DELIVERED

@@ -1,0 +1,8 @@
+Order #023
+Date: 2024-12-24
+Customer: Theo Leroy
+Items:
+- 3x Soda
+- 2x The Mighty Mozzarella
+Total: 19.48 EUR
+Status: DELIVERED

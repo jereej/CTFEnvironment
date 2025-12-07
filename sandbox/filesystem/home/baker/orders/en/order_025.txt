@@ -1,0 +1,8 @@
+Order #025
+Date: 2024-12-08
+Customer: Oceane Muller
+Items:
+- 1x The Les Baguettes Classic
+- 3x The OJ
+Total: 17.00 EUR
+Status: PENDING

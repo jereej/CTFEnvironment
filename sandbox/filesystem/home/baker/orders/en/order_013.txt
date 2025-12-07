@@ -1,0 +1,9 @@
+Order #013
+Date: 2024-12-04
+Customer: Philippe Martin
+Items:
+- 2x Soda
+- 1x The OJ
+- 1x The Les Baguettes Classic
+Total: 15.00 EUR
+Status: PENDING

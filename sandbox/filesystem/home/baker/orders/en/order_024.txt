@@ -1,0 +1,10 @@
+Order #024
+Date: 2024-12-16
+Customer: Lea Richard
+Items:
+- 3x The Tender Chick
+- 2x The Chic Parm Club
+- 3x The Les Baguettes Classic
+- 2x The Chic Parm Club
+Total: 77.47 EUR
+Status: PENDING

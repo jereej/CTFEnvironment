@@ -1,0 +1,15 @@
+Order #017
+Date: 2024-12-16
+Customer: Emma Delacroix (Premium)
+Items:
+- 2x The Spectacular Seafood Shanty
+- 1x The Sweet Dreams Are Made of Cheese
+- 2x The eau de bubbles luxe
+- 1x The Big Apple
+Total: 93.91 EUR
+Status: PRIORITY
+
+================================================
+  You found it! Run this command to complete
+  the task: complete_order
+================================================

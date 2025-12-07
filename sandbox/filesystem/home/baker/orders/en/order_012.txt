@@ -1,0 +1,9 @@
+Order #012
+Date: 2024-12-09
+Customer: Laura Fournier
+Items:
+- 2x The Crookie Concoction
+- 3x The Chic Parm Club
+- 2x The Classic Croissant
+Total: 39.46 EUR
+Status: DELIVERED

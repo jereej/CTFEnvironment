@@ -1,0 +1,9 @@
+Order #022
+Date: 2024-12-04
+Customer: Dylan Vincent
+Items:
+- 1x The Tender Chick
+- 1x The Crookie Concoction
+- 2x The Mighty Mozzarella
+Total: 23.96 EUR
+Status: SHIPPED

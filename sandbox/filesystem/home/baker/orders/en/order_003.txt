@@ -1,0 +1,10 @@
+Order #003
+Date: 2024-12-28
+Customer: Antoine Morel
+Items:
+- 2x The Chic Parm Club
+- 1x The Crookie Concoction
+- 1x The Mighty Mozzarella
+- 1x The Mighty Mozzarella
+Total: 32.97 EUR
+Status: DELIVERED

@@ -1,0 +1,9 @@
+Order #028
+Date: 2024-12-02
+Customer: Marine Lambert
+Items:
+- 3x The OJ
+- 3x The Mighty Mozzarella
+- 3x The Les Baguettes Classic
+Total: 47.97 EUR
+Status: PENDING

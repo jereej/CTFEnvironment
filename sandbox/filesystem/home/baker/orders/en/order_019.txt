@@ -1,0 +1,9 @@
+Order #019
+Date: 2024-12-05
+Customer: Maxime David
+Items:
+- 2x The Chic Parm Club
+- 3x The Crookie Concoction
+- 3x The OJ
+Total: 39.47 EUR
+Status: PROCESSING

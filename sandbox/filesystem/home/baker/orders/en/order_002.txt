@@ -1,0 +1,8 @@
+Order #002
+Date: 2024-12-06
+Customer: Quentin Girard
+Items:
+- 3x The Crookie Concoction
+- 1x The Tender Chick
+Total: 19.96 EUR
+Status: PROCESSING

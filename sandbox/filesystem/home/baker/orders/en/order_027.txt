@@ -1,0 +1,9 @@
+Order #027
+Date: 2024-12-16
+Customer: Romain Dupuis
+Items:
+- 2x The Victorious Vegetal
+- 2x The Les Baguettes Classic
+- 3x The OJ
+Total: 33.00 EUR
+Status: DELIVERED

@@ -1,0 +1,8 @@
+Order #018
+Date: 2024-12-28
+Customer: Chloe Simon
+Items:
+- 1x The Big Crunch
+- 1x The Big Crunch
+Total: 5.90 EUR
+Status: DELIVERED

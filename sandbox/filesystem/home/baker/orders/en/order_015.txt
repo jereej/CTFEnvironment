@@ -1,0 +1,8 @@
+Order #015
+Date: 2024-12-08
+Customer: Jean Dupont
+Items:
+- 1x The Big Crunch
+- 3x The Classic Croissant
+Total: 11.92 EUR
+Status: DELIVERED

@@ -1,0 +1,10 @@
+Order #006
+Date: 2024-12-22
+Customer: Mathis Andre
+Items:
+- 3x The Tender Chick
+- 3x The Chic Parm Club
+- 3x The Big Crunch
+- 2x The Crookie Concoction
+Total: 66.30 EUR
+Status: PROCESSING

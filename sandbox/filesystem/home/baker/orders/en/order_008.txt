@@ -1,0 +1,9 @@
+Order #008
+Date: 2024-12-01
+Customer: Romain Dupuis
+Items:
+- 3x The Victorious Vegetal
+- 3x The Tender Chick
+- 3x The Victorious Vegetal
+Total: 52.47 EUR
+Status: SHIPPED

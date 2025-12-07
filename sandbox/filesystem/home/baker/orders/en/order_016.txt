@@ -1,0 +1,9 @@
+Order #016
+Date: 2024-12-03
+Customer: Marine Lambert
+Items:
+- 1x The Tender Chick
+- 2x The OJ
+- 2x The Big Crunch
+Total: 20.89 EUR
+Status: PENDING

@@ -1,0 +1,10 @@
+Order #011
+Date: 2024-12-17
+Customer: Chloe Simon
+Items:
+- 3x The OJ
+- 1x The OJ
+- 1x Soda
+- 2x Soda
+Total: 21.50 EUR
+Status: PROCESSING

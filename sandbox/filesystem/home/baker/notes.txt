@@ -1,15 +1,14 @@
 Baker's Notes - December 2024
 ==============================
 
-TODO:
-- Check supplier delivery on Monday
-- Update inventory database
-- Review access logs (some suspicious activity?)
-- Change default passwords (been meaning to do this...)
+PROBLEMS:
+- We lost our secret recipe, but I swear we had it saved on this computer...
+- We got an important message from our supplier, but it's all gibberish and I can't read it...
+- We got an important order recently, but it got lost in all the other orders we received and I can't find it!
 
 REMINDERS:
 - The encoded message from our supplier is in messages/
-- Order files are backed up daily in orders/
+- Order files are in orders/
 - System logs are in /var/log/
 
 NOTE TO SELF:

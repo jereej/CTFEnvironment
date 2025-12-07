@@ -1,0 +1,10 @@
+Order #030
+Date: 2024-12-03
+Customer: Kevin Fontaine
+Items:
+- 1x The Big Crunch
+- 1x The OJ
+- 1x The Victorious Vegetal
+- 2x The Mighty Mozzarella
+Total: 23.18 EUR
+Status: SHIPPED

@@ -1,0 +1,10 @@
+Order #007
+Date: 2024-12-17
+Customer: Marine Lambert
+Items:
+- 1x The Classic Croissant
+- 3x The Chic Parm Club
+- 1x The Les Baguettes Classic
+- 2x The Tender Chick
+Total: 50.97 EUR
+Status: SHIPPED
