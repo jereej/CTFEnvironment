@@ -20,7 +20,7 @@ const AdminMenu: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', description: '', type: '', price: '', is_premium: ''});
   const [error, setError] = useState<string | null>(null);
 
-  const types = ["sandwich", "side dish", "drink", "dessert"];
+  const types = ["sandwiches", "side dishes", "drinks", "desserts"];
   const categoryOrder = types;
 
   useEffect(() => {
