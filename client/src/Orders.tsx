@@ -52,7 +52,7 @@ const Orders: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const categoryOrder = ["sandwich", "side dish", "drink", "dessert"];
+  const categoryOrder = ["sandwiches", "side dishes", "drinks", "desserts"];
   const storedUser = localStorage.getItem("user");
   const user = storedUser ? JSON.parse(storedUser) : null;
   
@@ -74,8 +74,12 @@ const Orders: React.FC = () => {
         setMenuItems(allItems);
 
         const grouped = allItems.reduce((groups: Record<string, MenuItem[]>, item) => {
-          if (!groups[item.type]) groups[item.type] = [];
-          groups[item.type].push(item);
+          const normalizedType = item.type.toLowerCase();
+          if (!groups[normalizedType]) {
+            groups[normalizedType] = [];
+          }
+
+          groups[normalizedType].push(item);
           return groups;
         }, {});
         setGroupedItems(grouped);
