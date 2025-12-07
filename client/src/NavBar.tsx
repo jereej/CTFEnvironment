@@ -47,7 +47,7 @@ const NavBar: React.FC = () => {
         className="flex items-center"
       >
         <img
-          src="/instagram.png"
+          src="/instagram.svg"
           alt="Instagram"
           className="h-12 w-auto rounded-md transition hover:opacity-80"
         />
