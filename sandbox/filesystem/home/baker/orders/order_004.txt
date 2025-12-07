@@ -1,8 +1,0 @@
-Order #004
-Date: 2024-12-02
-Customer: Sophie Bernard
-Items:
-- 5x Baguette Traditional
-- 3x Pain au Chocolat
-Total: 19.50 EUR
-Status: PENDING

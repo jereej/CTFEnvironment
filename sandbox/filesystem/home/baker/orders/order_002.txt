@@ -1,8 +1,0 @@
-Order #002
-Date: 2024-12-01
-Customer: Marie Laurent
-Items:
-- 3x Pain de Campagne
-- 2x Pain au Chocolat
-Total: 15.20 EUR
-Status: DELIVERED

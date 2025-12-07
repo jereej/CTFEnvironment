@@ -1,8 +1,0 @@
-Order #001
-Date: 2024-12-01
-Customer: Jean Dupont
-Items:
-- 2x Baguette Traditional
-- 1x Croissant
-Total: 8.50 EUR
-Status: DELIVERED
