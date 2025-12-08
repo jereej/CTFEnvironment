@@ -4,7 +4,7 @@ URL configuration for the app.
 from django.urls import path, include
 from rest_framework import routers
 
-from baguettes.views import UserViewSet, MenuItemViewSet, OrderItemViewSet, OrderViewSet, CartItemViewSet, login_view, get_progress, reset_progress, init_session, complete_task, trigger_database_disaster
+from baguettes.views import UserViewSet, MenuItemViewSet, OrderItemViewSet, OrderViewSet, CartItemViewSet, login_view, get_progress, reset_progress, init_session, complete_task
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
@@ -22,6 +22,5 @@ urlpatterns = [
     path('progress/reset/<str:session_id>/', reset_progress, name='reset_progress'),
     path("session/init/", init_session),
     path("tasks/", complete_task),
-    path("disaster/", trigger_database_disaster),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

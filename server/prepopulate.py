@@ -219,10 +219,6 @@ def populate_tasks():
         {
             "task_id": 4,
             "flag": "BAGUETTE{shell_master_baker}"
-        },
-        {
-            "task_id": 5,
-            "flag": "BAGUETTE{flag_that_restores_peace_upon_les_baguettes}"
         }
     ]
 

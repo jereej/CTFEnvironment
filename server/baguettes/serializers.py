@@ -98,4 +98,4 @@ class CartItemSerializer(serializers.ModelSerializer):
 class PlayerProgressSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlayerProgress
-        fields = ['session_id', 'task1_done', 'task2_done', 'task3_done', 'task4_done', 'task5_done', 'task5_disaster_triggered']
+        fields = ['session_id', 'task1_done', 'task2_done', 'task3_done', 'task4_done']

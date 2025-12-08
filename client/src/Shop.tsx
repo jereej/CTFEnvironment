@@ -97,13 +97,13 @@ return (
                 {/* Baguette logo with ellipse clip */}
                 <defs>
                     <clipPath id="ellipseClip">
-                        <ellipse cx="1280" cy="250" rx="140" ry="90" />
+                        <ellipse cx="1280" cy="190" rx="140" ry="90" />
                     </clipPath>
                 </defs>
                 <image
                     href="/baguette_logo.png"
                     x="1140"
-                    y="160"
+                    y="100"
                     width="280"
                     height="180"
                     clipPath="url(#ellipseClip)"
