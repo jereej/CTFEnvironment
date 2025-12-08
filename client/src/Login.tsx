@@ -57,23 +57,31 @@ const Login: React.FC = () => {
       }
     } catch (err: unknown) {
       console.error("Error during login or signup:", err);
-      if (err && typeof err === "object" && "response" in err) {
-        const axiosErr = err as { response?: { data?: { error?: string } } };
-        if (axiosErr.response?.data?.error) {
-          setError(axiosErr.response.data.error);
+
+      if (axios.isAxiosError(err)) {
+        const data = err.response?.data;
+
+        if (isSignUp && data && typeof data === "object") {
+          const messages = Object.values(data).flat();
+          setError(messages.join("\n"));   // ✅ multiline support
+          return;
+        }
+
+        if (data?.error) {
+          setError(data.error);
           return;
         }
       }
+
       if (isSignUp) {
-        setError(
-          "Failed to create account. Ensure username is available and password meets requirements."
-        );
+        setError("Failed to create account.");
       } else {
-        setError('Login failed. Check your username and password.');
+        setError("Login failed. Check your username and password.");
       }
     } finally {
       setLoading(false);
     }
+
   };
 
 return (
@@ -109,7 +117,11 @@ return (
         className="w-full mb-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
       />
 
-      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+      {error && (
+        <p className="text-red-500 text-center mb-4 whitespace-pre-line">
+          {error}
+        </p>
+      )}
 
       <button
         type="submit"
