@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, action
 from django.contrib.auth.hashers import check_password
 from django.utils.crypto import get_random_string
+from baguettes.backup_service import save_snapshot, restore_latest_snapshot
 
 from baguettes.models import User, MenuItem, OrderItem, Order, CartItem, PlayerProgress, Task
 from baguettes.serializers import UserSerializer, MenuItemSerializer, OrderItemSerializer, OrderSerializer, CartItemSerializer, PlayerProgressSerializer
@@ -241,6 +242,8 @@ def reset_progress(request, session_id):
     progress.task2_done = False
     progress.task3_done = False
     progress.task4_done = False
+    progress.task5_done = False
+    progress.task5_disaster_triggered = False
     progress.save()
     serializer = PlayerProgressSerializer(progress)
     return Response(serializer.data)
@@ -253,7 +256,10 @@ def complete_task(request):
     submitted_flag = request.data.get("flag")
 
     if not session_id or not task_id or not submitted_flag:
-        return Response({"error": "session_id, task_id, and flag are required"}, status=400)
+        return Response(
+            {"error": "session_id, task_id, and flag are required"},
+            status=400
+        )
 
     try:
         task_id = int(task_id)
@@ -267,7 +273,6 @@ def complete_task(request):
     except Task.DoesNotExist:
         return Response({"error": "Unknown task"}, status=404)
 
-    # Check if already completed
     task_field = f"task{task_id}_done"
     already_done = getattr(progress, task_field, None)
 
@@ -277,16 +282,25 @@ def complete_task(request):
             "flag_valid": True
         })
 
-    # Validate the submitted flag
-    if submitted_flag.strip() == task.flag.strip():
-        setattr(progress, task_field, True)
-        progress.save()
+    if submitted_flag.strip() != task.flag.strip():
+        return Response({"error": "Invalid flag"}, status=400)
 
-        return Response({
-            "success": True,
-        })
+    if task_id == 5:
+        if not progress.task5_disaster_triggered:
+            return Response(
+                {"error": "Disaster has not been triggered yet"},
+                status=400
+            )
 
-    return Response({"error": "Invalid flag"}, status=400)
+        restore_latest_snapshot()
+
+    setattr(progress, task_field, True)
+    progress.save()
+
+    return Response({
+        "success": True,
+    })
+
 
 @api_view(['POST'])
 def init_session(request):
@@ -303,5 +317,32 @@ def init_session(request):
         "task1_done": progress.task1_done,
         "task2_done": progress.task2_done,
         "task3_done": progress.task3_done,
-        "task4_done": progress.task4_done
+        "task4_done": progress.task4_done,
+        "task5_done": progress.task5_done,
+        "task5_disaster_triggered": progress.task5_disaster_triggered,
     })
+
+@api_view(["POST"])
+def trigger_database_disaster(request):
+    session_id = request.data.get("session_id")
+
+    if not session_id:
+        return Response({"error": "Missing session ID"}, status=400)
+
+    progress, _ = PlayerProgress.objects.get_or_create(session_id=session_id)
+
+    if progress.task5_disaster_triggered:
+        return Response({"status": "Disaster already triggered. Ignored."})
+
+    save_snapshot()
+
+    User.objects.all().delete()
+    Order.objects.all().delete()
+    OrderItem.objects.all().delete()
+    CartItem.objects.all().delete()
+    MenuItem.objects.all().delete()
+
+    progress.task5_disaster_triggered = True
+    progress.save()
+
+    return Response({"status": "Database wiped. Restore required."})

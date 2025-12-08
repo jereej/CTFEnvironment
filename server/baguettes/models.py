@@ -74,6 +74,8 @@ class PlayerProgress(models.Model):
     task2_done = models.BooleanField(default=False)
     task3_done = models.BooleanField(default=False)
     task4_done = models.BooleanField(default=False)
+    task5_done = models.BooleanField(default=False)
+    task5_disaster_triggered = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Progress for {self.session_id}"
@@ -88,4 +90,12 @@ class Task(models.Model):
 
     def __str__(self):
         return f"Task [{self.task_id} | Flag {self.flag}"
+    
+
+class BackupSnapshot(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    data = models.JSONField()
+
+    def __str__(self):
+        return f"Backup at {self.created_at}"
     
