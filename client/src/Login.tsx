@@ -82,7 +82,13 @@ return (
     <div className="absolute inset-0 bg-[#f2cbea]/70"></div>
 
     {/* Content */}
-    <div className="relative z-10 bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
+    <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleLoginOrSignUp();
+        }}
+        className="relative z-10 bg-white p-8 rounded-2xl shadow-md w-full max-w-md"
+      >
       <h1 className="text-2xl font-bold mb-6 text-center">
         {isSignUp ? 'Create Account' : 'Login'}
       </h1>
@@ -106,7 +112,7 @@ return (
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
       <button
-        onClick={handleLoginOrSignUp}
+        type="submit"
         className="w-full bg-[#b36be3] text-white py-2 rounded-lg hover:bg-[#794899] transition disabled:opacity-50"
         disabled={loading}
       >
@@ -124,7 +130,7 @@ return (
           {isSignUp ? 'Log in' : 'Create one'}
         </button>
       </p>
-    </div>
+    </form>
   </div>
 );
 

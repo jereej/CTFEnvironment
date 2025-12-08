@@ -58,7 +58,7 @@ After that, you can see the explanations for each mail, explaining why the given
 
         if (correct === total) {
             msg += `Perfect score! ${correct}/${total} correct!\n\n`;
-            msg += `Here's a flag for you:\nBAGUETTE{task2_tempflag}\n\n`;
+            msg += `Here's a flag for you:\nBAGUETTE{certified_phishing_sniffer}\n\n`;
 
             setShowConfetti(true);
             setTimeout(() => setShowConfetti(false), 5000);

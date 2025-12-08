@@ -101,7 +101,7 @@ return (
       progress &&
       progress.task1_done === false && (
         <p className="text-black mb-6 text-lg font-bold">
-          BAGUETTE{`{task1_tempflag}`}
+          BAGUETTE{`{bad_passwords_are_no_good}`}
         </p>
       )}
 

@@ -112,7 +112,7 @@ return (
                 {/* Newspaper button */}
                 <image
                     href="/newspaper.png"
-                    x="1050"
+                    x="1150"
                     y="380"
                     width="260"
                     height="200"

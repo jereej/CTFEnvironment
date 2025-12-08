@@ -206,11 +206,11 @@ def populate_tasks():
     tasks = [
         {
             "task_id": 1,
-            "flag": "BAGUETTE{task1_tempflag}"
+            "flag": "BAGUETTE{bad_passwords_are_no_good}"
         },
         {
             "task_id": 2,
-            "flag": "BAGUETTE{task2_tempflag}"
+            "flag": "BAGUETTE{certified_phishing_sniffer}"
         },
         {
             "task_id": 3,
@@ -232,6 +232,7 @@ def populate_tasks():
 
 # Run the script
 if __name__ == "__main__":
+    populate_tasks()
     if check_if_db_already_populated():
         print("Database has already been populated, skipping prepopulation.")
     else:
@@ -240,4 +241,3 @@ if __name__ == "__main__":
         populate_users(n)
         populate_real_menuitems()
         populate_orders_and_orderitems(n)
-        populate_tasks()
