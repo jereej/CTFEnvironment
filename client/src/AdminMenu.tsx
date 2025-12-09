@@ -56,13 +56,6 @@ const AdminMenu: React.FC = () => {
     }
   };
 
-  const openAddForm = () => {
-    // Open the form for adding a new menu item
-    setFormData({ name: '', description: '', type: '', price: '', is_premium: ''});
-    setFormMode('add');
-    setEditingItem(null);
-  };
-
   const openEditForm = (item: MenuItem) => {
     // Open the form for editing an existing menu item
     setFormData({
@@ -113,32 +106,11 @@ const AdminMenu: React.FC = () => {
     }
   };
 
-  const handleDelete = async (id: number) => {
-    // Confirm and delete a menu item
-    if (!window.confirm('Are you sure you want to delete this item?')) return;
-    try {
-      await axios.delete(`${API_BASE}menu-items/${id}/`);
-      await fetchMenu();
-    } catch (err) {
-      console.error('Failed to delete item:', err);
-      alert('Failed to delete item.');
-    }
-  };
-
   if (error) return <div className="min-h-screen flex justify-center items-center text-red-500">{error}</div>;
 
   return (
     <div className="max-w-5xl mx-auto mt-10 p-6 bg-white shadow rounded-xl">
       <h1 className="text-3xl font-bold text-center mb-8">Manage Menu</h1>
-
-      <div className="flex justify-end mb-4">
-        <button
-          onClick={openAddForm}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-        >
-          + Add New Item
-        </button>
-      </div>
 
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
@@ -165,12 +137,6 @@ const AdminMenu: React.FC = () => {
                     className="text-blue-600 hover:underline"
                   >
                     Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="text-red-600 hover:underline"
-                  >
-                    Delete
                   </button>
                 </div>
               </div>
