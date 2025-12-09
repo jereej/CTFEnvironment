@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import InstructionPopup from './InstructionPopup';
 
 const ADMIN_HASH = '1dd83078d7f246bfcd3d85cbd2c729d4789c25a48343086c1a95e73b5a1a9e26';
+const instructions = 
+`Congratulations, you have finished the OSINT (Open Source Intelligence) part of this exercise.
+
+Now it is time to try and escalate your privileges. Here are the in-depth instructions on how to do this:
+
+1. Edit a premium menu item, change it to a regular one and save the changes.
+2. Log into any account (or create a new one) and order the item.
+3. Profit??`
 
 const AdminLogin: React.FC = () => {
     // State variables
@@ -100,6 +109,10 @@ const AdminLogin: React.FC = () => {
         className="mt-4 w-full bg-gray-500 text-white py-2 rounded hover:bg-gray-600 transition">
         Back to Home
         </button>
+    <InstructionPopup
+    onClose={()=>{}}
+    text={instructions}
+    popupSource="adminpanel"></InstructionPopup>
     </div>
     )}
     </div>
