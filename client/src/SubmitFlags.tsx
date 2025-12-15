@@ -80,10 +80,10 @@ const SubmitFlags: React.FC = () => {
   if (!progress) return <p>Loading...</p>;
 
   const taskNames: Record<1 | 2 | 3 | 4, string> = {
-    1: "Task 1 — The Wild World of Password Security",
-    2: "Task 2 — Rise of the Crusty Emails",
-    3: "Task 3 — Remains to be Seen",
-    4: "Task 4 — Physical Security Task",
+    1: "Task 1 - The Wild World of Password Security",
+    2: "Task 2 - Rise of the Crusty Emails",
+    3: "Task 3 - Behind the Scenes",
+    4: "Task 4 - Gathering the Crumbs",
   };
 
   return (
