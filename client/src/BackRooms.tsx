@@ -35,7 +35,7 @@ const BackRooms: React.FC = () => {
             }
         } else if (sourceMail === false) {
             if (username == "admin" && password == "admin"){
-                navigate("/backrooms/shell");
+                navigate("/backrooms/terminal");
             } else {
                 setError("Incorrect credentials");
             }
@@ -74,7 +74,7 @@ return (
                     onMouseLeave={() => setDoorHovered(false)}
                 />
 
-                {/* Mail and Shell buttons / Login form */}
+                {/* Mail and Terminal buttons / Login form */}
                 <foreignObject x="430" y="285" width="650" height="400" className="pointer-events-auto">
                     <div className="w-full h-full flex items-center justify-center">
                         {!isPrompting ? (
@@ -98,7 +98,7 @@ return (
                                         src="/command-prompt-svgrepo-com.svg"
                                         className="w-24 h-24 object-contain hover:scale-105 transition-transform mx-auto"
                                     />
-                                    <span className="text-xl">Shell</span>
+                                    <span className="text-xl">Terminal</span>
                                 </button>
                             </div>
                         ) : (

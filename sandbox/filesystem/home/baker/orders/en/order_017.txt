@@ -10,6 +10,6 @@ Total: 93.91 EUR
 Status: PRIORITY
 
 ================================================
-  You found it! Run this command to complete
-  the task: complete_order
+  You found the flag, congratulations! Run this
+  command to complete the task: complete_order
 ================================================

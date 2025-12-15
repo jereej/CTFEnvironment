@@ -12,7 +12,7 @@ import NavBar from './NavBar';
 import Shop from './Shop';
 import BackRooms from './BackRooms';
 import Mail from './Mail';
-import Shell from './Shell';
+import Terminal from './Terminal';
 import SubmitFlags from './SubmitFlags';
 // Admin components
 import AdminLogin from './AdminLogin';
@@ -62,7 +62,7 @@ const App: React.FC = () => {
         <Route path="/shop" element={<Shop />} />
         <Route path="/backrooms" element={<BackRooms />} />
         <Route path="/backrooms/mail" element={<Mail />} />
-        <Route path="/backrooms/shell" element={<Shell />} />
+        <Route path="/backrooms/terminal" element={<Terminal />} />
         <Route path="/submit-flags" element={<SubmitFlags />} />
         <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admin/menu" element={<AdminMenu />} />

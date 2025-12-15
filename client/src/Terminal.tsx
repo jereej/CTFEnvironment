@@ -9,7 +9,7 @@ interface TerminalMessage {
     session_id?: string;
 }
 
-const Shell: React.FC = () => {
+const Terminal: React.FC = () => {
     const navigate = useNavigate();
     const terminalRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -210,7 +210,7 @@ const Shell: React.FC = () => {
             >
                 {connecting && (
                     <div className="text-yellow-400">
-                        Connecting to shell...
+                        Connecting to terminal...
                     </div>
                 )}
                 {renderOutput(output)}
@@ -253,4 +253,4 @@ const Shell: React.FC = () => {
     );
 };
 
-export default Shell;
+export default Terminal;

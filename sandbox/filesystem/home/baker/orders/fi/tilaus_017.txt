@@ -10,6 +10,6 @@ Yhteensä: 93.91 EUR
 Tila: PRIORITEETTI
 
 ================================================
-  Löysit sen! Suorita tämä komento tehtävän
-  suorittamiseksi: complete_order
+  Löysit lipun, onnittelut! Suorita tämä komento
+  tehtävän suorittamiseksi: complete_order
 ================================================
