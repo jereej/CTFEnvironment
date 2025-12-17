@@ -4,7 +4,7 @@ The CTFEnvironment is a university course project that aims to teach some cybers
 
 ![lesbaguettes](/client/public/baguette_logo.png)
 
-The website that the user connects belongs to a fictional local family-owned bakery called **Les Baguettes**. The bakery has experienced rapid growth recently and decided it was a good time to set up a website for them to get orders from customers online. However, the people they commissioned the websites from were not very trustworthy and quite literally left a back(room)door on the main page. The website has quite many features (not bugs :bug:, the local health inspectors would not like that) that are left for the user to find and later on report to the bakery so that they would not have to worry about the website and just focus on baking the most delicious bread on the block.
+The website that the user connects to belongs to a fictional local family-owned bakery called **Les Baguettes**. The bakery has experienced rapid growth recently and decided it was a good time to set up a website for them to get orders from customers online. However, the people they commissioned the websites from were not very trustworthy and quite literally left a back(room)door on the main page. The website has quite many features (not bugs :bug:, the local health inspectors would not like that) that are left for the user to find and later on report to the bakery so that they would not have to worry about the website and just focus on baking the most delicious bread on the block.
 
 Let's get this :bread:.
 
@@ -93,7 +93,7 @@ docker compose pull
 docker compose up -d
 ```
 
-After running `docker compose up -d` the environment is hosted at `http://YOUR_MACHINE_IP:443` and you should be able to access it remotely. Make sure to check your firewall settings and that you have the required port open.
+After running `docker compose up -d` the environment is hosted at `https://YOUR_MACHINE_IP:443` and you should be able to access it remotely. Make sure to check your firewall settings and that you have the required port open.
 
 ## Further development
 
